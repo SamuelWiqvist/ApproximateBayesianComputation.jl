@@ -1,11 +1,11 @@
 # posterior quantile intervals
 
 doc"""
-    calcquantileint(data::Matrix, lower::Real=2.5,upper::Real=97.5)
+    calcquantileint(data::Matrix, lower::Real=2.5,upper::Real=97.5,  print_on::Bool = false)
 
 Computes posterior quantile intervals, 2.5th and 97.5th quantiles as default.
 """
-function calcquantileint(data::Matrix, lower::Real=2.5,upper::Real=97.5)
+function calcquantileint(data::Matrix; lower::Real=2.5,upper::Real=97.5,  print_on::Bool = false)
 
     # find dim. for data
     dim = minimum(size(data))
@@ -23,6 +23,8 @@ function calcquantileint(data::Matrix, lower::Real=2.5,upper::Real=97.5)
         intervals[i,:] = quantile(data[i,:], [lower/100 upper/100])
     end
 
+    print_on == true ? show(intervals) :
+
     # return intervals
     return intervals
 
@@ -31,11 +33,11 @@ end
 
 
 doc"""
-    calcquantileint(data::Matrix, lower::Real=2.5,upper::Real=97.5)
+    calcquantileint(data::Matrix; lower::Real=2.5,upper::Real=97.5, print_on::Bool = false)
 
 Computes posterior quantile intervals, 2.5th and 97.5th quantiles as default.
 """
-function calcquantileint(data::Vector, lower::Real=2.5,upper::Real=97.5)
+function calcquantileint(data::Vector; lower::Real=2.5,upper::Real=97.5, print_on::Bool = false)
 
 
     # set nbr of intervals
@@ -44,22 +46,34 @@ function calcquantileint(data::Vector, lower::Real=2.5,upper::Real=97.5)
     # calc intervals over all dimensions
     intervals[1,:] = quantile(data, [lower/100 upper/100])
 
+    print_on == true ? show(intervals) :
+
     # return intervals
     return intervals
 
 end
 
-# RMSE
+# loss
 
 doc"""
-    RMSE(theta_true::Vector, theta_est::Matrix)
+    loss(theta_true::Vector, theta_est::Vector)
 
 Computes the root mean square error for the parameter estimations.
 """
-function RMSE(theta_true::Vector, Theta_est::Matrix)
-  rmse = copy(theta_true)
+function loss(theta_true::Vector, theta_est::Vector)
+  loss = copy(theta_true)
   for i = 1:length(rmse)
-    rmse[i] = sqrt(mean((theta_true[i]-Theta_est[i,:]).^2))
+    loss[i] = abs(theta_true[i]-theta_est[i])
   end
-  return rmse
+  return loss
+end
+
+
+doc"""
+    loss(theta_true::Real, theta_est::Real)
+
+Computes the root mean square error for the parameter estimations.
+"""
+function loss(theta_true::Real, theta_est::Real)
+  return abs(theta_true-theta_est)
 end

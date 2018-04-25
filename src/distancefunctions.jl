@@ -1,10 +1,10 @@
 
 doc"""
-    Euclidian(s_star::Vector, s::Vector, w::Vector)
+    Euclidean(s_star::Vector, s::Vector, w::Vector)
 
-The (weigthed) Euclidian distance function.
+The (weigthed) Euclidean distance function.
 """
-function Euclidian(s_star::Vector, s::Vector, w::Vector)
+function Euclidean(s_star::Vector, s::Vector, w::Vector)
 
   Δs =  (s_star-s)
   dist = Δs'*inv(diagm(w.^2))*Δs

@@ -1,20 +1,20 @@
 
-addprocs(4)
+addprocs(2)
 
-@everywhere using ABC
+@everywhere using ApproximateBayesianComputation
 @everywhere using Distributions
 using KernelDensity
 using PyPlot
 
 # data model
-@everywhere m = 4;
-@everywhere n = 5;
+@everywhere m = 4
+@everywhere n = 5
 p = 0.7
 
 y = rand(Binomial(m,p),n) # generate data
 
 # prior distribution
-@everywhere α = 2;
+@everywhere α = 2
 @everywhere β = 2
 
 @everywhere prior = Beta(α, β)
@@ -36,26 +36,24 @@ posterior = Beta(α + sum(y), β + m*n - sum(y))
 
 
 # compute absolute distance between the data sets
-@everywhere ρ(s_star, s) = sum(abs(sort(s_star)-sort(s)))
+@everywhere ρ(s_star, s) = sum(abs.(sort(s_star)-sort(s)))
 
-@everywhere kernel(s_star::Vector, s::Vector, ϵ::Real, ρ::Function) = ApproximateBayesianComputation.UniformKernel(s_star, s, ϵ, ρ)
 
 # create ABC rejection sampling problem
-data = ApproximateBayesianComputation.Data(y)
+data = Data(y)
 
 nbr_cores = length(workers())
 
-problem = ApproximateBayesianComputation.ABCRS(10^6, 0, data, 1, cores = nbr_cores, print_interval = 10000)
+problem = ABCRS(10^6, 0, data, 1, cores = nbr_cores, print_interval = 10000)
 
-approx_posterior_samples = @time ApproximateBayesianComputation.sample(problem,
+approx_posterior_samples = @time sample(problem,
                                             sample_from_prior,
                                             generate_data,
                                             calc_summary,
-                                            ρ,
-                                            kernel)
+                                            ρ)
 
 # calc posterior quantile interval
-posterior_quantile_interval = ApproximateBayesianComputation.calcquantileint(approx_posterior_samples)
+posterior_quantile_interval = calcquantileint(approx_posterior_samples, true)
 
 # calc kernel density est. for approxiamte posterior
 kde_approx_posterior = kde(approx_posterior_samples[:])

@@ -43,7 +43,6 @@ Input:
 - `generate_data::Function` function to generate data from the model
 - `calc_summary::Function` function to calculate summary statistics
 - `ρ::Function` the distance function
-- `kernel::Function` the kernel function
 
 Output:
 
@@ -100,7 +99,7 @@ function sample(problem::ABCRS,
                                                                      ϵ,
                                                                      sample_from_prior,
                                                                      generate_data,
-                                                                     calc_summary
+                                                                     calc_summary,
                                                                      ρ)
   end
 

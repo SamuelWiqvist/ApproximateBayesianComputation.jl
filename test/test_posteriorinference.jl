@@ -4,13 +4,13 @@ using StatsBase
 
 data = rand(4,100)
 
-quantile_int = ABC.calcquantileint(data, 10, 90)
-quantile_def = ABC.calcquantileint(data)
-quantile_trans = ABC.calcquantileint(data')
+quantile_int = calcquantileint(data, 10, 90)
+quantile_def = calcquantileint(data)
+quantile_trans = calcquantileint(data')
 
 data_vec = rand(100)
-quantile_vec = ABC.calcquantileint(data_vec, 10,90)
-quantile_vec_def = ABC.calcquantileint(data_vec)
+quantile_vec = calcquantileint(data_vec, 10,90)
+quantile_vec_def = calcquantileint(data_vec)
 
 @testset "calcquantileint" begin
   for i = 1:4
@@ -23,6 +23,14 @@ quantile_vec_def = ABC.calcquantileint(data_vec)
 end
 
 # test for RMSE
+
+theta_true = 2.
+theta_est = 2.
+
+@testset "loss 1D" begin
+  @test ABC.RMSE(theta_true, data) == zeros(4)
+  @test sum(ABC.RMSE(theta_true, data_noisy)) < 4
+end
 
 theta_true = [0.1;3;4;10]
 

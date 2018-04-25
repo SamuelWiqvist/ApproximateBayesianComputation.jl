@@ -10,6 +10,6 @@ s_star_same = copy(s)
 s_star_different = rand(4)
 
 @testset "UniformKernel" begin
-  @test ABC.UniformKernel(s_star_same, s, ϵ, ρ) == 1.
-  @test ABC.UniformKernel(s_star_different, s, ϵ, ρ) == 0.
+  @test UniformKernel(s_star_same, s, ϵ, ρ) == 1.
+  @test UniformKernel(s_star_different, s, ϵ, ρ) == 0.
 end

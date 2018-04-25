@@ -1,4 +1,4 @@
-using ABC
+using ApproximateBayesianComputation
 using Distributions
 using KernelDensity
 using PyPlot
@@ -53,7 +53,7 @@ calc_summary(y_sim::Vector, y_obs::Vector) = [percentile(y_sim, [20;40;60;80]);s
 
 # create distance function
 w  =  [0.22; 0.19; 0.53; 2.97; 1.90]  # from " Approximate maximum likelihood estimation using data-cloning ABC"
-ρ(s::Vector, s_star::Vector) = ApproximateBayesianComputation.Euclidian(s::Vector, s_star::Vector, w)
+ρ(s::Vector, s_star::Vector) = Euclidean(s::Vector, s_star::Vector, w)
 
 
 # generate data set

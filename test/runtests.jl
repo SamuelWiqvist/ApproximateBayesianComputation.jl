@@ -1,4 +1,4 @@
-using ABC
+using ApproximateBayesianComputation
 using Base.Test
 
 include("test_distancefunctions.jl")
