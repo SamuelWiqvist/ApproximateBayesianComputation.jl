@@ -67,13 +67,13 @@ end
 @everywhere calc_summary(y_sim::Vector, y_obs::Vector) = autocor(y_sim, 1:2)
 
 # distance function
-@everywhere ρ(s::Vector, s_star::Vector) = ABC.Euclidian(s, s_star, ones(2))
+@everywhere ρ(s::Vector, s_star::Vector) = ApproximateBayesianComputation.Euclidian(s, s_star, ones(2))
 
 
 # generate data set
 θ_true = [0.6; 0.2]
 y = generate_data(θ_true)
-data = ABC.Data(y)
+data = ApproximateBayesianComputation.Data(y)
 
 PyPlot.figure()
 PyPlot.plot(y)
@@ -104,10 +104,10 @@ T = length(ϵ_seq)
 N = 500
 dim_unknown = 2
 nbr_cores = 4
-problem = ABC.PMCABC(T,N,ϵ_seq,data,dim_unknown,cores = nbr_cores)
+problem = ApproximateBayesianComputation.PMCABC(T,N,ϵ_seq,data,dim_unknown,cores = nbr_cores)
 
 # run ABC-MCMC
-approx_posterior_samples = @time ABC.sample(problem,
+approx_posterior_samples = @time ApproximateBayesianComputation.sample(problem,
                                             sample_from_prior,
                                             evaluate_prior,
                                             generate_data,
@@ -115,7 +115,7 @@ approx_posterior_samples = @time ABC.sample(problem,
                                             ρ)
 
 # calc posterior quantile interval
-posterior_quantile_interval = ABC.calcquantileint(approx_posterior_samples)
+posterior_quantile_interval = ApproximateBayesianComputation.calcquantileint(approx_posterior_samples)
 
 PyPlot.figure()
 PyPlot.plot((0,-2),(-1,1), "g")

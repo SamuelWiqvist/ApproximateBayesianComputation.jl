@@ -54,8 +54,7 @@ function sample(problem::ABCRS,
                 sample_from_prior::Function,
                 generate_data::Function,
                 calc_summary::Function,
-                ρ::Function,
-                kernel::Function)
+                ρ::Function)
 
   # data
   y = problem.data.y
@@ -101,8 +100,7 @@ function sample(problem::ABCRS,
                                                                      ϵ,
                                                                      sample_from_prior,
                                                                      generate_data,
-                                                                     calc_summary,
-                                                                     kernel,
+                                                                     calc_summary
                                                                      ρ)
   end
 
@@ -136,7 +134,6 @@ function abcrsinterationatsatcore(dim_unknown::Int,
                                   sample_from_prior::Function,
                                   generate_data::Function,
                                   calc_summary::Function,
-                                  kernel::Function,
                                   ρ::Function)
 
   samples_approx_posterior = zeros(dim_unknown, iter_at_core)
@@ -153,7 +150,7 @@ function abcrsinterationatsatcore(dim_unknown::Int,
     y_star = generate_data(θ_star)
     s_star = calc_summary(y_star,y)
 
-    accept = rand() < kernel(s_star, s, ϵ, ρ)
+    accept = rand() < ApproximateBayesianComputation.UniformKernel(s_star, s, ϵ, ρ)
 
     if accept
       samples_approx_posterior[:,n] = θ_star

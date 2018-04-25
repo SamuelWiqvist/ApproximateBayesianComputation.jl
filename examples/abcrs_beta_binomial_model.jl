@@ -38,16 +38,16 @@ posterior = Beta(α + sum(y), β + m*n - sum(y))
 # compute absolute distance between the data sets
 @everywhere ρ(s_star, s) = sum(abs(sort(s_star)-sort(s)))
 
-@everywhere kernel(s_star::Vector, s::Vector, ϵ::Real, ρ::Function) = ABC.UniformKernel(s_star, s, ϵ, ρ)
+@everywhere kernel(s_star::Vector, s::Vector, ϵ::Real, ρ::Function) = ApproximateBayesianComputation.UniformKernel(s_star, s, ϵ, ρ)
 
 # create ABC rejection sampling problem
-data = ABC.Data(y)
+data = ApproximateBayesianComputation.Data(y)
 
 nbr_cores = length(workers())
 
-problem = ABC.ABCRS(10^6, 0, data, 1, cores = nbr_cores, print_interval = 10000)
+problem = ApproximateBayesianComputation.ABCRS(10^6, 0, data, 1, cores = nbr_cores, print_interval = 10000)
 
-approx_posterior_samples = @time ABC.sample(problem,
+approx_posterior_samples = @time ApproximateBayesianComputation.sample(problem,
                                             sample_from_prior,
                                             generate_data,
                                             calc_summary,
@@ -55,7 +55,7 @@ approx_posterior_samples = @time ABC.sample(problem,
                                             kernel)
 
 # calc posterior quantile interval
-posterior_quantile_interval = ABC.calcquantileint(approx_posterior_samples)
+posterior_quantile_interval = ApproximateBayesianComputation.calcquantileint(approx_posterior_samples)
 
 # calc kernel density est. for approxiamte posterior
 kde_approx_posterior = kde(approx_posterior_samples[:])

@@ -39,7 +39,7 @@ ABCMCMC(N::Int, burn_in::Real, ϵ_seq::Vector, dim_unknown::Int, θ_start::Vecto
         generate_data::Function,
         calc_summary::Function,
         ρ::Function;
-        kernel::Function = ABC.UniformKernel)
+        kernel::Function = ApproximateBayesianComputation.UniformKernel)
 
 Sample from the approximate posterior distribtuion using ABC-MCMC.
 
@@ -63,7 +63,7 @@ function sample(problem::ABCMCMC,
                 generate_data::Function,
                 calc_summary::Function,
                 ρ::Function;
-                kernel::Function = ABC.UniformKernel)
+                kernel::Function = ApproximateBayesianComputation.UniformKernel)
 
   # data
   y = problem.data.y
