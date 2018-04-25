@@ -1,5 +1,12 @@
-using ApproximateBayesianComputation
+using ABC
 using Base.Test
 
-# write your own tests here
-@test 1 == 2
+include("test_distancefunctions.jl")
+include("test_kernels.jl")
+include("test_posteriorinference.jl")
+
+addprocs(4)
+
+include("test_abcrs.jl")
+include("test_abcmcmc.jl")
+include("test_abcpmc.jl")
