@@ -120,7 +120,8 @@ function sample(problem::ABCMCMC,
       @printf "Percentage done: %.2f %% \n" 100*(n-1)/N_iteration
       # print accaptace rate
       @printf "Acceptance rate on iteration %d to %d is %.4f %% \n"
-      n-print_interval n-1
+      n-print_interval
+      n-1
       (sum(accept_vec[n-print_interval:n-1])/( n-1 - (n-print_interval) ))*100
       # print covaraince function
       @printf "Covariance:\n"
