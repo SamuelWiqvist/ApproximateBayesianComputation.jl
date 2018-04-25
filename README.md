@@ -18,7 +18,7 @@ Distance functions:
 
 ## How to use this module
 
-This package is not added to the Julia METADATA string. However, to install the package you can run: `Pkg.clone("https://github.com/SamuelWiqvist/ApproximateBayesianComputation.jl")`. 
+This package is not added to `METADATA`. However, to install the package you can run: `Pkg.clone("https://github.com/SamuelWiqvist/ApproximateBayesianComputation.jl")`. 
 
 To run the examples directly in your browser simply click on the binder link. However, launching the binder server might take a while (in some cases up to 20 minutes) since the environment has to be set up on the server.
 
