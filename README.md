@@ -18,9 +18,7 @@ Distance functions:
 
 ## How to use this module
 
-The module can be download as any other repository. To add the module to your local `LOAD_PATH` variable run `push!(LOAD_PATH, "path_to_module/abc-master/src")`
-
-This line can also be added to the file  `~/.juliarc.jl` to automatically include the module each time Julia starts.
+This package is not added to the Julia METADATA string. However, to install the package you can run `Pkg.clone("https://github.com/SamuelWiqvist/ApproximateBayesianComputation.jl")`
 
 To run the examples directly in your browser simply click on the binder link. However, launching the binder server might take a while (in some cases up to 20 minutes) since the environment has to be set up on the server.
 
