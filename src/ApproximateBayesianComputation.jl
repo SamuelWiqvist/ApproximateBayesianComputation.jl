@@ -83,8 +83,8 @@ n = 100 # nbr of observations
 
 y = rand(Normal(μ,σ),100) # generate some data
 
-# the prior is a normal distribution with
-prior = Normal(0.1 1)
+# the prior is a normal distribution with μ = 0.1, and σ = 1
+prior = Normal(0.1, 1)
 ```
 
 Define the functions needed for the ABC-RS algorithm.
@@ -107,13 +107,11 @@ calc_summary(y_star,y) = [mean(y_star); std(y_star)]
 Set up the ABC-RS problem.
 
 ```julia
-data = Data(y)
-nbr_cores = 1
 problem = ABCRS(10^6,
                 0.01,
-                data,
+                Data(y),
                 1,
-                cores = nbr_cores,
+                cores = 1,
                 print_interval = 10^5)
 ```
 
@@ -132,6 +130,7 @@ Check posterior quantile interval.
 ```julia
 posterior_quantile_interval = calcquantileint(approx_posterior_samples)
 ```
+
 
 """
 ApproximateBayesianComputation
