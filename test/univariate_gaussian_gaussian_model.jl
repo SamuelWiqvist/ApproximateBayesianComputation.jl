@@ -23,4 +23,4 @@ posterior_std = sqrt(1/(λ_0 + n*λ))
 @everywhere calc_summary(y_star,y) = [mean(y_star); std(y_star)]
 @everywhere ρ(s_star, s) = Euclidean(s_star, s, ones(2))
 @everywhere kernel(s_star::Vector, s::Vector, ϵ::Real, ρ::Function) = UniformKernel(s_star, s, ϵ, ρ)
-@everywhere evaluate_prior(Θ) = pdf(Normal(μ_0, σ_0), Θ)[1]
+@everywhere evaluate_prior(Θ) = pdf.(Normal(μ_0, σ_0), Θ)[1]
