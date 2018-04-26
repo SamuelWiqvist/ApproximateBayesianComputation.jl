@@ -9,8 +9,4 @@ include("test_posteriorinference.jl")
 
 include("test_abcrs.jl")
 include("test_abcmcmc.jl")
-
-
-#=
-include("test_abcpmc.jl")
-=#
+#include("test_abcpmc.jl")

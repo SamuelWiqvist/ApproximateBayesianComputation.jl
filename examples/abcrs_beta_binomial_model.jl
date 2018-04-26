@@ -46,10 +46,10 @@ nbr_cores = length(workers())
 problem = ABCRS(10^6, 0, data, 1, cores = nbr_cores, print_interval = 10000)
 
 approx_posterior_samples = @time sample(problem,
-                                            sample_from_prior,
-                                            generate_data,
-                                            calc_summary,
-                                            ρ)
+                                        sample_from_prior,
+                                        generate_data,
+                                        calc_summary,
+                                        ρ)
 
 # calc posterior quantile interval
 posterior_quantile_interval = calcquantileint(approx_posterior_samples, print_on = true)

@@ -31,7 +31,7 @@ end
 @everywhere function evaluate_prior(Θ::Vector)
   θ_1 = Θ[1]
   θ_2 = Θ[2]
-  if abs(θ_1) <= 2 && abs(θ_2) <= 1 &&  θ_2 + θ_1  >= -1 && θ_2 - θ_1 >= -1
+  if abs(θ_1) <= 2 && abs(θ_2) <= 1 && θ_2 + θ_1 >= -1 && θ_2 - θ_1 >= -1
     return 1.
   else
     return 0.
@@ -44,7 +44,7 @@ end
   θ_1 = Θ[1]
   θ_2 = Θ[2]
 
-  if abs(θ_1) <= 2 && abs(θ_2) <= 1 &&   θ_2 + θ_1  >= -1 && θ_2 - θ_1 >= -1
+  if abs(θ_1) <= 2 && abs(θ_2) <= 1 && θ_2 + θ_1 >= -1 && θ_2 - θ_1 >= -1
 
     y = zeros(N_data)
     ϵ = randn(N_data)
@@ -106,7 +106,7 @@ dim_unknown = 2
 nbr_cores = length(workers())
 problem = ABCPMC(T,N,ϵ_seq,data,dim_unknown,cores = nbr_cores)
 
-# run ABC-MCMC
+# run ABC-PMC
 approx_posterior_samples = @time sample(problem,
                                         sample_from_prior,
                                         evaluate_prior,
@@ -117,6 +117,7 @@ approx_posterior_samples = @time sample(problem,
 # calc posterior quantile interval
 posterior_quantile_interval = calcquantileint(approx_posterior_samples)
 
+# Plot posterior
 PyPlot.figure()
 PyPlot.plot((0,-2),(-1,1), "g")
 PyPlot.plot((-2,2),(1,1), "g")

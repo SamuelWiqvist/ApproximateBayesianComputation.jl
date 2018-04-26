@@ -45,9 +45,7 @@ Input:
 - `ρ::Function` the distance function
 
 Output:
-
 - `θ_pop::Matrix` last population
-
 """
 function sample(problem::ABCPMC,
                 sample_from_prior::Function,
@@ -89,7 +87,7 @@ function sample(problem::ABCPMC,
 
   @printf "Starting PMC-ABC \n"
   @printf "Running on %d core(s)\n" N_cores
-  @printf "Starting Threshold: ϵ: %.4f\n" ϵ_seq[1]
+  @printf "Starting Threshold: ϵ = %.4f\n" ϵ_seq[1]
 
   # compute summary statistics for data
   s = calc_summary(y,y)
@@ -131,10 +129,9 @@ function sample(problem::ABCPMC,
       # print progress
       @printf "Percentage done: %.2f %% \n" 100*(t-1)/T
       # print threshold
-      @printf "Threshold (current iteration): %.4f \n"  ϵ_seq[t]
+      @printf "Threshold (current iteration): ϵ = %.4f \n"  ϵ_seq[t]
       # print accaptace rate
       @printf "Accaptace rate (previous iteration): %.4f %%\n"  mean(accaptance_rate)*100
-
     end
 
     @sync begin
@@ -257,7 +254,6 @@ function ABCPMCpropatcores(w_old::Vector,
                            calc_summary::Function,
                            ρ::Function,
                            y::Array)
-
 
   θ_pop_at_core = zeros(dim_unknown, div(N, N_cores))
   θ_star = zeros(dim_unknown)
