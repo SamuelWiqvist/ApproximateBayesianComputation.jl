@@ -4,12 +4,12 @@ using StatsBase
 
 data = rand(4,100)
 
-quantile_int = calcquantileint(data, 10, 90)
+quantile_int = calcquantileint(data, lower=10, upper=90)
 quantile_def = calcquantileint(data)
 quantile_trans = calcquantileint(data')
 
 data_vec = rand(100)
-quantile_vec = calcquantileint(data_vec, 10,90)
+quantile_vec = calcquantileint(data_vec, lower=10, upper=90)
 quantile_vec_def = calcquantileint(data_vec)
 
 @testset "calcquantileint" begin
@@ -25,22 +25,19 @@ end
 # test for RMSE
 
 theta_true = 2.
-theta_est = 2.
+theta_est_true = 2.
+theta_est = 2. + 0.2*rand()
 
 @testset "loss 1D" begin
-  @test ABC.RMSE(theta_true, data) == zeros(4)
-  @test sum(ABC.RMSE(theta_true, data_noisy)) < 4
+  @test loss(theta_true, theta_est_true) == 0
+  @test loss(theta_true, theta_est) > 0
 end
 
 theta_true = [0.1;3;4;10]
+theta_est_true = copy(theta_true)
+theta_est = copy(theta_true) + 0.2*rand(4)
 
-data = repmat(theta_true, 1,100)
-
-data_noisy = data + rand(4,100)
-ABC.RMSE(theta_true, data)
-ABC.RMSE(theta_true, data_noisy)
-
-@testset "RMSE" begin
-  @test ABC.RMSE(theta_true, data) == zeros(4)
-  @test sum(ABC.RMSE(theta_true, data_noisy)) < 4
+@testset "loss multi-D" begin
+  @test sum(loss(theta_true,theta_est_true)) == 0.
+  @test sum(loss(theta_true, theta_est)) > 0
 end

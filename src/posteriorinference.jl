@@ -61,11 +61,11 @@ doc"""
 Computes the root mean square error for the parameter estimations.
 """
 function loss(theta_true::Vector, theta_est::Vector)
-  loss = copy(theta_true)
-  for i = 1:length(rmse)
-    loss[i] = abs(theta_true[i]-theta_est[i])
+  loss_vec = copy(theta_true)
+  for i = 1:length(loss_vec)
+    loss_vec[i] = abs(theta_true[i]-theta_est[i])
   end
-  return loss
+  return loss_vec
 end
 
 

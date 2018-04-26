@@ -21,6 +21,7 @@ export
   sample, # algorithms
   Euclidean, # distance functions
   UniformKernel, # kernels
+  GaussianKernel,
   calcquantileint, # posterior inference
   loss,
   log_unifpdf, # log pdfs
