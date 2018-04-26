@@ -14,7 +14,7 @@ export
   # types
   ABCRS,
   ABCMCMC,
-  PMCABC,
+  ABCPMC,
   Data,
 
   # methods
@@ -37,7 +37,7 @@ include("adaptive updating algorithms/adaptiveupdate.jl")
 # load soruce files for ABC algorithms and related methods
 include("types.jl")  # types
 include("abcrs.jl") # algorithms
-include("pmcabc.jl")
+include("abcpmc.jl")
 include("abcmcmc.jl")
 include("distancefunctions.jl") # distance functions
 include("kernels.jl") # kernels

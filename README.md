@@ -105,3 +105,6 @@ To run the examples directly in your browser simply click on the binder link, an
 ## About this package
 
 This package was originally created for the graduate course *Approximate Bayesian Computation* at Chalmers University of Technology.
+
+A short report containing an introduciton to ABC, and some information on how the code is structured can be found
+[here](https://www.overleaf.com/read/bqjbgtmcqhsx).  

@@ -104,7 +104,7 @@ T = length(ϵ_seq)
 N = 500
 dim_unknown = 2
 nbr_cores = length(workers())
-problem = PMCABC(T,N,ϵ_seq,data,dim_unknown,cores = nbr_cores)
+problem = ABCPMC(T,N,ϵ_seq,data,dim_unknown,cores = nbr_cores)
 
 # run ABC-MCMC
 approx_posterior_samples = @time sample(problem,
