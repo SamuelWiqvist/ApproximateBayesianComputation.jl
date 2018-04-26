@@ -1,7 +1,7 @@
 
-addprocs(4)
+addprocs(2)
 
-@everywhere using ABC
+@everywhere using ApproximateBayesianComputation
 @everywhere using Distributions
 @everywhere using StatsBase
 using KernelDensity
@@ -73,7 +73,7 @@ end
 # generate data set
 θ_true = [0.6; 0.2]
 y = generate_data(θ_true)
-data = ApproximateBayesianComputation.Data(y)
+data = Data(y)
 
 PyPlot.figure()
 PyPlot.plot(y)
@@ -91,31 +91,31 @@ end
 
 summarystats(ρ_vec)
 
+# plot ´hist of distances when we sample proposals from the prior
 PyPlot.figure()
 PyPlot.plt[:hist](ρ_vec,50)
 PyPlot.ylabel("Freq.")
 PyPlot.xlabel(L"$\rho$")
 
 # create ABC-MCMC problem
-#ϵ_seq = [2; 1.5; 1; 0.5; 0.3; 0.35]
 
 ϵ_seq = [2; 1.5; 1; 0.5; 0.1; 0.01]
 T = length(ϵ_seq)
 N = 500
 dim_unknown = 2
-nbr_cores = 4
-problem = ApproximateBayesianComputation.PMCABC(T,N,ϵ_seq,data,dim_unknown,cores = nbr_cores)
+nbr_cores = length(workers())
+problem = PMCABC(T,N,ϵ_seq,data,dim_unknown,cores = nbr_cores)
 
 # run ABC-MCMC
-approx_posterior_samples = @time ApproximateBayesianComputation.sample(problem,
-                                            sample_from_prior,
-                                            evaluate_prior,
-                                            generate_data,
-                                            calc_summary,
-                                            ρ)
+approx_posterior_samples = @time sample(problem,
+                                        sample_from_prior,
+                                        evaluate_prior,
+                                        generate_data,
+                                        calc_summary,
+                                        ρ)
 
 # calc posterior quantile interval
-posterior_quantile_interval = ApproximateBayesianComputation.calcquantileint(approx_posterior_samples)
+posterior_quantile_interval = calcquantileint(approx_posterior_samples)
 
 PyPlot.figure()
 PyPlot.plot((0,-2),(-1,1), "g")

@@ -219,7 +219,7 @@ function pmcabcstartvalatcores(sample_from_prior::Function,
       θ_star = sample_from_prior()
       y_star = generate_data(θ_star)
       s_star = calc_summary(y_star,y)
-      accept = Bool(ABC.UniformKernel(s_star, s, ϵ_val, ρ))
+      accept = Bool(UniformKernel(s_star, s, ϵ_val, ρ))
       accaptance_rate[i] = accaptance_rate[i] + 1.
     end
     accaptance_rate[i] = 1/accaptance_rate[i]
@@ -279,7 +279,7 @@ function pmcabcpropatcores(w_old::Vector,
       end
       y_star = generate_data(θ_star)
       s_star = calc_summary(y_star,y)
-      accept = Bool(ABC.UniformKernel(s_star, s, ϵ_val, ρ))
+      accept = Bool(UniformKernel(s_star, s, ϵ_val, ρ))
       accaptance_rate[i] = accaptance_rate[i] + 1.
     end
     accaptance_rate[i] = 1/accaptance_rate[i]
