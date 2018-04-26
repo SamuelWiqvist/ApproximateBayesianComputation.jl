@@ -77,12 +77,13 @@ function sample(problem::PMCABC,
   θ_pop_old = zeros(dim_unknown,N)
   θ_pop = zeros(dim_unknown,N)
   τ_2 = zeros(dim_unknown)
-  #accaptance_rate = zeros(N)
 
+  # check inputs
   if mod(N,N_cores) != 0
     error("Select N and cores such that mod(N,cores) == 0")
   end
 
+  # pre-allocate matricies
   θ_pop_parallel = SharedArray{Float64}(dim_unknown,div(N,N_cores), N_cores)
   accaptance_rate = SharedArray{Float64}(N_cores)
 

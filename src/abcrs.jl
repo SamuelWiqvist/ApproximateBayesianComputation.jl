@@ -74,7 +74,6 @@ function sample(problem::ABCRS,
 
   # pre-allocate vectors and matricies
   theta_star = zeros(problem.dim_unknown)
-  #samples_approx_posterior = zeros(length(theta_star),div(N,N_cores), N_cores)
 
   samples_approx_posterior = SharedArray{Float64}(length(theta_star),
                                                   div(N,N_cores),
@@ -149,7 +148,7 @@ function abcrsinterationatsatcore(dim_unknown::Int,
     y_star = generate_data(θ_star)
     s_star = calc_summary(y_star,y)
 
-    accept = rand() < ApproximateBayesianComputation.UniformKernel(s_star, s, ϵ, ρ)
+    accept = rand() < UniformKernel(s_star, s, ϵ, ρ)
 
     if accept
       samples_approx_posterior[:,n] = θ_star

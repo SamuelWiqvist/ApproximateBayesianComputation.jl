@@ -13,7 +13,7 @@ Kernels:
 * Uniform
 * Gaussian
 
-Distance functions:
+Distance function(s):
 * (Weighted) Euclidean distance
 
 Posterior inference checks are also provided see ```?calcquantileint``` and ```?loss```.
@@ -56,7 +56,7 @@ generate_data(μ) = rand(Normal(μ[1],σ),n)
 calc_summary(y_star,y) = [mean(y_star); std(y_star)]
 
 # distance function
-ρ(s_star, s) = Euclidean(s_star, s, [1;1])
+ρ(s_star, s) = Euclidean(s_star, s, ones(2))
 ```
 
 Set up the ABC-RS problem.
@@ -88,13 +88,20 @@ Check posterior quantile interval.
 posterior_quantile_interval = calcquantileint(approx_posterior_samples)
 ```
 
+Posterior and prior distribution.
 
-## How to use this module
+![](/assets/post_example.pdf)
 
-This package is not added to `METADATA`. However, to install the package you can run: `Pkg.clone("https://github.com/SamuelWiqvist/ApproximateBayesianComputation.jl")`.
 
-To run the examples directly in your browser simply click on the binder link. However, launching the binder server might take a while (in some cases up to 20 minutes) since the environment has to be set up on the server.
+## How to use this package
 
-## About this repository
+This package is not added to `METADATA`. However, to install the package you can run:
+```julia
+Pkg.clone("https://github.com/SamuelWiqvist/ApproximateBayesianComputation.jl")
+ ```
 
-This repository was originally created for the graduate course *Approximate Bayesian Computation* at Chalmers University of Technology.
+To run the examples directly in your browser simply click on the binder link, and then open the Jupyter notebook `examples.ipynb`. However, launching the binder server might take a while (in some cases up to 20 minutes) since the environment has to be installed on the server.
+
+## About this package
+
+This package was originally created for the graduate course *Approximate Bayesian Computation* at Chalmers University of Technology.

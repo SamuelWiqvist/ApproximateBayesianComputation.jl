@@ -22,6 +22,6 @@ posterior_std = sqrt(1/(λ_0 + n*λ))
 @everywhere sample_from_prior() = rand(Normal(μ_0, σ_0))
 @everywhere generate_data(μ) = typeof(μ) <: Real ? rand(Normal(μ,σ),n) : rand(Normal(μ[1],σ),n)
 @everywhere calc_summary(y_star,y) = [mean(y_star); std(y_star)]
-@everywhere ρ(s_star, s) = ABC.Euclidean(s_star, s, [1;1])
+@everywhere ρ(s_star, s) = ABC.Euclidean(s_star, s, ones(2))
 @everywhere kernel(s_star::Vector, s::Vector, ϵ::Real, ρ::Function) = ABC.UniformKernel(s_star, s, ϵ, ρ)
 @everywhere evaluate_prior(Θ) = pdf(Normal(μ_0, σ_0), Θ)[1]

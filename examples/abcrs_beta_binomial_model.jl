@@ -38,7 +38,6 @@ posterior = Beta(α + sum(y), β + m*n - sum(y))
 # compute absolute distance between the data sets
 @everywhere ρ(s_star, s) = sum(abs.(sort(s_star)-sort(s)))
 
-
 # create ABC rejection sampling problem
 data = Data(y)
 
@@ -53,7 +52,7 @@ approx_posterior_samples = @time sample(problem,
                                             ρ)
 
 # calc posterior quantile interval
-posterior_quantile_interval = calcquantileint(approx_posterior_samples, true)
+posterior_quantile_interval = calcquantileint(approx_posterior_samples, print_on = true)
 
 # calc kernel density est. for approxiamte posterior
 kde_approx_posterior = kde(approx_posterior_samples[:])
@@ -61,8 +60,8 @@ kde_approx_posterior = kde(approx_posterior_samples[:])
 # plot results
 PyPlot.figure()
 PyPlot.plot(kde_approx_posterior.x,kde_approx_posterior.density, "b")
-PyPlot.plot(0:0.01:1,pdf(posterior, 0:0.01:1), "r")
-PyPlot.plot(0:0.01:1, pdf(prior, 0:0.01:1), "g")
+PyPlot.plot(0:0.01:1,pdf.(posterior, 0:0.01:1), "r")
+PyPlot.plot(0:0.01:1, pdf.(prior, 0:0.01:1), "g")
 PyPlot.plot((p, p), (0, maximum(kde_approx_posterior.density)), "k")
 PyPlot.xlabel("p")
 PyPlot.ylabel("Density")

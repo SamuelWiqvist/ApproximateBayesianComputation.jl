@@ -100,7 +100,7 @@ generate_data(μ) = rand(Normal(μ[1],σ),n)
 calc_summary(y_star,y) = [mean(y_star); std(y_star)]
 
 # distance function
-ρ(s_star, s) = Euclidean(s_star, s, [1;1])
+ρ(s_star, s) = Euclidean(s_star, s, ones(2))
 ```
 
 Set up the ABC-RS problem.
