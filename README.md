@@ -1,8 +1,6 @@
 # [![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/SamuelWiqvist/ApproximateBayesianComputation.jl/master) Approximate Bayesian Computation in Julia
 
-[![Build Status](https://travis-ci.org/SamuelWiqvist/ApproximateBayesianComputation.jl.svg?branch=master)](https://travis-ci.org/SamuelWiqvist/ApproximateBayesianComputation.jl)
-
-[![Build status](https://ci.appveyor.com/api/projects/status/6iukm6um8355uldi?svg=true)](https://ci.appveyor.com/project/SamuelWiqvist/approximatebayesiancomputation-jl)
+[![Build Status](https://travis-ci.org/SamuelWiqvist/ApproximateBayesianComputation.jl.svg?branch=master)](https://travis-ci.org/SamuelWiqvist/ApproximateBayesianComputation.jl) [![Build status](https://ci.appveyor.com/api/projects/status/6iukm6um8355uldi?svg=true)](https://ci.appveyor.com/project/SamuelWiqvist/approximatebayesiancomputation-jl)
 
 
 This repository contains some Approximate Bayesian computation algorithms.
