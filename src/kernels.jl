@@ -14,12 +14,15 @@ function UniformKernel(s_star::Vector, s::Vector, ϵ::Real, ρ::Function)
 end
 
 doc"""
-    GaussianKernel(s_star::Vector, s::Vector, ϵ::Real, ρ)
+    GaussianKernel(s_star::Vector, s::Vector, Ω_inv::Array, ϵ::Real)
 
 The uniform kernel function.
 """
-function GaussianKernel(s_star::Vector, s::Vector, Ω_inv::Real)
+function GaussianKernel(s_star::Vector, s::Vector, Ω_inv::Array, ϵ::Real)
 
-  return exp(-(s_star-s)*Ω_inv*(s_star-s))
+  Δs =  (s_star-s)
+  dist = Δs'*Ω_inv*Δs
+
+  return exp(-dist/2*ϵ)
 
 end

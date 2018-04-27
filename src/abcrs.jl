@@ -43,12 +43,9 @@ Input:
 - `generate_data::Function` function to generate data from the model
 - `calc_summary::Function` function to calculate summary statistics
 - `ρ::Function` the distance function
-- `kernel::Function` the kernel function
 
 Output:
-
 - `samples_approx_posterior::Matrix` samples from the approxiamte posterior
-
 """
 function sample(problem::ABCRS,
                 sample_from_prior::Function,
@@ -66,7 +63,7 @@ function sample(problem::ABCRS,
   ϵ = problem.ϵ
   print_interval = problem.print_interval
   nbr_samples = 0
-
+  dim_unknown = problem.dim_unknown
 
   # check inputs
   if mod(N,N_cores) != 0
@@ -74,10 +71,7 @@ function sample(problem::ABCRS,
   end
 
   # pre-allocate vectors and matricies
-  theta_star = zeros(problem.dim_unknown)
-  #samples_approx_posterior = zeros(length(theta_star),div(N,N_cores), N_cores)
-
-  samples_approx_posterior = SharedArray{Float64}(length(theta_star),
+  samples_approx_posterior = SharedArray{Float64}(dim_unknown,
                                                   div(N,N_cores),
                                                   N_cores)
 
@@ -88,11 +82,10 @@ function sample(problem::ABCRS,
   @printf "Running on %d core(s)\n" N_cores
   @printf "Accuracy: ϵ: %f\n" ϵ
 
-
   @sync begin
 
   @parallel for n_cores = 1:N_cores
-    samples_approx_posterior[:,:,n_cores] = abcrsinterationatsatcore(length(theta_star),
+    samples_approx_posterior[:,:,n_cores] = abcrsinterationatsatcore(dim_unknown,
                                                                      div(N,N_cores),
                                                                      print_interval,
                                                                      y,
@@ -100,14 +93,14 @@ function sample(problem::ABCRS,
                                                                      ϵ,
                                                                      sample_from_prior,
                                                                      generate_data,
-                                                                     calc_summary
+                                                                     calc_summary,
                                                                      ρ)
   end
 
   end
 
   # store sample in column-major order
-  samples_approx_posterior_results = reshape(samples_approx_posterior,length(theta_star),:)
+  samples_approx_posterior_results = reshape(samples_approx_posterior,dim_unknown,:)
 
   # only keep accepted proposals
   idx_keep = find(x->x != 0 ,samples_approx_posterior_results[1,:])
@@ -138,7 +131,6 @@ function abcrsinterationatsatcore(dim_unknown::Int,
 
   samples_approx_posterior = zeros(dim_unknown, iter_at_core)
 
-
   for n = 1:iter_at_core
 
     if mod(n-1,print_interval) == 0
@@ -150,7 +142,7 @@ function abcrsinterationatsatcore(dim_unknown::Int,
     y_star = generate_data(θ_star)
     s_star = calc_summary(y_star,y)
 
-    accept = rand() < ApproximateBayesianComputation.UniformKernel(s_star, s, ϵ, ρ)
+    accept = rand() < UniformKernel(s_star, s, ϵ, ρ)
 
     if accept
       samples_approx_posterior[:,n] = θ_star

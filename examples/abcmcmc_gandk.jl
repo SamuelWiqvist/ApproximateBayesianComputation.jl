@@ -1,4 +1,4 @@
-using ABC
+using ApproximateBayesianComputation
 using Distributions
 using KernelDensity
 using PyPlot
@@ -21,7 +21,7 @@ function  evaluate_prior(Θ::Vector)
   # set start value for loglik
   log_prior = 0.
   for i = 1:length(Θ)
-    log_prior += ApproximateBayesianComputation.log_unifpdf( Θ[i], 0, 10 )
+    log_prior += log_unifpdf( Θ[i], 0, 10 )
   end
 
   return log_prior # return log_lik
@@ -53,13 +53,13 @@ calc_summary(y_sim::Vector, y_obs::Vector) = [percentile(y_sim, [20;40;60;80]);s
 
 # create distance function
 w  =  [0.22; 0.19; 0.53; 2.97; 1.90]  # from " Approximate maximum likelihood estimation using data-cloning ABC"
-ρ(s::Vector, s_star::Vector) = ApproximateBayesianComputation.Euclidian(s::Vector, s_star::Vector, w)
+ρ(s::Vector, s_star::Vector) = Euclidean(s::Vector, s_star::Vector, w)
 
 
 # generate data set
 θ_true = [3; 1; 2; .5]
 y = generate_data(θ_true)
-data = ApproximateBayesianComputation.Data(y)
+data = Data(y)
 
 # create ABC-MCMC problem
 ϵ_seq = [30*ones(1000);20*ones(1000);10*ones(1000); 5*ones(1000); 2.5*ones(1000); 1*ones(1000); 0.5*ones(1000); 0.3*ones(100000)] # ; 0.05*ones(100000)
@@ -68,20 +68,20 @@ N = length(ϵ_seq)
 dim_unknown = 4
 #θ_start = sample_from_prior()
 θ_start =  [5;5;3; 2] # fixed start values far away from the true parameter values
-adaptive_update = ApproximateBayesianComputation.AMUpdate(eye(dim_unknown), 2.4/sqrt(dim_unknown), 1., 0.7, 25) # use the AM algorithm to tune the proposal distribution
-problem = ApproximateBayesianComputation.ABCMCMC(N, burn_in, ϵ_seq, dim_unknown, θ_start, "none", data, adaptive_update)
+adaptive_update = AMUpdate(eye(dim_unknown), 2.4/sqrt(dim_unknown), 1., 0.7, 25) # use the AM algorithm to tune the proposal distribution
+problem = ABCMCMC(N, burn_in, ϵ_seq, dim_unknown, θ_start, "none", data, adaptive_update, print_interval = 10000)
 
 # run ABC-MCMC
-chain = @time ApproximateBayesianComputation.sample(problem,
-                        sample_from_prior,
-                        evaluate_prior,
-                        generate_data,
-                        calc_summary,
-                        ρ)
+chain = @time sample(problem,
+                    sample_from_prior,
+                    evaluate_prior,
+                    generate_data,
+                    calc_summary,
+                    ρ)
 
 
 # calc posterior quantile interval
-posterior_quantile_interval = ApproximateBayesianComputation.calcquantileint(chain[:,burn_in+1:end])
+posterior_quantile_interval = calcquantileint(chain[:,burn_in+1:end])
 
 
 # plot chains
@@ -132,7 +132,7 @@ PyPlot.ylabel(L"$k$")
 x_grid = -0.5:0.01:10.5
 
 # calc prior dist
-priordensity = pdf(Uniform(0, 10), x_grid)
+priordensity = pdf.(Uniform(0, 10), x_grid)
 
 
 h1 = kde(chain[1,burn_in:end])

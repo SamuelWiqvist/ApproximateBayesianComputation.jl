@@ -1,4 +1,4 @@
-# [![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/SamuelWiqvist/abc/master) Approximate Bayesian Computation in Julia
+# [![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/SamuelWiqvist/ApproximateBayesianComputation.jl/tree/dev/master) Approximate Bayesian Computation in Julia
 
 This repository contains some Approximate Bayesian computation algorithms.
 
@@ -13,15 +13,96 @@ Kernels:
 * Uniform
 * Gaussian
 
-Distance functions:
-* (Weighted) Euclidian distance
+Distance function(s):
+* (Weighted) Euclidean distance
 
-## How to use this module
+Posterior inference checks are also provided see ```?calcquantileint``` and ```?loss```.
 
-This package is not added to `METADATA`. However, to install the package you can run: `Pkg.clone("https://github.com/SamuelWiqvist/ApproximateBayesianComputation.jl")`. 
 
-To run the examples directly in your browser simply click on the binder link. However, launching the binder server might take a while (in some cases up to 20 minutes) since the environment has to be set up on the server.
+## Minimal working example
 
-## About this repository
+We will in this minimal working example using the ABC rejection sampling algorithm
+to learn the mean for a Normal distribution with known standard deviation.
 
-This repository was originally created for the graduate course *Approximate Bayesian Computation* at Chalmers University of Technology.
+#### Walk-through
+
+Load packages, and set up the model.
+
+```julia
+using ApproximateBayesianComputation
+using Distributions
+
+μ = 0 # true value for the mean we want to estimate
+σ = 1 # known standard deviation
+n = 100 # nbr of observations
+
+y = rand(Normal(μ,σ),100) # generate some data
+
+# the prior is a normal distribution with μ = 0.1, and σ = 1
+prior = Normal(0.1, 1)
+```
+
+Define the functions needed for the ABC-RS algorithm.
+
+```julia
+# function to sample from the prior
+sample_from_prior() = rand(prior)
+
+# function to generate data
+generate_data(μ) = rand(Normal(μ[1],σ),n)
+
+# the summary statistics are the mean and the standard
+# deviation, i.e. the sufficent statistics for the data
+calc_summary(y_star,y) = [mean(y_star); std(y_star)]
+
+# distance function
+ρ(s_star, s) = Euclidean(s_star, s, ones(2))
+```
+
+Set up the ABC-RS problem.
+
+```julia
+problem = ABCRS(10^6,
+                0.01,
+                Data(y),
+                1,
+                cores = 1,
+                print_interval = 10^5)
+```
+
+Run ABC-RS.
+
+```julia
+approx_posterior_samples = sample(problem,
+                                  sample_from_prior,
+                                  generate_data,
+                                  calc_summary,
+                                  ρ)
+```
+
+Check posterior quantile interval.
+
+```julia
+posterior_quantile_interval = calcquantileint(approx_posterior_samples)
+```
+
+Posterior and prior distribution.
+
+![](/assets/post_min_example.png)
+
+
+## How to use this package
+
+This package is not added to `METADATA`. However, to install the package you can run:
+```julia
+Pkg.clone("https://github.com/SamuelWiqvist/ApproximateBayesianComputation.jl")
+ ```
+
+To run the examples directly in your browser simply click on the binder link, and then open the Jupyter notebook `examples.ipynb`. However, launching the binder server might take a while (in some cases up to 20 minutes) since the environment has to be installed on the server.
+
+## About this package
+
+This package was originally created for the graduate course *Approximate Bayesian Computation* at Chalmers University of Technology.
+
+A short report containing an introduciton to ABC, and some information on how the code is structured can be found
+<a href="https://www.overleaf.com/read/bqjbgtmcqhsx" target="_blank">here</a>.  

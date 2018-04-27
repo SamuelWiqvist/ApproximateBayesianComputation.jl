@@ -12,7 +12,7 @@ Parameters:
 - `cores::Int` nbr of course (default value 1)
 - `print_interval::Int` print state of algorithm at every `print_interval`th iteration (default value 1000)
 """
-type PMCABC <: ABCAlgorithm
+type ABCPMC <: ABCAlgorithm
   T::Int # nbr of iterations
   N::Int # nbr of samples in the population
   ϵ_seq::Vector # start threshold
@@ -23,11 +23,11 @@ type PMCABC <: ABCAlgorithm
 end
 
 # constructor
-PMCABC(T::Int, N::Int,ϵ_seq::Vector, data::Data, dim_unknown::Int; cores::Int=1, print_interval::Int = 1) = PMCABC(T,N, ϵ_seq, data, dim_unknown, cores, print_interval)
+ABCPMC(T::Int, N::Int,ϵ_seq::Vector, data::Data, dim_unknown::Int; cores::Int=1, print_interval::Int = 1) = ABCPMC(T,N, ϵ_seq, data, dim_unknown, cores, print_interval)
 
 # method
 """
-    sample(problem::PMCABC,
+    sample(problem::ABCPMC,
         sample_from_prior::Function,
         evaluate_prior::Function,
         generate_data::Function,
@@ -38,18 +38,16 @@ Sample from the approximate posterior distribtuion using PMC-ABC algorithm
 described in Adaptive approximate Bayesian computation< http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.313.3573&rep=rep1&type=pdf.
 
 Input:
-- `problem::PMCABC` problem
+- `problem::ABCPMC` problem
 - `sample_from_prior::Function` function to sample from the prior
 - `generate_data::Function` function to generate data from the model
 - `calc_summary::Function` function to calculate summary statistics
 - `ρ::Function` the distance function
 
 Output:
-
 - `θ_pop::Matrix` last population
-
 """
-function sample(problem::PMCABC,
+function sample(problem::ABCPMC,
                 sample_from_prior::Function,
                 evaluate_prior::Function,
                 generate_data::Function,
@@ -77,18 +75,19 @@ function sample(problem::PMCABC,
   θ_pop_old = zeros(dim_unknown,N)
   θ_pop = zeros(dim_unknown,N)
   τ_2 = zeros(dim_unknown)
-  #accaptance_rate = zeros(N)
 
+  # check inputs
   if mod(N,N_cores) != 0
     error("Select N and cores such that mod(N,cores) == 0")
   end
 
+  # pre-allocate matricies
   θ_pop_parallel = SharedArray{Float64}(dim_unknown,div(N,N_cores), N_cores)
   accaptance_rate = SharedArray{Float64}(N_cores)
 
   @printf "Starting PMC-ABC \n"
   @printf "Running on %d core(s)\n" N_cores
-  @printf "Starting Threshold: ϵ: %.4f\n" ϵ_seq[1]
+  @printf "Starting Threshold: ϵ = %.4f\n" ϵ_seq[1]
 
   # compute summary statistics for data
   s = calc_summary(y,y)
@@ -97,7 +96,7 @@ function sample(problem::PMCABC,
 
   # set start population (in parallel)
   @parallel for i = 1:N_cores
-    θ_pop_parallel[:,:,i], accaptance_rate[i] = pmcabcstartvalatcores(sample_from_prior,
+    θ_pop_parallel[:,:,i], accaptance_rate[i] = ABCPMCstartvalatcores(sample_from_prior,
                                                                       generate_data,
                                                                       calc_summary,
                                                                       ρ,
@@ -130,17 +129,16 @@ function sample(problem::PMCABC,
       # print progress
       @printf "Percentage done: %.2f %% \n" 100*(t-1)/T
       # print threshold
-      @printf "Threshold (current iteration): %.4f \n"  ϵ_seq[t]
+      @printf "Threshold (current iteration): ϵ = %.4f \n"  ϵ_seq[t]
       # print accaptace rate
       @printf "Accaptace rate (previous iteration): %.4f %%\n"  mean(accaptance_rate)*100
-
     end
 
     @sync begin
 
     # update population (in parallel)
     @parallel for i = 1:N_cores
-      θ_pop_parallel[:,:,i], accaptance_rate[i] = pmcabcpropatcores(w_old,
+      θ_pop_parallel[:,:,i], accaptance_rate[i] = ABCPMCpropatcores(w_old,
                                                                     θ_pop_old,
                                                                     τ_2,
                                                                     dim_unknown,
@@ -188,7 +186,7 @@ end
 # help functions
 
 """
-    pmcabcstartvalatcores(sample_from_prior::Function,
+    ABCPMCstartvalatcores(sample_from_prior::Function,
                           generate_data::Function,
                           calc_summary::Funciton,
                           N::Int,
@@ -197,7 +195,7 @@ end
 Runs the first iteration of the PMC-SMC algorithm for N/N_cores particels,
 in parallel at N_cores cores.
 """
-function pmcabcstartvalatcores(sample_from_prior::Function,
+function ABCPMCstartvalatcores(sample_from_prior::Function,
                                generate_data::Function,
                                calc_summary::Function,
                                ρ::Function,
@@ -218,7 +216,7 @@ function pmcabcstartvalatcores(sample_from_prior::Function,
       θ_star = sample_from_prior()
       y_star = generate_data(θ_star)
       s_star = calc_summary(y_star,y)
-      accept = Bool(ABC.UniformKernel(s_star, s, ϵ_val, ρ))
+      accept = Bool(UniformKernel(s_star, s, ϵ_val, ρ))
       accaptance_rate[i] = accaptance_rate[i] + 1.
     end
     accaptance_rate[i] = 1/accaptance_rate[i]
@@ -230,7 +228,7 @@ function pmcabcstartvalatcores(sample_from_prior::Function,
 end
 
 """
-    pmcabcpropatcores(w_old::Vector,
+    ABCPMCpropatcores(w_old::Vector,
                       θ_pop_old::Matrix,
                       τ_2::Vector,
                       dim_unknown::Int,
@@ -244,7 +242,7 @@ end
 
 Updates the population for N/N_cores particels in parallel at N_cores cores.
 """
-function pmcabcpropatcores(w_old::Vector,
+function ABCPMCpropatcores(w_old::Vector,
                            θ_pop_old::Base.ReshapedArray,
                            τ_2::Vector,
                            dim_unknown::Int,
@@ -256,7 +254,6 @@ function pmcabcpropatcores(w_old::Vector,
                            calc_summary::Function,
                            ρ::Function,
                            y::Array)
-
 
   θ_pop_at_core = zeros(dim_unknown, div(N, N_cores))
   θ_star = zeros(dim_unknown)
@@ -278,7 +275,7 @@ function pmcabcpropatcores(w_old::Vector,
       end
       y_star = generate_data(θ_star)
       s_star = calc_summary(y_star,y)
-      accept = Bool(ABC.UniformKernel(s_star, s, ϵ_val, ρ))
+      accept = Bool(UniformKernel(s_star, s, ϵ_val, ρ))
       accaptance_rate[i] = accaptance_rate[i] + 1.
     end
     accaptance_rate[i] = 1/accaptance_rate[i]
