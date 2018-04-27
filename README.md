@@ -2,6 +2,9 @@
 
 [![Build Status](https://travis-ci.org/SamuelWiqvist/ApproximateBayesianComputation.jl.svg?branch=master)](https://travis-ci.org/SamuelWiqvist/ApproximateBayesianComputation.jl)
 
+[![Build status](https://ci.appveyor.com/api/projects/status/6iukm6um8355uldi?svg=true)](https://ci.appveyor.com/project/SamuelWiqvist/approximatebayesiancomputation-jl)
+
+
 This repository contains some Approximate Bayesian computation algorithms.
 
 A toy example for each algorithm is also provided in the examples.
