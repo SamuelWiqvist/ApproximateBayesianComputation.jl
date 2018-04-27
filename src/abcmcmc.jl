@@ -2,32 +2,32 @@
 """
 Type for defining a problem for the ABC-MCMC algorithm
 Parameters:
-- `N::Int` nbr of iterations
-- `burn_in::Int` length for burn-in
+- `N::Integer` nbr of iterations
+- `burn_in::Integer` length for burn-in
 - `ϵ_seq::Vector` sequence of threshold values
-- `dim_unknown::Int` nbr of unknown parameters
+- `dim_unknown::Integer` nbr of unknown parameters
 - `θ_start::Vector` start value for chain
 - `transformation::String` transformation for proposal distribution: none/log/
 - `data::Data` data
 - `adaptive_update::AdaptationAlgorithm` adaptive updating algorithm for the proposal distribtuion
 - `algorithm_type::String` type of ABC algorithm (original or general, default value original)
-- `print_interval::Int` print interval for stats of algorithm (default value 1000)
+- `print_interval::Integer` print interval for stats of algorithm (default value 1000)
 """
 type ABCMCMC <: ABCAlgorithm
-  N::Int # nbr of iterations
+  N::Integer # nbr of iterations
   burn_in::Real # length for burn-in
   ϵ_seq::Vector # sequence of threshold values
-  dim_unknown::Int # nbr of unknown parameters
+  dim_unknown::Integer # nbr of unknown parameters
   θ_start::Vector # start value
   transformation::String
   data::Data # data
   adaptive_update::AdaptationAlgorithm
   algorithm_type::String # type of ABC algorithm
-  print_interval::Int # print interval for stats of algorithm
+  print_interval::Integer # print interval for stats of algorithm
 end
 
 # constructor
-ABCMCMC(N::Int, burn_in::Real, ϵ_seq::Vector, dim_unknown::Int, θ_start::Vector, transforamtion::String, data::Data, adaptive_update::AdaptationAlgorithm; algorithm_type::String="original", print_interval::Int=1000) = ABCMCMC(N, burn_in, ϵ_seq, dim_unknown, θ_start, transforamtion, data, adaptive_update, algorithm_type, print_interval)
+ABCMCMC(N::Integer, burn_in::Real, ϵ_seq::Vector, dim_unknown::Integer, θ_start::Vector, transforamtion::String, data::Data, adaptive_update::AdaptationAlgorithm; algorithm_type::String="original", print_interval::Integer=1000) = ABCMCMC(N, burn_in, ϵ_seq, dim_unknown, θ_start, transforamtion, data, adaptive_update, algorithm_type, print_interval)
 
 # method
 """
@@ -84,7 +84,7 @@ function sample(problem::ABCMCMC,
   chain = zeros(length(θ_start),N_iteration)
   accept_vec = zeros(N_iteration)
   s_matrix = zeros(length(s_star), N_iteration)
-  a_log = zero(Float64)
+  a_log = 0.0
 
   # parameters for adaptive update
   adaptive_update_params = set_adaptive_alg_params(adaptive_update,

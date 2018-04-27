@@ -1,26 +1,26 @@
 # This file contains the functions and types related to the
 
-abstract type  AdaptationAlgorithm end 
+abstract type  AdaptationAlgorithm end
 
 type noAdaptation <: AdaptationAlgorithm
-  Cov::Array{Float64}
+  Cov::Array{Real}
 end
 
 type AMUpdate <: AdaptationAlgorithm
-  C_0::Array{Float64}
-  r_cov_m::Float64
-  gamma_0::Float64
-  k::Float64
-  t_0::Int64
+  C_0::Array{Real}
+  r_cov_m::Real
+  gamma_0::Real
+  k::Real
+  t_0::Integer
 end
 
 type AMUpdate_gen <: AdaptationAlgorithm
-  C_0::Array{Float64}
-  r_cov_m::Float64
-  P_star::Float64
-  gamma_0::Float64
-  k::Float64
-  t_0::Int64
+  C_0::Array{Real}
+  r_cov_m::Real
+  P_star::Real
+  gamma_0::Real
+  k::Real
+  t_0::Integer
 end
 
 
@@ -29,7 +29,7 @@ end
 # set up functions
 
 "Set parameters for noAdaptation"
-function set_adaptive_alg_params(algorithm::noAdaptation, nbr_of_unknown_parameters::Int64, theta::Vector,R::Int64)
+function set_adaptive_alg_params(algorithm::noAdaptation, nbr_of_unknown_parameters::Integer, theta::Vector,R::Integer)
 
   return (algorithm.Cov, NaN)
 
@@ -37,7 +37,7 @@ end
 
 
 "Set parameters for AMUpdate"
-function set_adaptive_alg_params(algorithm::AMUpdate, nbr_of_unknown_parameters::Int64, theta::Vector,R::Int64)
+function set_adaptive_alg_params(algorithm::AMUpdate, nbr_of_unknown_parameters::Integer, theta::Vector,R::Integer)
 
   # define m_g m_g_1
   m_g = zeros(nbr_of_unknown_parameters,1)
@@ -48,7 +48,7 @@ function set_adaptive_alg_params(algorithm::AMUpdate, nbr_of_unknown_parameters:
 end
 
 "Set parameters for AMUpdate_gen"
-function set_adaptive_alg_params(algorithm::AMUpdate_gen, nbr_of_unknown_parameters::Int64, theta::Vector,R::Int64)
+function set_adaptive_alg_params(algorithm::AMUpdate_gen, nbr_of_unknown_parameters::Integer, theta::Vector,R::Integer)
 
   Cov_m = algorithm.C_0
   log_r_cov_m = log(algorithm.r_cov_m)
@@ -74,31 +74,31 @@ end
 # return covariance functions
 
 doc"""
-    return_covariance_matrix(algorithm::noAdaptation, adaptive_update_params::Tuple,r::Int64)
+    return_covariance_matrix(algorithm::noAdaptation, adaptive_update_params::Tuple,r::Integer)
 """
-function return_covariance_matrix(algorithm::noAdaptation, adaptive_update_params::Tuple,r::Int64)
+function return_covariance_matrix(algorithm::noAdaptation, adaptive_update_params::Tuple,r::Integer)
 
   return adaptive_update_params[1]
 
 end
 
 doc"""
-    return_covariance_matrix(algorithm::AMUpdate, adaptive_update_params::Tuple,r::Int64)
+    return_covariance_matrix(algorithm::AMUpdate, adaptive_update_params::Tuple,r::Integer)
 
 Print function for AMUpdate.
 """
-function return_covariance_matrix(algorithm::AMUpdate, adaptive_update_params::Tuple,r::Int64)
+function return_covariance_matrix(algorithm::AMUpdate, adaptive_update_params::Tuple,r::Integer)
     r_cov_m = adaptive_update_params[end-2][1]
     Cov_m = adaptive_update_params[1]
     return r_cov_m^2*Cov_m
 end
 
 doc"""
-    return_covariance_matrix(algorithm::AMUpdate_gen, adaptive_update_params::Tuple,r::Int64)
+    return_covariance_matrix(algorithm::AMUpdate_gen, adaptive_update_params::Tuple,r::Integer)
 
 Print function for AMUpdate_gen.
 """
-function return_covariance_matrix(algorithm::AMUpdate_gen, adaptive_update_params::Tuple,r::Int64)
+function return_covariance_matrix(algorithm::AMUpdate_gen, adaptive_update_params::Tuple,r::Integer)
     log_r_cov_m = adaptive_update_params[end-2][1]
     Cov_m = adaptive_update_params[1]
     return exp(log_r_cov_m)^2*Cov_m
@@ -109,9 +109,9 @@ end
 # print_covariance functions
 
 doc"""
-    print_covariance(algorithm::noAdaptation, adaptive_update_params::Tuple,r::Int64)
+    print_covariance(algorithm::noAdaptation, adaptive_update_params::Tuple,r::Integer)
 """
-function print_covariance(algorithm::noAdaptation, adaptive_update_params::Tuple,r::Int64)
+function print_covariance(algorithm::noAdaptation, adaptive_update_params::Tuple,r::Integer)
 
   println(adaptive_update_params[1])
 
@@ -119,18 +119,18 @@ end
 
 
 doc"""
-    print_covariance(algorithm::AMUpdate, adaptive_update_params::Tuple,r::Int64)
+    print_covariance(algorithm::AMUpdate, adaptive_update_params::Tuple,r::Integer)
 """
-function print_covariance(algorithm::AMUpdate, adaptive_update_params::Tuple,r::Int64)
+function print_covariance(algorithm::AMUpdate, adaptive_update_params::Tuple,r::Integer)
     r_cov_m = adaptive_update_params[end-2][1]
     Cov_m = adaptive_update_params[1]
     println(r_cov_m^2*Cov_m)
 end
 
 doc"""
-    print_covariance(algorithm::AMUpdate_gen, adaptive_update_params::Tuple,r::Int64)
+    print_covariance(algorithm::AMUpdate_gen, adaptive_update_params::Tuple,r::Integer)
 """
-function print_covariance(algorithm::AMUpdate_gen, adaptive_update_params::Tuple,r::Int64)
+function print_covariance(algorithm::AMUpdate_gen, adaptive_update_params::Tuple,r::Integer)
     log_r_cov_m = adaptive_update_params[end-2][1]
     Cov_m = adaptive_update_params[1]
     println(exp(log_r_cov_m)^2*Cov_m)
@@ -140,9 +140,9 @@ end
 
 
 doc"""
-    get_covariance(algorithm::noAdaptation, adaptive_update_params::Tuple,r::Int64)
+    get_covariance(algorithm::noAdaptation, adaptive_update_params::Tuple,r::Integer)
 """
-function get_covariance(algorithm::noAdaptation, adaptive_update_params::Tuple,r::Int64)
+function get_covariance(algorithm::noAdaptation, adaptive_update_params::Tuple,r::Integer)
 
   return adaptive_update_params[1]
 
@@ -150,18 +150,18 @@ end
 
 
 doc"""
-    get_covariance(algorithm::AMUpdate, adaptive_update_params::Tuple,r::Int64)
+    get_covariance(algorithm::AMUpdate, adaptive_update_params::Tuple,r::Integer)
 """
-function get_covariance(algorithm::AMUpdate, adaptive_update_params::Tuple,r::Int64)
+function get_covariance(algorithm::AMUpdate, adaptive_update_params::Tuple,r::Integer)
     r_cov_m = adaptive_update_params[end-2][1]
     Cov_m = adaptive_update_params[1]
     return r_cov_m^2*Cov_m
 end
 
 doc"""
-    get_covariance(algorithm::AMUpdate_gen, adaptive_update_params::Tuple,r::Int64)
+    get_covariance(algorithm::AMUpdate_gen, adaptive_update_params::Tuple,r::Integer)
 """
-function get_covariance(algorithm::AMUpdate_gen, adaptive_update_params::Tuple,r::Int64)
+function get_covariance(algorithm::AMUpdate_gen, adaptive_update_params::Tuple,r::Integer)
     log_r_cov_m = adaptive_update_params[end-2][1]
     Cov_m = adaptive_update_params[1]
     return exp(log_r_cov_m)^2*Cov_m
@@ -170,9 +170,9 @@ end
 # gaussian random walk functions
 
 doc"""
-    gaussian_random_walk(algorithm::noAdaptation, adaptive_update_params::Tuple, Theta::Vector, r::Int64)
+    gaussian_random_walk(algorithm::noAdaptation, adaptive_update_params::Tuple, Theta::Vector, r::Integer)
 """
-function gaussian_random_walk(algorithm::noAdaptation, adaptive_update_params::Tuple, Theta::Vector, r::Int64)
+function gaussian_random_walk(algorithm::noAdaptation, adaptive_update_params::Tuple, Theta::Vector, r::Integer)
 
   return rand(MvNormal(Theta, adaptive_update_params[1])), zeros(size(Theta))
 
@@ -180,20 +180,20 @@ end
 
 
 doc"""
-    gaussian_random_walk(algorithm::AMUpdate, adaptive_update_params::Tuple, Theta::Vector, r::Int64)
+    gaussian_random_walk(algorithm::AMUpdate, adaptive_update_params::Tuple, Theta::Vector, r::Integer)
 """
-function gaussian_random_walk(algorithm::AMUpdate, adaptive_update_params::Tuple, Theta::Vector, r::Int64)
+function gaussian_random_walk(algorithm::AMUpdate, adaptive_update_params::Tuple, Theta::Vector, r::Integer)
   r_cov_m = adaptive_update_params[end-2][1]
   Cov_m = adaptive_update_params[1]
   return rand(MvNormal(Theta, r_cov_m^2*Cov_m)), zeros(size(Theta))
 end
 
 doc"""
-    gaussian_random_walk(algorithm::AMUpdate_gen, adaptive_update_params::Tuple, Theta::Vector, r::Int64)
+    gaussian_random_walk(algorithm::AMUpdate_gen, adaptive_update_params::Tuple, Theta::Vector, r::Integer)
 
 RW for AMUpdate_gen.
 """
-function gaussian_random_walk(algorithm::AMUpdate_gen, adaptive_update_params::Tuple, Theta::Vector, r::Int64)
+function gaussian_random_walk(algorithm::AMUpdate_gen, adaptive_update_params::Tuple, Theta::Vector, r::Integer)
   log_r_cov_m = adaptive_update_params[end-2][1]
   Cov_m = adaptive_update_params[1]
   return rand(MvNormal(Theta, exp(log_r_cov_m)^2*Cov_m)), zeros(size(Theta))
@@ -202,9 +202,9 @@ end
 
 # functions for adaptation of parameters
 doc"""
-    adaptation(algorithm::noAdaptation, adaptive_update_params::Tuple, Theta::Array, r::Int64,a_log::Float64)
+    adaptation(algorithm::noAdaptation, adaptive_update_params::Tuple, Theta::Array, r::Integer,a_log::Real)
 """
-function adaptation(algorithm::noAdaptation, adaptive_update_params::Tuple, Theta::Array, r::Int64,a_log::Float64)
+function adaptation(algorithm::noAdaptation, adaptive_update_params::Tuple, Theta::Array, r::Integer,a_log::Real)
 
   # do nothing
 
@@ -213,9 +213,9 @@ end
 
 
 doc"""
-    adaptation(algorithm::AMUpdate, adaptive_update_params::Tuple, Theta::Array, r::Int64,a_log::Float64)
+    adaptation(algorithm::AMUpdate, adaptive_update_params::Tuple, Theta::Array, r::Integer,a_log::Real)
 """
-function adaptation(algorithm::AMUpdate, adaptive_update_params::Tuple, Theta::Array, r::Int64,a_log::Float64)
+function adaptation(algorithm::AMUpdate, adaptive_update_params::Tuple, Theta::Array, r::Integer,a_log::Real)
 
   Cov_m = adaptive_update_params[1]
   m_g = adaptive_update_params[end-1]
@@ -239,9 +239,9 @@ function adaptation(algorithm::AMUpdate, adaptive_update_params::Tuple, Theta::A
 end
 
 doc"""
-    adaptation(algorithm::AMUpdate_gen, adaptive_update_params::Tuple, Theta::Array, r::Int64,a_log::Float64)
+    adaptation(algorithm::AMUpdate_gen, adaptive_update_params::Tuple, Theta::Array, r::Integer,a_log::Real)
 """
-function adaptation(algorithm::AMUpdate_gen, adaptive_update_params::Tuple, Theta::Array, r::Int64, a_log::Float64)
+function adaptation(algorithm::AMUpdate_gen, adaptive_update_params::Tuple, Theta::Array, r::Integer, a_log::Real)
 
   Cov_m = adaptive_update_params[1]
   m_g = adaptive_update_params[end-1]

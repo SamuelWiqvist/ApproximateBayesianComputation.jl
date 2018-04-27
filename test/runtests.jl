@@ -7,6 +7,7 @@ using Base.Test
 include("test_distancefunctions.jl")
 include("test_kernels.jl")
 include("test_posteriorinference.jl")
+include("test_utilities.jl")
 
 # include model that we test the algorithms on
 include("gaussian_gaussian_models.jl")

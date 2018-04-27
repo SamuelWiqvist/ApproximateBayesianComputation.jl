@@ -4,26 +4,26 @@ Type for defining a problem for the ABC rejection sampling algorithm
 
 Parameters:
 
-- `T::Int` nbr of iterations
-- `N::Int` nbr of samples in the population
+- `T::Integer` nbr of iterations
+- `N::Integer` nbr of samples in the population
 - `ϵ::Real` start threshold
 - `data::Data` data
-- `dim_unknown::Int` nbr of unknown parameters
-- `cores::Int` nbr of course (default value 1)
-- `print_interval::Int` print state of algorithm at every `print_interval`th iteration (default value 1000)
+- `dim_unknown::Integer` nbr of unknown parameters
+- `cores::Integer` nbr of course (default value 1)
+- `print_interval::Integer` print state of algorithm at every `print_interval`th iteration (default value 1000)
 """
 type ABCPMC <: ABCAlgorithm
-  T::Int # nbr of iterations
-  N::Int # nbr of samples in the population
+  T::Integer # nbr of iterations
+  N::Integer # nbr of samples in the population
   ϵ_seq::Vector # start threshold
   data::Data # data
-  dim_unknown::Int # nbr of unknown parameters
-  cores::Int # nbr of course
-  print_interval::Int # print interval for stats of algorithm
+  dim_unknown::Integer # nbr of unknown parameters
+  cores::Integer # nbr of course
+  print_interval::Integer # print interval for stats of algorithm
 end
 
 # constructor
-ABCPMC(T::Int, N::Int,ϵ_seq::Vector, data::Data, dim_unknown::Int; cores::Int=1, print_interval::Int = 1) = ABCPMC(T,N, ϵ_seq, data, dim_unknown, cores, print_interval)
+ABCPMC(T::Integer, N::Integer,ϵ_seq::Vector, data::Data, dim_unknown::Integer; cores::Integer=1, print_interval::Integer = 1) = ABCPMC(T,N, ϵ_seq, data, dim_unknown, cores, print_interval)
 
 # method
 """
@@ -189,8 +189,8 @@ end
     ABCPMCstartvalatcores(sample_from_prior::Function,
                           generate_data::Function,
                           calc_summary::Funciton,
-                          N::Int,
-                          N_cores::Int)
+                          N::Integer,
+                          N_cores::Integer)
 
 Runs the first iteration of the PMC-SMC algorithm for N/N_cores particels,
 in parallel at N_cores cores.
@@ -199,9 +199,9 @@ function ABCPMCstartvalatcores(sample_from_prior::Function,
                                generate_data::Function,
                                calc_summary::Function,
                                ρ::Function,
-                               dim_unknown::Int,
-                               N::Int,
-                               N_cores::Int,
+                               dim_unknown::Integer,
+                               N::Integer,
+                               N_cores::Integer,
                                ϵ_val::Real,
                                y::Array,
                                s::Vector)
@@ -231,11 +231,11 @@ end
     ABCPMCpropatcores(w_old::Vector,
                       θ_pop_old::Matrix,
                       τ_2::Vector,
-                      dim_unknown::Int,
+                      dim_unknown::Integer,
                       s::Vector,
                       ϵ_val::Real,
-                      N::Int,
-                      N_cores::Int,
+                      N::Integer,
+                      N_cores::Integer,
                       sample_from_prior::Function,
                       generate_data::Function,
                       calc_summary::Function)
@@ -245,11 +245,11 @@ Updates the population for N/N_cores particels in parallel at N_cores cores.
 function ABCPMCpropatcores(w_old::Vector,
                            θ_pop_old::Base.ReshapedArray,
                            τ_2::Vector,
-                           dim_unknown::Int,
+                           dim_unknown::Integer,
                            s::Vector,
                            ϵ_val::Real,
-                           N::Int,
-                           N_cores::Int,
+                           N::Integer,
+                           N_cores::Integer,
                            generate_data::Function,
                            calc_summary::Function,
                            ρ::Function,

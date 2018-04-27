@@ -4,26 +4,26 @@ Type for defining a problem for the ABC rejection sampling algorithm
 
 Parameters:
 
-- `N::Int` nbr of iterations
+- `N::Integer` nbr of iterations
 - `ϵ::Real` threshold
 - `data::Data` data
-- `dim_unknown::Int` nbr of unknown parameters
-- `cores::Int` nbr of course (default value 1)
-- `print_interval::Int` print state of algorithm at every
+- `dim_unknown::Integer` nbr of unknown parameters
+- `cores::Integer` nbr of course (default value 1)
+- `print_interval::Integer` print state of algorithm at every
   `print_interval`th iteration (default value 1000)
 """
 type ABCRS <: ABCAlgorithm
-  N::Int # nbr of iterations
+  N::Integer # nbr of iterations
   ϵ::Real # threshold
   data::Data # data
-  dim_unknown::Int # nbr of unknown parameters
-  cores::Int # nbr of course
-  print_interval::Int # print interval for stats of algorithm
+  dim_unknown::Integer # nbr of unknown parameters
+  cores::Integer # nbr of course
+  print_interval::Integer # print interval for stats of algorithm
 end
 
 # constructor
-ABCRS(N::Int, ϵ::Real, data::Data, dim_unknown::Int;
-      cores::Int=1, print_interval::Int=1000) = ABCRS(N, ϵ, data, dim_unknown,
+ABCRS(N::Integer, ϵ::Real, data::Data, dim_unknown::Integer;
+      cores::Integer=1, print_interval::Integer=1000) = ABCRS(N, ϵ, data, dim_unknown,
                                                       cores, print_interval)
 
 # method
@@ -118,9 +118,9 @@ function sample(problem::ABCRS,
 end
 
 
-function abcrsinterationatsatcore(dim_unknown::Int,
-                                  iter_at_core::Int,
-                                  print_interval::Int,
+function abcrsinterationatsatcore(dim_unknown::Integer,
+                                  iter_at_core::Integer,
+                                  print_interval::Integer,
                                   y::Array,
                                   s::Array,
                                   ϵ::Real,
