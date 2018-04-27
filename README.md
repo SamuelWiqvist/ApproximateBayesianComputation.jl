@@ -1,5 +1,7 @@
 # [![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/SamuelWiqvist/ApproximateBayesianComputation.jl/master) Approximate Bayesian Computation in Julia
 
+https://travis-ci.org/SamuelWiqvist/ApproximateBayesianComputation.jl.svg?branch=master
+
 This repository contains some Approximate Bayesian computation algorithms.
 
 A toy example for each algorithm is also provided in the examples.
