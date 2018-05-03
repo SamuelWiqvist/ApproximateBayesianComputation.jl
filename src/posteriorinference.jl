@@ -58,7 +58,7 @@ end
 doc"""
     loss(theta_true::Vector, theta_est::Vector)
 
-Computes the root mean square error for the parameter estimations.
+Computes the loss for the parameter estimations.
 """
 function loss(theta_true::Vector, theta_est::Vector)
   loss_vec = copy(theta_true)
@@ -72,7 +72,7 @@ end
 doc"""
     loss(theta_true::Real, theta_est::Real)
 
-Computes the root mean square error for the parameter estimations.
+Computes the loss for the parameter estimations.
 """
 function loss(theta_true::Real, theta_est::Real)
   return abs(theta_true-theta_est)

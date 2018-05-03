@@ -1,7 +1,7 @@
 doc"""
     UniformKernel(s_star::Vector, s::Vector, ϵ::Real, ρ)
 
-The uniform kernel function.
+The Uniform kernel function.
 """
 function UniformKernel(s_star::Vector, s::Vector, ϵ::Real, ρ::Function)
 
@@ -16,7 +16,7 @@ end
 doc"""
     GaussianKernel(s_star::Vector, s::Vector, Ω_inv::Array, ϵ::Real)
 
-The uniform kernel function.
+The Gaussian kernel function.
 """
 function GaussianKernel(s_star::Vector, s::Vector, Ω_inv::Array, ϵ::Real)
 
