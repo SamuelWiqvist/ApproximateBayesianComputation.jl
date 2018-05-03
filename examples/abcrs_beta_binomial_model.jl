@@ -1,5 +1,5 @@
 
-addprocs(2)
+addprocs(4)
 
 @everywhere using ApproximateBayesianComputation
 @everywhere using Distributions

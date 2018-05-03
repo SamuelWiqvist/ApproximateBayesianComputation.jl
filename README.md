@@ -1,7 +1,6 @@
 # [![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/SamuelWiqvist/ApproximateBayesianComputation.jl/master) Approximate Bayesian Computation in Julia
 
-[![Build Status](https://travis-ci.org/SamuelWiqvist/ApproximateBayesianComputation.jl.svg?branch=master)](https://travis-ci.org/SamuelWiqvist/ApproximateBayesianComputation.jl) [![Build status](https://ci.appveyor.com/api/projects/status/6iukm6um8355uldi?svg=true)](https://ci.appveyor.com/project/SamuelWiqvist/approximatebayesiancomputation-jl)[![Coverage Status](https://coveralls.io/repos/github/SamuelWiqvist/ApproximateBayesianComputation.jl/badge.svg)](https://coveralls.io/github/SamuelWiqvist/ApproximateBayesianComputation.jl)[![codecov](https://codecov.io/gh/SamuelWiqvist/ApproximateBayesianComputation.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/SamuelWiqvist/ApproximateBayesianComputation.jl)
-
+![![Build Status](https://travis-ci.org/SamuelWiqvist/ApproximateBayesianComputation.jl.svg?branch=master)](https://travis-ci.org/SamuelWiqvist/ApproximateBayesianComputation.jl) [![Build status](https://ci.appveyor.com/api/projects/status/6iukm6um8355uldi?svg=true)](https://ci.appveyor.com/project/SamuelWiqvist/approximatebayesiancomputation-jl)[![Coverage Status](https://coveralls.io/repos/github/SamuelWiqvist/ApproximateBayesianComputation.jl/badge.svg)](https://coveralls.io/github/SamuelWiqvist/ApproximateBayesianComputation.jl)[![codecov](https://codecov.io/gh/SamuelWiqvist/ApproximateBayesianComputation.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/SamuelWiqvist/ApproximateBayesianComputation.jl)
 
 This repository contains some Approximate Bayesian computation algorithms.
 
@@ -35,7 +34,7 @@ Load packages, and set up the model.
 using ApproximateBayesianComputation
 using Distributions
 
-μ = 0 # true value for the mean we want to estimate
+μ = 0 # true value for the mean, the parameter that  we want to estimate
 σ = 1 # known standard deviation
 n = 100 # nbr of observations
 
@@ -55,7 +54,7 @@ sample_from_prior() = rand(prior)
 generate_data(μ) = rand(Normal(μ[1],σ),n)
 
 # the summary statistics are the mean and the standard
-# deviation, i.e. the sufficent statistics for the data
+# deviation, i.e. the sufficient statistics for the data
 calc_summary(y_star,y) = [mean(y_star); std(y_star)]
 
 # distance function
@@ -96,7 +95,8 @@ Posterior and prior distribution.
 
 ## How to use this package
 
-This package is not added to `METADATA`. However, to install the package you can run:
+This package is not added to `METADATA.jl`. But, you can still install the package locally by running:
+
 ```julia
 Pkg.clone("https://github.com/SamuelWiqvist/ApproximateBayesianComputation.jl")
  ```
@@ -106,6 +106,3 @@ To run the examples directly in your browser simply click on the binder link, an
 ## About this package
 
 This package was originally created for the graduate course *Approximate Bayesian Computation* at Chalmers University of Technology.
-
-A short report containing an introduciton to ABC, and some information on how the code is structured can be found
-<a href="https://www.overleaf.com/read/bqjbgtmcqhsx" target="_blank">here</a>.  

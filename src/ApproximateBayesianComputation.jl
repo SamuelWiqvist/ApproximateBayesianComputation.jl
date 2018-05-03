@@ -77,7 +77,7 @@ Load packages, and set up the model.
 using ApproximateBayesianComputation
 using Distributions
 
-μ = 0 # true value for the mean we want to estimate
+μ = 0 # true value for the mean, the parameter that  we want to estimate
 σ = 1 # known standard deviation
 n = 100 # nbr of observations
 
@@ -97,7 +97,7 @@ sample_from_prior() = rand(prior)
 generate_data(μ) = rand(Normal(μ[1],σ),n)
 
 # the summary statistics are the mean and the standard
-# deviation, i.e. the sufficent statistics for the data
+# deviation, i.e. the sufficient statistics for the data
 calc_summary(y_star,y) = [mean(y_star); std(y_star)]
 
 # distance function
