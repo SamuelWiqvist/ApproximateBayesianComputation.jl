@@ -14,6 +14,7 @@ s_star_different = rand(4)
   @test UniformKernel(s_star_different, s, ϵ, ρ) == 0.
 end
 
+#=
 Ω = eye(4)
 Ω_inv = inv(Ω)
 ϵ = 0.1
@@ -23,3 +24,4 @@ end
   kernelval2 = GaussianKernel(1.5*s_star_same, s, Ω_inv, ϵ)
   @test kernelval1 > kernelval2
 end
+=#
