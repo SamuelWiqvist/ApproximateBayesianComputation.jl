@@ -12,4 +12,19 @@ function Euclidean(s_star::Vector, s::Vector, w::Vector)
 
 end
 
+
+doc"""
+    GaussianKernelDistance(s_star::Vector, s::Vector, w::Vector)
+
+The Gaussian kernel distance function.
+"""
+function GaussianKernelDistance(s_star::Vector, s::Vector, Ω_inv::Array)
+
+  Δs =  (s_star-s)
+  dist = Δs'*Ω_inv*Δs
+  return dist[1]
+
+end
+
+
 # add more distance functions here
