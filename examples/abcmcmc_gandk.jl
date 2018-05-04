@@ -1,3 +1,4 @@
+
 using ApproximateBayesianComputation
 using Distributions
 using KernelDensity
@@ -51,15 +52,18 @@ end
 # Computes the summary statistics
 calc_summary(y_sim::Vector, y_obs::Vector) = [percentile(y_sim, [20;40;60;80]);skewness(y_sim)]
 
-# create distance function
-w  =  [0.22; 0.19; 0.53; 2.97; 1.90]  # from " Approximate maximum likelihood estimation using data-cloning ABC"
-ρ(s::Vector, s_star::Vector) = Euclidean(s::Vector, s_star::Vector, w)
-
-
 # generate data set
 θ_true = [3; 1; 2; .5]
 y = generate_data(θ_true)
 data = Data(y)
+
+# set weigths
+w  =  [0.22; 0.19; 0.53; 2.97; 1.90]  # from " Approximate maximum likelihood estimation using data-cloning ABC"
+
+# using orignal ABC-MCMC
+
+# create distance function
+ρ(s::Vector, s_star::Vector) = Euclidean(s::Vector, s_star::Vector, w)
 
 # create ABC-MCMC problem
 ϵ_seq = [30*ones(1000);20*ones(1000);10*ones(1000); 5*ones(1000); 2.5*ones(1000); 1*ones(1000); 0.5*ones(1000); 0.3*ones(100000)] # ; 0.05*ones(100000)
@@ -78,6 +82,120 @@ chain = @time sample(problem,
                     generate_data,
                     calc_summary,
                     ρ)
+
+
+# calc posterior quantile interval
+posterior_quantile_interval = calcquantileint(chain[:,burn_in+1:end])
+
+
+# plot chains
+PyPlot.figure()
+PyPlot.subplot(411)
+PyPlot.plot(chain[1,:])
+PyPlot.plot(ones(size(chain,2),1)*θ_true[1], "k")
+PyPlot.ylabel(L"$A$")
+PyPlot.subplot(412)
+PyPlot.plot(chain[2,:])
+PyPlot.plot(ones(size(chain,2),1)*θ_true[2], "k")
+PyPlot.ylabel(L"$B$")
+PyPlot.subplot(413)
+PyPlot.plot(chain[3,:])
+PyPlot.plot(ones(size(chain,2),1)*θ_true[3], "k")
+PyPlot.ylabel(L"$g$")
+PyPlot.subplot(414)
+PyPlot.plot(chain[4,:])
+PyPlot.plot(ones(size(chain,2),1)*θ_true[4], "k")
+PyPlot.xlabel(L"Iteration")
+PyPlot.ylabel(L"$k$")
+
+
+# plot chains after burn in
+PyPlot.figure()
+PyPlot.subplot(411)
+PyPlot.plot(chain[1,burn_in:end])
+PyPlot.plot(ones(size(chain[:,burn_in:end],2),1)*θ_true[1], "k")
+PyPlot.ylabel(L"$A$")
+PyPlot.subplot(412)
+PyPlot.plot(chain[2,burn_in:end])
+PyPlot.plot(ones(size(chain[:,burn_in:end],2),1)*θ_true[2], "k")
+PyPlot.ylabel(L"$B$")
+PyPlot.subplot(413)
+PyPlot.plot(chain[3,burn_in:end])
+PyPlot.plot(ones(size(chain[:,burn_in:end],2),1)*θ_true[3], "k")
+PyPlot.ylabel(L"$g$")
+PyPlot.subplot(414)
+PyPlot.plot(chain[4,burn_in:end])
+PyPlot.plot(ones(size(chain[:,burn_in:end],2),1)*θ_true[4], "k")
+PyPlot.xlabel(L"Iteration")
+PyPlot.ylabel(L"$k$")
+
+
+# plot marginal posterior distributions
+
+# calc grid for prior dist
+x_grid = -0.5:0.01:10.5
+
+# calc prior dist
+priordensity = pdf.(Uniform(0, 10), x_grid)
+
+
+h1 = kde(chain[1,burn_in:end])
+h2 = kde(chain[2,burn_in:end])
+h3 = kde(chain[3,burn_in:end])
+h4 = kde(chain[4,burn_in:end])
+
+PyPlot.figure()
+subplot(221)
+PyPlot.plot(h1.x,h1.density, "b")
+PyPlot.plot(x_grid,priordensity, "g")
+PyPlot.plot((θ_true[1], θ_true[1]), (0, maximum(h1.density)), "k")
+PyPlot.ylabel(L"Density")
+PyPlot.xlabel(L"$A$")
+subplot(222)
+PyPlot.plot(h2.x,h2.density, "b")
+PyPlot.plot(x_grid,priordensity, "g")
+PyPlot.plot((θ_true[2], θ_true[2]), (0, maximum(h2.density)), "k")
+PyPlot.xlabel(L"$B$")
+subplot(223)
+PyPlot.plot(h3.x,h3.density, "b")
+PyPlot.plot(x_grid,priordensity, "g")
+PyPlot.plot((θ_true[3], θ_true[3]), (0, maximum(h3.density)), "k")
+PyPlot.xlabel(L"$g$")
+PyPlot.ylabel(L"Density")
+subplot(224)
+PyPlot.plot(h4.x,h4.density, "b")
+PyPlot.plot(x_grid,priordensity, "g")
+PyPlot.plot((θ_true[4], θ_true[4]), (0, maximum(h4.density)), "k")
+PyPlot.xlabel(L"$k$")
+
+# use general ABC-MCMC with Gaussian kernel
+
+# set inv. covrance matrix
+Ω_inv = inv(diagm(w.^2))
+
+# set distance function
+ρ(s::Vector, s_star::Vector) = GaussianKernelDistance(s_star, s, Ω_inv)
+
+# set kernel
+abcmcmkernel(s_star::Vector,s::Vector, ϵ::Real, ρ::Function) = GaussianKernel(s_star, s, ϵ, ρ)
+
+# create ABC-MCMC problem
+ϵ_seq = [30*ones(1000);20*ones(1000);10*ones(1000); 5*ones(1000); 2.5*ones(1000); 1*ones(1000); 0.5*ones(1000); 0.3*ones(1000); 0.2*ones(1000); 0.1*ones(101000)] # ; 0.05*ones(100000)
+burn_in = length(ϵ_seq)-100000
+N = length(ϵ_seq)
+dim_unknown = 4
+θ_start =  [5;5;3; 2] # fixed start values far away from the true parameter values
+adaptive_update = AMUpdate(eye(dim_unknown), 2.4/sqrt(dim_unknown), 1., 0.7, 25) # use the AM algorithm to tune the proposal distribution
+problem = ABCMCMC(N, burn_in, ϵ_seq, dim_unknown, θ_start, "none", data, adaptive_update, print_interval = 20000; algorithm_type = "general")
+
+# run ABC-MCMC
+chain = @time sample(problem,
+                    sample_from_prior,
+                    evaluate_prior,
+                    generate_data,
+                    calc_summary,
+                    ρ;
+                    kernel = abcmcmkernel)
 
 
 # calc posterior quantile interval

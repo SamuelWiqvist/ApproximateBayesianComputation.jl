@@ -20,6 +20,7 @@ export
   # methods
   sample, # algorithms
   Euclidean, # distance functions
+  GaussianKernelDistance, 
   UniformKernel, # kernels
   GaussianKernel,
   calcquantileint, # posterior inference
