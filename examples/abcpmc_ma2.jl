@@ -67,7 +67,7 @@ end
 @everywhere calc_summary(y_sim::Vector, y_obs::Vector) = autocor(y_sim, 1:2)
 
 # distance function
-@everywhere ρ(s::Vector, s_star::Vector) = Euclidean(s, s_star, ones(2))
+@everywhere ρ(s::Vector, s_star::Vector) = euclidean_dist(s, s_star, ones(2))
 
 
 # generate data set

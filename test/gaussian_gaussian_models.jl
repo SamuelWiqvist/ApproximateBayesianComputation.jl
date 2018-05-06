@@ -22,8 +22,8 @@ posterior_std = sqrt(1/(λ_0 + n*λ))
 @everywhere sample_from_prior_univar() = rand(Normal(μ_0_univar, σ_0))
 @everywhere generate_data_univar(μ) = typeof(μ) <: Real ? rand(Normal(μ,σ),n) : rand(Normal(μ[1],σ),n)
 @everywhere calc_summary_univar(y_star,y) = [mean(y_star); std(y_star)]
-@everywhere ρ_univar(s_star, s) = Euclidean(s_star, s, ones(2))
-@everywhere kernel_univar(s_star::Vector, s::Vector, ϵ::Real, ρ::Function) = UniformKernel(s_star, s, ϵ, ρ)
+@everywhere ρ_univar(s_star, s) = euclidean_dist(s_star, s, ones(2))
+@everywhere kernel_univar(s_star::Vector, s::Vector, ϵ::Real, ρ::Function) = uniform_kernel(s_star, s, ϵ, ρ)
 @everywhere evaluate_prior_univar(Θ) = pdf.(Normal(μ_0_univar, σ_0), Θ)[1]
 
 # multivariate Gaussian-Gaussian model
@@ -44,6 +44,6 @@ posterior_mean_multivar = posterior_cov_m*(n*inv(Σ)*mean(y_multivar,2) + inv(Σ
 @everywhere sample_from_prior_multivar() = rand(MvNormal(μ_0_multivar, Σ_0))
 @everywhere generate_data_multivar(μ) = rand(MvNormal(μ,Σ),n)
 @everywhere calc_summary_multivar(y_star,y) = [mean(y_star,2)[:]; var(y_star,2)[:]; cov(y_star)[1,2]]
-@everywhere ρ_multivar(s_star, s) = Euclidean(s_star, s, ones(5))
-@everywhere kernel_multivar(s_star::Vector, s::Vector, ϵ::Real, ρ::Function) = UniformKernel(s_star, s, ϵ, ρ)
+@everywhere ρ_multivar(s_star, s) = euclidean_dist(s_star, s, ones(5))
+@everywhere kernel_multivar(s_star::Vector, s::Vector, ϵ::Real, ρ::Function) = uniform_kernel(s_star, s, ϵ, ρ)
 @everywhere evaluate_prior_multivar(θ) = pdf(MvNormal(μ_0_multivar, Σ_0), θ)[1]

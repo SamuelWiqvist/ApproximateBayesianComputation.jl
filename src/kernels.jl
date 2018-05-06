@@ -1,9 +1,9 @@
 doc"""
-    UniformKernel(s_star::Vector, s::Vector, ϵ::Real, ρ::Function)
+    uniform_kernel(s_star::Vector, s::Vector, ϵ::Real, ρ::Function)
 
 The Uniform kernel function.
 """
-function UniformKernel(s_star::Vector, s::Vector, ϵ::Real, ρ::Function)
+function uniform_kernel(s_star::Vector, s::Vector, ϵ::Real, ρ::Function)
 
   if ρ(s_star,s) <= ϵ
     return 1.
@@ -14,11 +14,11 @@ function UniformKernel(s_star::Vector, s::Vector, ϵ::Real, ρ::Function)
 end
 
 doc"""
-    GaussianKernel(s_star::Vector, s::Vector, ϵ::Real, ρ::Function)
+    gaussian_kernel(s_star::Vector, s::Vector, ϵ::Real, ρ::Function)
 
 The Gaussian kernel function.
 """
-function GaussianKernel(s_star::Vector, s::Vector, ϵ::Real, ρ::Function)
+function gaussian_kernel(s_star::Vector, s::Vector, ϵ::Real, ρ::Function)
 
   return exp(-ρ(s_star,s)/(2*ϵ^2))
 

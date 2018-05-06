@@ -82,8 +82,8 @@ function sample(problem::ABCPMC,
   end
 
   # pre-allocate matricies
-  θ_pop_parallel = SharedArray{Float64}(dim_unknown,div(N,N_cores), N_cores)
-  accaptance_rate = SharedArray{Float64}(N_cores)
+  θ_pop_parallel = SharedArray{typeof(1.0)}(dim_unknown,div(N,N_cores), N_cores)
+  accaptance_rate = SharedArray{typeof(1.0)}(N_cores)
 
   @printf "Starting PMC-ABC \n"
   @printf "Running on %d core(s)\n" N_cores
@@ -216,7 +216,7 @@ function ABCPMCstartvalatcores(sample_from_prior::Function,
       θ_star = sample_from_prior()
       y_star = generate_data(θ_star)
       s_star = calc_summary(y_star,y)
-      accept = Bool(UniformKernel(s_star, s, ϵ_val, ρ))
+      accept = Bool(uniform_kernel(s_star, s, ϵ_val, ρ))
       accaptance_rate[i] = accaptance_rate[i] + 1.
     end
     accaptance_rate[i] = 1/accaptance_rate[i]
@@ -275,7 +275,7 @@ function ABCPMCpropatcores(w_old::Vector,
       end
       y_star = generate_data(θ_star)
       s_star = calc_summary(y_star,y)
-      accept = Bool(UniformKernel(s_star, s, ϵ_val, ρ))
+      accept = Bool(uniform_kernel(s_star, s, ϵ_val, ρ))
       accaptance_rate[i] = accaptance_rate[i] + 1.
     end
     accaptance_rate[i] = 1/accaptance_rate[i]

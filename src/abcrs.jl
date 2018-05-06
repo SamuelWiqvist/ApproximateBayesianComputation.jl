@@ -71,9 +71,10 @@ function sample(problem::ABCRS,
   end
 
   # pre-allocate vectors and matricies
-  samples_approx_posterior = SharedArray{Float64}(dim_unknown,
+  samples_approx_posterior = SharedArray{typeof(1.0)}(dim_unknown,
                                                   div(N,N_cores),
                                                   N_cores)
+
 
   # compute summary statistics for data
   s = calc_summary(y,y)
@@ -142,7 +143,7 @@ function abcrsinterationatsatcore(dim_unknown::Integer,
     y_star = generate_data(θ_star)
     s_star = calc_summary(y_star,y)
 
-    accept = rand() < UniformKernel(s_star, s, ϵ, ρ)
+    accept =  uniform_kernel(s_star, s, ϵ, ρ) == 1. 
 
     if accept
       samples_approx_posterior[:,n] = θ_star
