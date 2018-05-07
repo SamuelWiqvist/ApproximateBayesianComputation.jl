@@ -3,5 +3,5 @@
 ABC-MCMC object.
 
 ```@docs
-ApproximateBayesianComputation.ABCRS
+ApproximateBayesianComputation.ABCMCMC
 ```

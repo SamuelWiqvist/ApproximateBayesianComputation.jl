@@ -1,0 +1,5 @@
+# Loss  
+
+```@docs
+ApproximateBayesianComputation.loss
+```

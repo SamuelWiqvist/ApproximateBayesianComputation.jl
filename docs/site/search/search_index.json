@@ -27,43 +27,103 @@
         },
         {
             "location": "/sec/abcrs/",
-            "text": "ABC rejections sampling\n\n\nABC-RS object.\n\n\nApproximateBayesianComputation.ABCRS",
+            "text": "ABC rejections sampling\n\n\nABC-RS object.\n\n\n#\n\n\nApproximateBayesianComputation.ABCRS\n \u2014 \nType\n.\n\n\nType for defining a problem for the ABC rejection sampling algorithm\n\n\nParameters:\n\n\n\n\nN::Integer\n nbr of iterations\n\n\n\u03f5::Real\n threshold\n\n\ndata::Data\n data\n\n\ndim_unknown::Integer\n nbr of unknown parameters\n\n\ncores::Integer\n nbr of course (default value 1)\n\n\nprint_interval::Integer\n print state of algorithm at every \nprint_interval\nth iteration (default value 1000)",
             "title": "ABC-RS"
         },
         {
             "location": "/sec/abcrs/#abc-rejections-sampling",
-            "text": "ABC-RS object.  ApproximateBayesianComputation.ABCRS",
+            "text": "ABC-RS object.  #  ApproximateBayesianComputation.ABCRS  \u2014  Type .  Type for defining a problem for the ABC rejection sampling algorithm  Parameters:   N::Integer  nbr of iterations  \u03f5::Real  threshold  data::Data  data  dim_unknown::Integer  nbr of unknown parameters  cores::Integer  nbr of course (default value 1)  print_interval::Integer  print state of algorithm at every  print_interval th iteration (default value 1000)",
             "title": "ABC rejections sampling"
         },
         {
-            "location": "/sec/abcrs/",
-            "text": "ABC rejections sampling\n\n\nABC-RS object.\n\n\nApproximateBayesianComputation.ABCRS",
+            "location": "/sec/abcmcmc/",
+            "text": "ABC Markov chain Monte Carlo\n\n\nABC-MCMC object.\n\n\nApproximateBayesianComputation.ABCRS",
             "title": "ABC-MCMC"
         },
         {
-            "location": "/sec/abcrs/#abc-rejections-sampling",
-            "text": "ABC-RS object.  ApproximateBayesianComputation.ABCRS",
-            "title": "ABC rejections sampling"
+            "location": "/sec/abcmcmc/#abc-markov-chain-monte-carlo",
+            "text": "ABC-MCMC object.  ApproximateBayesianComputation.ABCRS",
+            "title": "ABC Markov chain Monte Carlo"
         },
         {
-            "location": "/sec/abcrs/",
-            "text": "ABC rejections sampling\n\n\nABC-RS object.\n\n\nApproximateBayesianComputation.ABCRS",
+            "location": "/sec/abcpmc/",
+            "text": "ABC Markov chain Monte Carlo\n\n\nABC-MCMC object.\n\n\n#\n\n\nApproximateBayesianComputation.ABCPMC\n \u2014 \nType\n.\n\n\nType for defining a problem for the ABC rejection sampling algorithm\n\n\nParameters:\n\n\n\n\nT::Integer\n nbr of iterations\n\n\nN::Integer\n nbr of samples in the population\n\n\n\u03f5::Real\n start threshold\n\n\ndata::Data\n data\n\n\ndim_unknown::Integer\n nbr of unknown parameters\n\n\ncores::Integer\n nbr of course (default value 1)\n\n\nprint_interval::Integer\n print state of algorithm at every \nprint_interval\nth iteration (default value 1000)",
             "title": "ABC-PMC"
         },
         {
-            "location": "/sec/abcrs/#abc-rejections-sampling",
-            "text": "ABC-RS object.  ApproximateBayesianComputation.ABCRS",
-            "title": "ABC rejections sampling"
+            "location": "/sec/abcpmc/#abc-markov-chain-monte-carlo",
+            "text": "ABC-MCMC object.  #  ApproximateBayesianComputation.ABCPMC  \u2014  Type .  Type for defining a problem for the ABC rejection sampling algorithm  Parameters:   T::Integer  nbr of iterations  N::Integer  nbr of samples in the population  \u03f5::Real  start threshold  data::Data  data  dim_unknown::Integer  nbr of unknown parameters  cores::Integer  nbr of course (default value 1)  print_interval::Integer  print state of algorithm at every  print_interval th iteration (default value 1000)",
+            "title": "ABC Markov chain Monte Carlo"
         },
         {
-            "location": "/sec/abcrs/",
-            "text": "ABC rejections sampling\n\n\nABC-RS object.\n\n\nApproximateBayesianComputation.ABCRS",
+            "location": "/sec/sample/",
+            "text": "Sample\n\n\n#\n\n\nStatsBase.sample\n \u2014 \nFunction\n.\n\n\nsample(problem::ABCRS,\n  sample_from_prior::Function,\n  generate_data::Function,\n  calc_summary::Function,\n  \u03c1::Function,\n  kernel::Function)\n\n\n\n\n\nSample from the approximate posterior distribtuion using ABC rejection sampling.\n\n\nInput:\n\n\n\n\nproblem::ABCRS\n problem\n\n\nsample_from_prior::Function\n function to sample from the prior\n\n\ngenerate_data::Function\n function to generate data from the model\n\n\ncalc_summary::Function\n function to calculate summary statistics\n\n\n\u03c1::Function\n the distance function\n\n\n\n\nOutput:\n\n\n\n\nsamples_approx_posterior::Matrix\n samples from the approxiamte posterior\n\n\n\n\nsample(problem::ABCPMC,\n    sample_from_prior::Function,\n    evaluate_prior::Function,\n    generate_data::Function,\n    calc_summary::Function,\n    \u03c1::Function)\n\n\n\n\n\nSample from the approximate posterior distribtuion using PMC-ABC algorithm described in Adaptive approximate Bayesian computation< http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.313.3573&rep=rep1&type=pdf.\n\n\nInput:\n\n\n\n\nproblem::ABCPMC\n problem\n\n\nsample_from_prior::Function\n function to sample from the prior\n\n\ngenerate_data::Function\n function to generate data from the model\n\n\ncalc_summary::Function\n function to calculate summary statistics\n\n\n\u03c1::Function\n the distance function\n\n\n\n\nOutput:\n\n\n\n\n\u03b8_pop::Matrix\n last population\n\n\n\n\nsample\n(\nproblem\n:\n:ABCMCMC\n,\n\n      \nsample_from_prior\n:\n:Function\n,\n\n      \nevaluate_prior\n:\n:Function\n,\n\n      \ngenerate_data\n:\n:Function\n,\n\n      \ncalc_summary\n:\n:Function\n,\n\n      \n\u03c1\n:\n:Function\n;\n\n      \nkernel\n:\n:Function\n \n=\n \nuniform_kernel\n)\n\n\n\n\n\n\nSample from the approximate posterior distribtuion using ABC-MCMC.\n\n\nInput:\n\n\n\n\nproblem::ABCMCMC\n problem\n\n\nsample_from_prior::Function\n function to sample from the prior\n\n\nevaluate_prior::Function\n evaluate the prior\n\n\ngenerate_data::Function\n function to generate data\n\n\ncalc_summary::Function\n function to calculate summary statistics\n\n\n\u03c1::Function\n the distance function\n\n\nkernel::Function\n the kernel function\n\n\n\n\nOutput:\n\n\n\n\nchain::Matrix\n the chain genrated by the ABC-MCMC algorithm",
             "title": "sample"
         },
         {
-            "location": "/sec/abcrs/#abc-rejections-sampling",
-            "text": "ABC-RS object.  ApproximateBayesianComputation.ABCRS",
-            "title": "ABC rejections sampling"
+            "location": "/sec/sample/#sample",
+            "text": "#  StatsBase.sample  \u2014  Function .  sample(problem::ABCRS,\n  sample_from_prior::Function,\n  generate_data::Function,\n  calc_summary::Function,\n  \u03c1::Function,\n  kernel::Function)  Sample from the approximate posterior distribtuion using ABC rejection sampling.  Input:   problem::ABCRS  problem  sample_from_prior::Function  function to sample from the prior  generate_data::Function  function to generate data from the model  calc_summary::Function  function to calculate summary statistics  \u03c1::Function  the distance function   Output:   samples_approx_posterior::Matrix  samples from the approxiamte posterior   sample(problem::ABCPMC,\n    sample_from_prior::Function,\n    evaluate_prior::Function,\n    generate_data::Function,\n    calc_summary::Function,\n    \u03c1::Function)  Sample from the approximate posterior distribtuion using PMC-ABC algorithm described in Adaptive approximate Bayesian computation< http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.313.3573&rep=rep1&type=pdf.  Input:   problem::ABCPMC  problem  sample_from_prior::Function  function to sample from the prior  generate_data::Function  function to generate data from the model  calc_summary::Function  function to calculate summary statistics  \u03c1::Function  the distance function   Output:   \u03b8_pop::Matrix  last population   sample ( problem : :ABCMCMC , \n       sample_from_prior : :Function , \n       evaluate_prior : :Function , \n       generate_data : :Function , \n       calc_summary : :Function , \n       \u03c1 : :Function ; \n       kernel : :Function   =   uniform_kernel )   Sample from the approximate posterior distribtuion using ABC-MCMC.  Input:   problem::ABCMCMC  problem  sample_from_prior::Function  function to sample from the prior  evaluate_prior::Function  evaluate the prior  generate_data::Function  function to generate data  calc_summary::Function  function to calculate summary statistics  \u03c1::Function  the distance function  kernel::Function  the kernel function   Output:   chain::Matrix  the chain genrated by the ABC-MCMC algorithm",
+            "title": "Sample"
+        },
+        {
+            "location": "/sec/uniformkernel/",
+            "text": "Gaussian kernel\n\n\n#\n\n\nApproximateBayesianComputation.uniform_kernel\n \u2014 \nFunction\n.\n\n\nuniform_kernel(s_star::Vector, s::Vector, \u03f5::Real, \u03c1::Function)\n\n\n\n\n\nThe Uniform kernel function.",
+            "title": "Uniform kernel"
+        },
+        {
+            "location": "/sec/uniformkernel/#gaussian-kernel",
+            "text": "#  ApproximateBayesianComputation.uniform_kernel  \u2014  Function .  uniform_kernel(s_star::Vector, s::Vector, \u03f5::Real, \u03c1::Function)  The Uniform kernel function.",
+            "title": "Gaussian kernel"
+        },
+        {
+            "location": "/sec/gaussiankernel/",
+            "text": "Gaussian kernel\n\n\nApproximateBayesianComputation.gaussian_kernel",
+            "title": "Gaussian kernel"
+        },
+        {
+            "location": "/sec/gaussiankernel/#gaussian-kernel",
+            "text": "ApproximateBayesianComputation.gaussian_kernel",
+            "title": "Gaussian kernel"
+        },
+        {
+            "location": "/sec/euclideandist/",
+            "text": "Weigthed Euclidean distance function\n\n\n#\n\n\nApproximateBayesianComputation.euclidean_dist\n \u2014 \nFunction\n.\n\n\neuclidean_dist(s_star::Vector, s::Vector, w::Vector)\n\n\n\n\n\nThe (weigthed) Euclidean distance function.",
+            "title": "Weigthed Euclidena distance"
+        },
+        {
+            "location": "/sec/euclideandist/#weigthed-euclidean-distance-function",
+            "text": "#  ApproximateBayesianComputation.euclidean_dist  \u2014  Function .  euclidean_dist(s_star::Vector, s::Vector, w::Vector)  The (weigthed) Euclidean distance function.",
+            "title": "Weigthed Euclidean distance function"
+        },
+        {
+            "location": "/sec/gaussiankerneldist/",
+            "text": "Gaussian kernel\n\n\n#\n\n\nApproximateBayesianComputation.gaussian_kernel\n \u2014 \nFunction\n.\n\n\ngaussian_kernel(s_star::Vector, s::Vector, \u03f5::Real, \u03c1::Function)\n\n\n\n\n\nThe Gaussian kernel function.",
+            "title": "Gaussian kernel distance"
+        },
+        {
+            "location": "/sec/gaussiankerneldist/#gaussian-kernel",
+            "text": "#  ApproximateBayesianComputation.gaussian_kernel  \u2014  Function .  gaussian_kernel(s_star::Vector, s::Vector, \u03f5::Real, \u03c1::Function)  The Gaussian kernel function.",
+            "title": "Gaussian kernel"
+        },
+        {
+            "location": "/sec/quantint/",
+            "text": "Quantile interval\n\n\n#\n\n\nApproximateBayesianComputation.quantile_interval\n \u2014 \nFunction\n.\n\n\nquantile_interval(data::Matrix, lower::Real=2.5,upper::Real=97.5,  print_on::Bool = false)\n\n\n\n\n\nComputes posterior quantile intervals, 2.5th and 97.5th quantiles as default.\n\n\nquantile_interval\n(\ndata\n:\n:Matrix\n;\n \nlower\n:\n:Real\n=\n2\n.5\n,\nupper\n:\n:Real\n=\n97\n.5\n,\n \nprint_on\n:\n:Bool\n \n=\n \nfalse\n)\n\n\n\n\n\n\nComputes posterior quantile intervals, 2.5th and 97.5th quantiles as default.",
+            "title": "Quantile intervals"
+        },
+        {
+            "location": "/sec/quantint/#quantile-interval",
+            "text": "#  ApproximateBayesianComputation.quantile_interval  \u2014  Function .  quantile_interval(data::Matrix, lower::Real=2.5,upper::Real=97.5,  print_on::Bool = false)  Computes posterior quantile intervals, 2.5th and 97.5th quantiles as default.  quantile_interval ( data : :Matrix ;   lower : :Real = 2 .5 , upper : :Real = 97 .5 ,   print_on : :Bool   =   false )   Computes posterior quantile intervals, 2.5th and 97.5th quantiles as default.",
+            "title": "Quantile interval"
+        },
+        {
+            "location": "/sec/loss/",
+            "text": "Loss\n\n\n#\n\n\nApproximateBayesianComputation.loss\n \u2014 \nFunction\n.\n\n\nloss(theta_true::Vector, theta_est::Vector)\n\n\n\n\n\nComputes the loss for the parameter estimations.\n\n\nloss(theta_true::Real, theta_est::Real)\n\n\n\n\n\nComputes the loss for the parameter estimations.",
+            "title": "Loss"
+        },
+        {
+            "location": "/sec/loss/#loss",
+            "text": "#  ApproximateBayesianComputation.loss  \u2014  Function .  loss(theta_true::Vector, theta_est::Vector)  Computes the loss for the parameter estimations.  loss(theta_true::Real, theta_est::Real)  Computes the loss for the parameter estimations.",
+            "title": "Loss"
         }
     ]
 }

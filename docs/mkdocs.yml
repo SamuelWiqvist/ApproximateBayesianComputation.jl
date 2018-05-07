@@ -29,11 +29,11 @@ pages:
   - ABC-PMC: sec/abcpmc.md
   - sample: sec/sample.md
 - Kernels:
-  - Uniform kernel: sec/sample.md
-  - Gaussian kernel: sec/sample.md
+  - Uniform kernel: sec/uniformkernel.md
+  - Gaussian kernel: sec/gaussiankernel.md
 - Distance functions:
-  - Weigthed Euclidena distance: sec/sample.md
-  - Gaussian kernel distance: sec/sample.md
+  - Weigthed Euclidena distance: sec/euclideandist.md
+  - Gaussian kernel distance: sec/gaussiankerneldist.md
 - Posterior inference:
-  - Quantile intervals: sec/sample.md
-  - Loss: sec/sample.md
+  - Quantile intervals: sec/quantint.md
+  - Loss: sec/loss.md

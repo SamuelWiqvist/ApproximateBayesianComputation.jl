@@ -1,8 +1,8 @@
 # test multivariate model
 
 # create ABC-MCMC problem
-ϵ_seq = [2*ones(100000);1*ones(100000); 0.8*ones(100000);0.5*ones(100000);0.3*ones(500000)] # ; 0.05*ones(100000)
-burn_in = length(ϵ_seq)-500000
+ϵ_seq = [2*ones(1000);1*ones(1000); 0.8*ones(1000);0.5*ones(1000);0.3*ones(100000)] # ; 0.05*ones(100000)
+burn_in = length(ϵ_seq)-100000
 N = length(ϵ_seq)
 dim_unknown = 2
 θ_start =  ones(2)
@@ -47,8 +47,8 @@ end
 # test univariate model
 
 # create ABC-MCMC problem
-ϵ_seq = [1*ones(1000);0.5*ones(1000);0.2*ones(1000); 0.1*ones(1000); 0.05*ones(1000);0.01*ones(500000)] # ; 0.05*ones(100000)
-burn_in = length(ϵ_seq)-500000
+ϵ_seq = [1*ones(1000);0.5*ones(1000);0.2*ones(1000); 0.1*ones(1000); 0.05*ones(1000);0.01*ones(100000)] # ; 0.05*ones(100000)
+burn_in = length(ϵ_seq)-100000
 N = length(ϵ_seq)
 dim_unknown = 1
 θ_start =  [1.]

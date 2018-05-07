@@ -32,9 +32,6 @@ Output:
   * `samples_approx_posterior::Matrix` samples from the approxiamte posterior
 
 
-<a target='_blank' href='https://github.com/SamuelWiqvist/ApproximateBayesianComputation.jl/blob/d17b73be7f901fee96be0095d13ea4d32bf9fce1/src\abcrs.jl#L30-L49' class='documenter-source'>source</a><br>
-
-
 ```
 sample(problem::ABCPMC,
     sample_from_prior::Function,
@@ -57,9 +54,6 @@ Input:
 Output:
 
   * `θ_pop::Matrix` last population
-
-
-<a target='_blank' href='https://github.com/SamuelWiqvist/ApproximateBayesianComputation.jl/blob/d17b73be7f901fee96be0095d13ea4d32bf9fce1/src\abcpmc.jl#L29-L49' class='documenter-source'>source</a><br>
 
 
 ```
@@ -87,7 +81,4 @@ Input:
 Output:
 
   * `chain::Matrix` the chain genrated by the ABC-MCMC algorithm
-
-
-<a target='_blank' href='https://github.com/SamuelWiqvist/ApproximateBayesianComputation.jl/blob/d17b73be7f901fee96be0095d13ea4d32bf9fce1/src\abcmcmc.jl#L33-L55' class='documenter-source'>source</a><br>
 

@@ -26,19 +26,67 @@
     </url>
         
     <url>
-     <loc>/sec/abcrs/</loc>
+     <loc>/sec/abcmcmc/</loc>
      <lastmod>2018-05-07</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>/sec/abcrs/</loc>
+     <loc>/sec/abcpmc/</loc>
      <lastmod>2018-05-07</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>/sec/abcrs/</loc>
+     <loc>/sec/sample/</loc>
+     <lastmod>2018-05-07</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    
+
+    
+        
+    <url>
+     <loc>/sec/uniformkernel/</loc>
+     <lastmod>2018-05-07</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>/sec/gaussiankernel/</loc>
+     <lastmod>2018-05-07</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    
+
+    
+        
+    <url>
+     <loc>/sec/euclideandist/</loc>
+     <lastmod>2018-05-07</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>/sec/gaussiankerneldist/</loc>
+     <lastmod>2018-05-07</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    
+
+    
+        
+    <url>
+     <loc>/sec/quantint/</loc>
+     <lastmod>2018-05-07</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>/sec/loss/</loc>
      <lastmod>2018-05-07</lastmod>
      <changefreq>daily</changefreq>
     </url>

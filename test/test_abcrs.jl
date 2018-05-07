@@ -3,6 +3,7 @@
 # test input
 
 problem_error = ABCRS(10^6, 0.3, Data(y_multivar), 2, cores = 3, print_interval = 10^5)
+
 function test_input()
   try
     sample(problem_error,
