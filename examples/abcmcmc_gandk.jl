@@ -63,7 +63,7 @@ w  =  [0.22; 0.19; 0.53; 2.97; 1.90]  # from " Approximate maximum likelihood es
 # using orignal ABC-MCMC
 
 # create distance function
-ρ(s::Vector, s_star::Vector) = Euclidean(s::Vector, s_star::Vector, w)
+ρ(s::Vector, s_star::Vector) = euclidean_dist(s::Vector, s_star::Vector, w)
 
 # create ABC-MCMC problem
 ϵ_seq = [30*ones(1000);20*ones(1000);10*ones(1000); 5*ones(1000); 2.5*ones(1000); 1*ones(1000); 0.5*ones(1000); 0.3*ones(100000)] # ; 0.05*ones(100000)
@@ -87,7 +87,6 @@ chain = @time sample(problem,
 # calc posterior quantile interval
 posterior_quantile_interval = calcquantileint(chain[:,burn_in+1:end])
 
-
 # plot chains
 PyPlot.figure()
 PyPlot.subplot(411)
@@ -108,7 +107,6 @@ PyPlot.plot(ones(size(chain,2),1)*θ_true[4], "k")
 PyPlot.xlabel(L"Iteration")
 PyPlot.ylabel(L"$k$")
 
-
 # plot chains after burn in
 PyPlot.figure()
 PyPlot.subplot(411)
@@ -128,7 +126,6 @@ PyPlot.plot(chain[4,burn_in:end])
 PyPlot.plot(ones(size(chain[:,burn_in:end],2),1)*θ_true[4], "k")
 PyPlot.xlabel(L"Iteration")
 PyPlot.ylabel(L"$k$")
-
 
 # plot marginal posterior distributions
 
@@ -174,10 +171,10 @@ PyPlot.xlabel(L"$k$")
 Ω_inv = inv(diagm(w.^2))
 
 # set distance function
-ρ(s::Vector, s_star::Vector) = GaussianKernelDistance(s_star, s, Ω_inv)
+ρ(s::Vector, s_star::Vector) = gaussian_kernel_dist(s_star, s, Ω_inv)
 
 # set kernel
-abcmcmkernel(s_star::Vector,s::Vector, ϵ::Real, ρ::Function) = GaussianKernel(s_star, s, ϵ, ρ)
+abcmcmkernel(s_star::Vector,s::Vector, ϵ::Real, ρ::Function) = gaussian_kernel(s_star, s, ϵ, ρ)
 
 # create ABC-MCMC problem
 ϵ_seq = [30*ones(1000);20*ones(1000);10*ones(1000); 5*ones(1000); 2.5*ones(1000); 1*ones(1000); 0.5*ones(1000); 0.3*ones(1000); 0.2*ones(1000); 0.1*ones(101000)] # ; 0.05*ones(100000)

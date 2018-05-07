@@ -9,19 +9,18 @@ s = rand(4)
 s_star_same = copy(s)
 s_star_different = rand(4)
 
-@testset "UniformKernel" begin
-  @test UniformKernel(s_star_same, s, ϵ, ρ) == 1.
-  @test UniformKernel(s_star_different, s, ϵ, ρ) == 0.
+@testset "uniform_kernel" begin
+  @test uniform_kernel(s_star_same, s, ϵ, ρ) == 1.
+  @test uniform_kernel(s_star_different, s, ϵ, ρ) == 0.
 end
 
-#=
-Ω = eye(4)
-Ω_inv = inv(Ω)
+Ω_inv = inv(eye(4))
 ϵ = 0.1
+
+ρ(s_star, s) = gaussian_kernel_dist(s_star, s, Ω_inv)
+
 @testset "GaussianKernel" begin
-  @test GaussianKernel(s_star_same, s, Ω_inv, ϵ) == 1.
-  kernelval1 = GaussianKernel(1.2*s_star_same, s, Ω_inv, ϵ)
-  kernelval2 = GaussianKernel(1.5*s_star_same, s, Ω_inv, ϵ)
+  kernelval1 = gaussian_kernel(1.2*s_star_same, s, ϵ, ρ)
+  kernelval2 = gaussian_kernel(1.5*s_star_same, s, ϵ, ρ)
   @test kernelval1 > kernelval2
 end
-=#

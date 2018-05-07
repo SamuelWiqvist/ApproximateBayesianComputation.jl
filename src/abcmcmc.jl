@@ -37,7 +37,7 @@ ABCMCMC(N::Integer, burn_in::Real, ϵ_seq::Vector, dim_unknown::Integer, θ_star
           generate_data::Function,
           calc_summary::Function,
           ρ::Function;
-          kernel::Function = UniformKernel)
+          kernel::Function = uniform_kernel)
 
 Sample from the approximate posterior distribtuion using ABC-MCMC.
 
@@ -59,7 +59,7 @@ function sample(problem::ABCMCMC,
                 generate_data::Function,
                 calc_summary::Function,
                 ρ::Function;
-                kernel::Function = UniformKernel)
+                kernel::Function = uniform_kernel)
 
   # data
   y = problem.data.y

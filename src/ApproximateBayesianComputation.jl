@@ -19,10 +19,10 @@ export
 
   # methods
   sample, # algorithms
-  Euclidean, # distance functions
-  GaussianKernelDistance, 
-  UniformKernel, # kernels
-  GaussianKernel,
+  euclidean_dist, # distance functions
+  gaussian_kernel_dist,
+  uniform_kernel, # kernels
+  gaussian_kernel,
   calcquantileint, # posterior inference
   loss,
   log_unifpdf, # log pdfs
@@ -60,7 +60,7 @@ Kernels:
 * Gaussian
 
 Distance functions:
-* (Weighted) Euclidean distance
+* (Weighted) euclidean_dist distance
 
 Posterior inference checks are also provided see ```?calcquantileint``` and ```?loss```.
 
@@ -102,7 +102,7 @@ generate_data(μ) = rand(Normal(μ[1],σ),n)
 calc_summary(y_star,y) = [mean(y_star); std(y_star)]
 
 # distance function
-ρ(s_star, s) = Euclidean(s_star, s, ones(2))
+ρ(s_star, s) = euclidean_dist(s_star, s, ones(2))
 ```
 
 Set up the ABC-RS problem.
