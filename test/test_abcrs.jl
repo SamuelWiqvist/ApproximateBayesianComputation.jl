@@ -1,4 +1,24 @@
 
+
+# test input
+
+problem_error = ABCRS(10^6, 0.3, Data(y_multivar), 2, cores = 3, print_interval = 10^5)
+function test_input()
+  try
+    sample(problem_error,
+           sample_from_prior_multivar,
+           generate_data_multivar,
+           calc_summary_multivar,
+           ρ_multivar)
+  catch err
+    return err
+  end
+end
+
+@testset "ABC-RS Gaussian-Gaussian (test input values )" begin
+  @test typeof(test_input()) == ErrorException
+end
+
 # test multivariate model
 
 # test single core
@@ -14,6 +34,7 @@ approx_posterior_samples_single_core = @time sample(problem,
 # test multi-core
 nbr_cores = length(workers())
 problem = ABCRS(10^6, 0.3, Data(y_multivar), 2, cores = nbr_cores, print_interval = 10^5)
+
 @everywhere srand(123) # fix random numbers
 approx_posterior_samples_multi_core = @time sample(problem,
                                                   sample_from_prior_multivar,

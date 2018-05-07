@@ -1,0 +1,39 @@
+site_name:           ApproximateBayesianComputation
+repo_url:            https://github.com/SamuelWiqvist/ApproximateBayesianComputation.jl
+site_description:    Description
+site_author:         Samuel Wiqvist
+theme:               readthedocs
+
+markdown_extensions:
+  - codehilite
+  - extra
+  - tables
+  - fenced_code
+  - mdx_math # For LaTeX
+
+extra_css:
+  - assets/Documenter.css
+
+extra_javascript:
+  - https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML
+  - assets/mathjaxhelper.js
+
+docs_dir: 'build'
+
+pages:
+- Introduction: index.md
+- Simple example: examples/ex1.md
+- Algorithms:
+  - ABC-RS: sec/abcrs.md
+  - ABC-MCMC: sec/abcmcmc.md
+  - ABC-PMC: sec/abcpmc.md
+  - sample: sec/sample.md
+- Kernels:
+  - Uniform kernel: sec/sample.md
+  - Gaussian kernel: sec/sample.md
+- Distance functions:
+  - Weigthed Euclidena distance: sec/sample.md
+  - Gaussian kernel distance: sec/sample.md
+- Posterior inference:
+  - Quantile intervals: sec/sample.md
+  - Loss: sec/sample.md

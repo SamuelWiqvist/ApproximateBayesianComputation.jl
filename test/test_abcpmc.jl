@@ -1,4 +1,29 @@
 
+# test input
+ϵ_seq = [1; 0.5; 0.3]
+T = length(ϵ_seq)
+N = 1000
+dim_unknown = 2
+
+problem_error = ABCPMC(T,N,ϵ_seq,Data(y_multivar),dim_unknown,cores = 3)
+function test_input()
+  try
+    sample(problem_error,
+          sample_from_prior_multivar,
+          evaluate_prior_multivar,
+          generate_data_multivar,
+          calc_summary_multivar,
+          ρ_multivar)
+  catch err
+    return err
+  end
+end
+
+@testset "ABC-PMC Gaussian-Gaussian (test input values )" begin
+  @test typeof(test_input()) == ErrorException
+end
+
+
 # test multivariate model
 
 # test single core

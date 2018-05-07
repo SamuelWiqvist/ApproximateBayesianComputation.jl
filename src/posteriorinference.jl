@@ -1,11 +1,11 @@
 # posterior quantile intervals
 
 doc"""
-    calcquantileint(data::Matrix, lower::Real=2.5,upper::Real=97.5,  print_on::Bool = false)
+    quantile_interval(data::Matrix, lower::Real=2.5,upper::Real=97.5,  print_on::Bool = false)
 
 Computes posterior quantile intervals, 2.5th and 97.5th quantiles as default.
 """
-function calcquantileint(data::Matrix; lower::Real=2.5,upper::Real=97.5,  print_on::Bool = false)
+function quantile_interval(data::Matrix; lower::Real=2.5,upper::Real=97.5,  print_on::Bool = false)
 
     # find dim. for data
     dim = minimum(size(data))
@@ -33,11 +33,11 @@ end
 
 
 doc"""
-    calcquantileint(data::Matrix; lower::Real=2.5,upper::Real=97.5, print_on::Bool = false)
+    quantile_interval(data::Matrix; lower::Real=2.5,upper::Real=97.5, print_on::Bool = false)
 
 Computes posterior quantile intervals, 2.5th and 97.5th quantiles as default.
 """
-function calcquantileint(data::Vector; lower::Real=2.5,upper::Real=97.5, print_on::Bool = false)
+function quantile_interval(data::Vector; lower::Real=2.5,upper::Real=97.5, print_on::Bool = false)
 
 
     # set nbr of intervals

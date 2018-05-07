@@ -18,7 +18,7 @@ Kernels:
 Distance function(s):
 * (Weighted) Euclidean distance
 
-Posterior inference checks are also provided see ```?calcquantileint``` and ```?loss```.
+Posterior inference checks are also provided see ```?quantile_interval``` and ```?loss```.
 
 
 ## Minimal working example
@@ -85,7 +85,7 @@ approx_posterior_samples = sample(problem,
 Check posterior quantile interval.
 
 ```julia
-posterior_quantile_interval = calcquantileint(approx_posterior_samples)
+posterior_quantile_interval = quantile_interval(approx_posterior_samples)
 ```
 
 Posterior and prior distribution.

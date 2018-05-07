@@ -1,0 +1,5 @@
+# Sample
+
+```@docs
+ApproximateBayesianComputation.sample
+```

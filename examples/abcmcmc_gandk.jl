@@ -85,7 +85,7 @@ chain = @time sample(problem,
 
 
 # calc posterior quantile interval
-posterior_quantile_interval = calcquantileint(chain[:,burn_in+1:end])
+posterior_quantile_interval = quantile_interval(chain[:,burn_in+1:end])
 
 # plot chains
 PyPlot.figure()
@@ -196,7 +196,7 @@ chain = @time sample(problem,
 
 
 # calc posterior quantile interval
-posterior_quantile_interval = calcquantileint(chain[:,burn_in+1:end])
+posterior_quantile_interval = quantile_interval(chain[:,burn_in+1:end])
 
 
 # plot chains

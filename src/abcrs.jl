@@ -143,7 +143,7 @@ function abcrsinterationatsatcore(dim_unknown::Integer,
     y_star = generate_data(θ_star)
     s_star = calc_summary(y_star,y)
 
-    accept =  uniform_kernel(s_star, s, ϵ, ρ) == 1. 
+    accept =  uniform_kernel(s_star, s, ϵ, ρ) == 1.
 
     if accept
       samples_approx_posterior[:,n] = θ_star

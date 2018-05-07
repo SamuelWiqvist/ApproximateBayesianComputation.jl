@@ -1,0 +1,69 @@
+{
+    "docs": [
+        {
+            "location": "/",
+            "text": "Documentation for ApproximateBayesianComputation.jl\n\n\nThis package contains some Approximate Bayesian computation algorithms.\n\n\n\n\nFeatures\n\n\nAlgorithms:\n\n\n\n\nABC rejection sampling (ABC-RS)\n\n\nABC Markov chain Monte Carlo (ABC-MCMC)\n\n\nABC population Monte Carlo (ABC-PMC)\n\n\n\n\nKernels:\n\n\n\n\nUniform\n\n\nGaussian\n\n\n\n\nDistance function(s):\n\n\n\n\n(Weighted) Euclidean distance",
+            "title": "Introduction"
+        },
+        {
+            "location": "/#documentation-for-approximatebayesiancomputationjl",
+            "text": "This package contains some Approximate Bayesian computation algorithms.",
+            "title": "Documentation for ApproximateBayesianComputation.jl"
+        },
+        {
+            "location": "/#features",
+            "text": "Algorithms:   ABC rejection sampling (ABC-RS)  ABC Markov chain Monte Carlo (ABC-MCMC)  ABC population Monte Carlo (ABC-PMC)   Kernels:   Uniform  Gaussian   Distance function(s):   (Weighted) Euclidean distance",
+            "title": "Features"
+        },
+        {
+            "location": "/examples/ex1/",
+            "text": "Simple example\n\n\nLet us use the  ABC rejection sampling algorithm to learn the mean for a Normal distribution with known standard deviation, where the prior for unknown mean is a Normal distibution.\n\n\nLoad packages, and set up the model.\n\n\nusing\n \nApproximateBayesianComputation\n\n\nusing\n \nDistributions\n\n\n\n\u03bc\n \n=\n \n0\n \n# true value for the mean, the parameter that  we want to estimate\n\n\n\u03c3\n \n=\n \n1\n \n# known standard deviation\n\n\nn\n \n=\n \n100\n \n# nbr of observations\n\n\n\ny\n \n=\n \nrand\n(\nNormal\n(\n\u03bc\n,\n\u03c3\n),\n100\n)\n \n# generate some data\n\n\n\n# the prior is a normal distribution with \u03bc = 0.1, and \u03c3 = 1\n\n\nprior\n \n=\n \nNormal\n(\n0.1\n,\n \n1\n)\n\n\n\n\n\n\nDefine the functions needed for the ABC-RS algorithm.\n\n\n# function to sample from the prior\n\n\nsample_from_prior\n()\n \n=\n \nrand\n(\nprior\n)\n\n\n\n# function to generate data\n\n\ngenerate_data\n(\n\u03bc\n)\n \n=\n \nrand\n(\nNormal\n(\n\u03bc\n[\n1\n],\n\u03c3\n),\nn\n)\n\n\n\n# the summary statistics are the mean and the standard\n\n\n# deviation, i.e. the sufficient statistics for the data\n\n\ncalc_summary\n(\ny_star\n,\ny\n)\n \n=\n \n[\nmean\n(\ny_star\n);\n \nstd\n(\ny_star\n)]\n\n\n\n# distance function\n\n\n\u03c1\n(\ns_star\n,\n \ns\n)\n \n=\n \neuclidean_dist\n(\ns_star\n,\n \ns\n,\n \nones\n(\n2\n))\n\n\n\n\n\n\nSet up the ABC-RS problem.\n\n\nproblem\n \n=\n \nABCRS\n(\n10\n^\n6\n,\n\n                \n0.01\n,\n\n                \nData\n(\ny\n),\n\n                \n1\n,\n\n                \ncores\n \n=\n \n1\n,\n\n                \nprint_interval\n \n=\n \n10\n^\n5\n)\n\n\n\n\n\n\nRun ABC-RS.\n\n\napprox_posterior_samples\n \n=\n \nsample\n(\nproblem\n,\n\n                                  \nsample_from_prior\n,\n\n                                  \ngenerate_data\n,\n\n                                  \ncalc_summary\n,\n\n                                  \n\u03c1\n)\n\n\n\n\n\n\nCheck posterior quantile interval.\n\n\nposterior_quantile_interval\n \n=\n \nquantile_interval\n(\napprox_posterior_samples\n)",
+            "title": "Simple example"
+        },
+        {
+            "location": "/examples/ex1/#simple-example",
+            "text": "Let us use the  ABC rejection sampling algorithm to learn the mean for a Normal distribution with known standard deviation, where the prior for unknown mean is a Normal distibution.  Load packages, and set up the model.  using   ApproximateBayesianComputation  using   Distributions  \u03bc   =   0   # true value for the mean, the parameter that  we want to estimate  \u03c3   =   1   # known standard deviation  n   =   100   # nbr of observations  y   =   rand ( Normal ( \u03bc , \u03c3 ), 100 )   # generate some data  # the prior is a normal distribution with \u03bc = 0.1, and \u03c3 = 1  prior   =   Normal ( 0.1 ,   1 )   Define the functions needed for the ABC-RS algorithm.  # function to sample from the prior  sample_from_prior ()   =   rand ( prior )  # function to generate data  generate_data ( \u03bc )   =   rand ( Normal ( \u03bc [ 1 ], \u03c3 ), n )  # the summary statistics are the mean and the standard  # deviation, i.e. the sufficient statistics for the data  calc_summary ( y_star , y )   =   [ mean ( y_star );   std ( y_star )]  # distance function  \u03c1 ( s_star ,   s )   =   euclidean_dist ( s_star ,   s ,   ones ( 2 ))   Set up the ABC-RS problem.  problem   =   ABCRS ( 10 ^ 6 , \n                 0.01 , \n                 Data ( y ), \n                 1 , \n                 cores   =   1 , \n                 print_interval   =   10 ^ 5 )   Run ABC-RS.  approx_posterior_samples   =   sample ( problem , \n                                   sample_from_prior , \n                                   generate_data , \n                                   calc_summary , \n                                   \u03c1 )   Check posterior quantile interval.  posterior_quantile_interval   =   quantile_interval ( approx_posterior_samples )",
+            "title": "Simple example"
+        },
+        {
+            "location": "/sec/abcrs/",
+            "text": "ABC rejections sampling\n\n\nABC-RS object.\n\n\nApproximateBayesianComputation.ABCRS",
+            "title": "ABC-RS"
+        },
+        {
+            "location": "/sec/abcrs/#abc-rejections-sampling",
+            "text": "ABC-RS object.  ApproximateBayesianComputation.ABCRS",
+            "title": "ABC rejections sampling"
+        },
+        {
+            "location": "/sec/abcrs/",
+            "text": "ABC rejections sampling\n\n\nABC-RS object.\n\n\nApproximateBayesianComputation.ABCRS",
+            "title": "ABC-MCMC"
+        },
+        {
+            "location": "/sec/abcrs/#abc-rejections-sampling",
+            "text": "ABC-RS object.  ApproximateBayesianComputation.ABCRS",
+            "title": "ABC rejections sampling"
+        },
+        {
+            "location": "/sec/abcrs/",
+            "text": "ABC rejections sampling\n\n\nABC-RS object.\n\n\nApproximateBayesianComputation.ABCRS",
+            "title": "ABC-PMC"
+        },
+        {
+            "location": "/sec/abcrs/#abc-rejections-sampling",
+            "text": "ABC-RS object.  ApproximateBayesianComputation.ABCRS",
+            "title": "ABC rejections sampling"
+        },
+        {
+            "location": "/sec/abcrs/",
+            "text": "ABC rejections sampling\n\n\nABC-RS object.\n\n\nApproximateBayesianComputation.ABCRS",
+            "title": "sample"
+        },
+        {
+            "location": "/sec/abcrs/#abc-rejections-sampling",
+            "text": "ABC-RS object.  ApproximateBayesianComputation.ABCRS",
+            "title": "ABC rejections sampling"
+        }
+    ]
+}

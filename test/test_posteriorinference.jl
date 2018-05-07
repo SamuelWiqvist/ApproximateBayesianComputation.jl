@@ -4,15 +4,15 @@ using StatsBase
 
 data = rand(4,100)
 
-quantile_int = calcquantileint(data, lower=10, upper=90)
-quantile_def = calcquantileint(data)
-quantile_trans = calcquantileint(data')
+quantile_int = quantile_interval(data, lower=10, upper=90)
+quantile_def = quantile_interval(data)
+quantile_trans = quantile_interval(data')
 
 data_vec = rand(100)
-quantile_vec = calcquantileint(data_vec, lower=10, upper=90)
-quantile_vec_def = calcquantileint(data_vec)
+quantile_vec = quantile_interval(data_vec, lower=10, upper=90)
+quantile_vec_def = quantile_interval(data_vec)
 
-@testset "calcquantileint" begin
+@testset "quantile_interval" begin
   for i = 1:4
       @test quantile(data[i,:], [0.1 0.9])[:] == quantile_int[i,:]
       @test quantile(data[i,:], [0.025 0.975])[:] == quantile_def[i,:]
