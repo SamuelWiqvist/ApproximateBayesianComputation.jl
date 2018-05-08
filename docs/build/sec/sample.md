@@ -32,7 +32,7 @@ Output:
   * `samples_approx_posterior::Matrix` samples from the approxiamte posterior
 
 
-<a target='_blank' href='https://github.com/SamuelWiqvist/ApproximateBayesianComputation.jl/blob/3dc50ffae08dd9cb9f8f7bc1fae4bdb44f3a61f1/src\abcrs.jl#L30-L49' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/SamuelWiqvist/ApproximateBayesianComputation.jl/blob/e462f22d3194c7bcc5dec24708fc4385d8ca1ab8/src\abcrs.jl#L30-L49' class='documenter-source'>source</a><br>
 
 
 ```
@@ -44,7 +44,7 @@ sample(problem::ABCPMC,
     ρ::Function)
 ```
 
-Sample from the approximate posterior distribtuion using PMC-ABC algorithm described in *Adaptive approximate Bayesian computation* http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.313.3573&rep=rep1&type=pdf.
+Sample from the approximate posterior distribtuion using PMC-ABC algorithm described in *Adaptive approximate Bayesian computation* [http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.313.3573&rep=rep1&type=pdf](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.313.3573&rep=rep1&type=pdf).
 
 Input:
 
@@ -59,7 +59,7 @@ Output:
   * `θ_pop::Matrix` last population
 
 
-<a target='_blank' href='https://github.com/SamuelWiqvist/ApproximateBayesianComputation.jl/blob/3dc50ffae08dd9cb9f8f7bc1fae4bdb44f3a61f1/src\abcpmc.jl#L29-L49' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/SamuelWiqvist/ApproximateBayesianComputation.jl/blob/e462f22d3194c7bcc5dec24708fc4385d8ca1ab8/src\abcpmc.jl#L29-L49' class='documenter-source'>source</a><br>
 
 
 ```
@@ -89,5 +89,5 @@ Output:
   * `chain::Matrix` the chain genrated by the ABC-MCMC algorithm
 
 
-<a target='_blank' href='https://github.com/SamuelWiqvist/ApproximateBayesianComputation.jl/blob/3dc50ffae08dd9cb9f8f7bc1fae4bdb44f3a61f1/src\abcmcmc.jl#L33-L55' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/SamuelWiqvist/ApproximateBayesianComputation.jl/blob/e462f22d3194c7bcc5dec24708fc4385d8ca1ab8/src\abcmcmc.jl#L33-L55' class='documenter-source'>source</a><br>
 

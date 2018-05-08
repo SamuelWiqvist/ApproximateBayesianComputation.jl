@@ -90,3 +90,32 @@ end
   @test abs(mean(chain_general[burn_in:end]) - posterior_mean_univar) < 0.1
   @test abs(std(chain_general[burn_in:end]) - posterior_std) < 0.1
 end
+
+
+# test AMUpdate
+
+# create ABC-MCMC problem
+ϵ_seq = [1*ones(1000);0.5*ones(1000);0.2*ones(1000); 0.1*ones(1000); 0.05*ones(1000);0.01*ones(100000)] # ; 0.05*ones(100000)
+burn_in = length(ϵ_seq)-100000
+N = length(ϵ_seq)
+dim_unknown = 1
+θ_start =  [1.]
+adaptive_update = AMUpdate(eye(dim_unknown), 2.4/sqrt(dim_unknown), 1., 0.7, 25)
+data = Data(y_univar)
+problem = ABCMCMC(N, burn_in, ϵ_seq, dim_unknown, θ_start, "none", data, adaptive_update,
+                  print_interval = 10^5)
+
+
+# run ABC-MCMC
+srand(123) # fix random numbers
+chain_original = @time sample(problem,
+                              sample_from_prior_univar,
+                              evaluate_prior_univar,
+                              generate_data_univar,
+                              calc_summary_univar,
+                              ρ_univar)
+
+@testset "ABC-MCMC Gaussian-Gaussian (univariate) (AMUpdate)" begin
+  @test abs(mean(chain_original[burn_in:end]) - posterior_mean_univar) < 0.1
+  @test abs(std(chain_original[burn_in:end]) - posterior_std) < 0.1
+end

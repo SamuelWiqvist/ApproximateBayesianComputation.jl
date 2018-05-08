@@ -179,12 +179,9 @@ function sample(problem::ABCMCMC,
 end
 
 
-# help functions for ABc-MCMC
+# help functions
 
-doc"""
-    jacobian(θ::Vector, parameter_transformation::String)
-Returnes log-Jacobian for transformation of parameter space.
-"""
+# Computes log-Jacobian.
 function jacobian(θ::Vector, parameter_transformation::String)
 
   if parameter_transformation == "none"

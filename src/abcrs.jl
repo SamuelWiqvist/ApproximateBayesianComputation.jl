@@ -86,16 +86,16 @@ function sample(problem::ABCRS,
   @sync begin
 
   @parallel for n_cores = 1:N_cores
-    samples_approx_posterior[:,:,n_cores] = abcrsinterationatsatcore(dim_unknown,
-                                                                     div(N,N_cores),
-                                                                     print_interval,
-                                                                     y,
-                                                                     s,
-                                                                     ϵ,
-                                                                     sample_from_prior,
-                                                                     generate_data,
-                                                                     calc_summary,
-                                                                     ρ)
+    samples_approx_posterior[:,:,n_cores] = abcrsinterationats_at_core(dim_unknown,
+                                                                       div(N,N_cores),
+                                                                       print_interval,
+                                                                       y,
+                                                                       s,
+                                                                       ϵ,
+                                                                       sample_from_prior,
+                                                                       generate_data,
+                                                                       calc_summary,
+                                                                       ρ)
   end
 
   end
@@ -118,8 +118,9 @@ function sample(problem::ABCRS,
 
 end
 
+# help functions 
 
-function abcrsinterationatsatcore(dim_unknown::Integer,
+function abcrsinterationats_at_core(dim_unknown::Integer,
                                   iter_at_core::Integer,
                                   print_interval::Integer,
                                   y::Array,
