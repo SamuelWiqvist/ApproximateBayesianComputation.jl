@@ -1,9 +1,7 @@
-#Documentation for ApproximateBayesianComputation.jl
+# ApproximateBayesianComputation.jl
 
 
 This package contains some Approximate Bayesian computation algorithms.
-
-## Features
 
 Algorithms:
 * ABC rejection sampling (ABC-RS)

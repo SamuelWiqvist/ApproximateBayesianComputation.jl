@@ -73,6 +73,12 @@
             
     <li class="toctree-l3"><a href="#abc-markov-chain-monte-carlo">ABC Markov chain Monte Carlo</a></li>
     
+        <ul>
+        
+            <li><a class="toctree-l4" href="#adaptive-tuning-of-the-proposal-distrbution">Adaptive tuning of the proposal distrbution</a></li>
+        
+        </ul>
+    
 
     </ul>
                 </li>
@@ -174,8 +180,46 @@
                 <p><a id='ABC-Markov-chain-Monte-Carlo-1'></a></p>
 <h1 id="abc-markov-chain-monte-carlo">ABC Markov chain Monte Carlo</h1>
 <p>ABC-MCMC object.</p>
-<div class="codehilite"><pre><span></span>ApproximateBayesianComputation.ABCRS
-</pre></div>
+<p><a id='ApproximateBayesianComputation.ABCMCMC' href='#ApproximateBayesianComputation.ABCMCMC'>#</a>
+<strong><code>ApproximateBayesianComputation.ABCMCMC</code></strong> &mdash; <em>Type</em>.</p>
+<p>Type for defining a problem for the ABC-MCMC algorithm Parameters:</p>
+<ul>
+<li><code>N::Integer</code> nbr of iterations</li>
+<li><code>burn_in::Integer</code> length for burn-in</li>
+<li><code>ϵ_seq::Vector</code> sequence of threshold values</li>
+<li><code>dim_unknown::Integer</code> nbr of unknown parameters</li>
+<li><code>θ_start::Vector</code> start value for chain</li>
+<li><code>transformation::String</code> transformation for proposal distribution: none/log/</li>
+<li><code>data::Data</code> data</li>
+<li><code>adaptive_update::AdaptationAlgorithm</code> adaptive updating algorithm for the proposal distribtuion</li>
+<li><code>algorithm_type::String</code> type of ABC algorithm (original or general, default value original)</li>
+<li><code>print_interval::Integer</code> print interval for stats of algorithm (default value 1000)</li>
+</ul>
+<p><a target='_blank' href='https://github.com/SamuelWiqvist/ApproximateBayesianComputation.jl/blob/3dc50ffae08dd9cb9f8f7bc1fae4bdb44f3a61f1/src\abcmcmc.jl#L2-L15' class='documenter-source'>source</a><br></p>
+<p><a id='Adaptive-tuning-of-the-proposal-distrbution-1'></a></p>
+<h2 id="adaptive-tuning-of-the-proposal-distrbution">Adaptive tuning of the proposal distrbution</h2>
+<p><a id='ApproximateBayesianComputation.FixedKernel' href='#ApproximateBayesianComputation.FixedKernel'>#</a>
+<strong><code>ApproximateBayesianComputation.FixedKernel</code></strong> &mdash; <em>Type</em>.</p>
+<p>FixedKernel</p>
+<p>Fixed proposal distribution.</p>
+<p>Parameters:</p>
+<ul>
+<li><code>Cov::Array{Real}</code> covaraince matrix</li>
+</ul>
+<p><a target='_blank' href='https://github.com/SamuelWiqvist/ApproximateBayesianComputation.jl/blob/3dc50ffae08dd9cb9f8f7bc1fae4bdb44f3a61f1/src\adaptive updating algorithms\adaptiveupdate.jl#L6-L14' class='documenter-source'>source</a><br></p>
+<p><a id='ApproximateBayesianComputation.AMUpdate' href='#ApproximateBayesianComputation.AMUpdate'>#</a>
+<strong><code>ApproximateBayesianComputation.AMUpdate</code></strong> &mdash; <em>Type</em>.</p>
+<p>AMUpdate</p>
+<p>Adaptive tuning of the proposal distribution. Sources: <em>A tutorial on adaptive MCMC</em> <a href="https://link.springer.com/article/10.1007/s11222-008-9110-y">https://link.springer.com/article/10.1007/s11222-008-9110-y</a>, and <em>Exploring the common concepts of adaptive MCMC and Covariance Matrix Adaptation schemes</em> <a href="http://drops.dagstuhl.de/opus/volltexte/2010/2813/pdf/10361.MuellerChristian.Paper.2813.pdf">http://drops.dagstuhl.de/opus/volltexte/2010/2813/pdf/10361.MuellerChristian.Paper.2813.pdf</a></p>
+<p>Parameters:</p>
+<ul>
+<li><code>C_0::Array{Real}</code></li>
+<li><code>r_cov_m::Real</code></li>
+<li><code>gamma_0::Real</code></li>
+<li><code>k::Real</code></li>
+<li><code>t_0::Integer</code></li>
+</ul>
+<p><a target='_blank' href='https://github.com/SamuelWiqvist/ApproximateBayesianComputation.jl/blob/3dc50ffae08dd9cb9f8f7bc1fae4bdb44f3a61f1/src\adaptive updating algorithms\adaptiveupdate.jl#L19-L32' class='documenter-source'>source</a><br></p>
               
             </div>
           </div>

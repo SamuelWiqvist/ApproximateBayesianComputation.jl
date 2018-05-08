@@ -2,10 +2,34 @@
 
 abstract type  AdaptationAlgorithm end
 
-type noAdaptation <: AdaptationAlgorithm
+
+"""
+FixedKernel
+
+Fixed proposal distribution.
+
+Parameters:
+
+* `Cov::Array{Real}` covaraince matrix
+"""
+type FixedKernel <: AdaptationAlgorithm
   Cov::Array{Real}
 end
 
+"""
+AMUpdate
+
+Adaptive tuning of the proposal distribution. Sources: *A tutorial on adaptive MCMC* [https://link.springer.com/article/10.1007/s11222-008-9110-y](https://link.springer.com/article/10.1007/s11222-008-9110-y),
+and *Exploring the common concepts of adaptive MCMC and Covariance Matrix Adaptation schemes* [http://drops.dagstuhl.de/opus/volltexte/2010/2813/pdf/10361.MuellerChristian.Paper.2813.pdf](http://drops.dagstuhl.de/opus/volltexte/2010/2813/pdf/10361.MuellerChristian.Paper.2813.pdf)
+
+Parameters:
+
+* `C_0::Array{Real}`
+* `r_cov_m::Real`
+* `gamma_0::Real`
+* `k::Real`
+* `t_0::Integer`
+"""
 type AMUpdate <: AdaptationAlgorithm
   C_0::Array{Real}
   r_cov_m::Real
@@ -29,8 +53,8 @@ end
 
 # set up functions
 
-"Set parameters for noAdaptation"
-function set_adaptive_alg_params(algorithm::noAdaptation, nbr_of_unknown_parameters::Integer, theta::Vector,R::Integer)
+"Set parameters for FixedKernel"
+function set_adaptive_alg_params(algorithm::FixedKernel, nbr_of_unknown_parameters::Integer, theta::Vector,R::Integer)
 
   return (algorithm.Cov, NaN)
 
@@ -76,9 +100,9 @@ end
 # return covariance functions
 
 doc"""
-    return_covariance_matrix(algorithm::noAdaptation, adaptive_update_params::Tuple,r::Integer)
+    return_covariance_matrix(algorithm::FixedKernel, adaptive_update_params::Tuple,r::Integer)
 """
-function return_covariance_matrix(algorithm::noAdaptation, adaptive_update_params::Tuple,r::Integer)
+function return_covariance_matrix(algorithm::FixedKernel, adaptive_update_params::Tuple,r::Integer)
 
   return adaptive_update_params[1]
 
@@ -112,9 +136,9 @@ end
 # print_covariance functions
 
 doc"""
-    print_covariance(algorithm::noAdaptation, adaptive_update_params::Tuple,r::Integer)
+    print_covariance(algorithm::FixedKernel, adaptive_update_params::Tuple,r::Integer)
 """
-function print_covariance(algorithm::noAdaptation, adaptive_update_params::Tuple,r::Integer)
+function print_covariance(algorithm::FixedKernel, adaptive_update_params::Tuple,r::Integer)
 
   println(adaptive_update_params[1])
 
@@ -145,9 +169,9 @@ end
 
 
 doc"""
-    get_covariance(algorithm::noAdaptation, adaptive_update_params::Tuple,r::Integer)
+    get_covariance(algorithm::FixedKernel, adaptive_update_params::Tuple,r::Integer)
 """
-function get_covariance(algorithm::noAdaptation, adaptive_update_params::Tuple,r::Integer)
+function get_covariance(algorithm::FixedKernel, adaptive_update_params::Tuple,r::Integer)
 
   return adaptive_update_params[1]
 
@@ -177,9 +201,9 @@ end
 # gaussian random walk functions
 
 doc"""
-    gaussian_random_walk(algorithm::noAdaptation, adaptive_update_params::Tuple, Theta::Vector, r::Integer)
+    gaussian_random_walk(algorithm::FixedKernel, adaptive_update_params::Tuple, Theta::Vector, r::Integer)
 """
-function gaussian_random_walk(algorithm::noAdaptation, adaptive_update_params::Tuple, Theta::Vector, r::Integer)
+function gaussian_random_walk(algorithm::FixedKernel, adaptive_update_params::Tuple, Theta::Vector, r::Integer)
 
   return rand(MvNormal(Theta, 1.0*adaptive_update_params[1])), zeros(size(Theta))
 
@@ -210,9 +234,9 @@ end
 
 # functions for adaptation of parameters
 doc"""
-    adaptation(algorithm::noAdaptation, adaptive_update_params::Tuple, Theta::Array, r::Integer,a_log::Real)
+    adaptation(algorithm::FixedKernel, adaptive_update_params::Tuple, Theta::Array, r::Integer,a_log::Real)
 """
-function adaptation(algorithm::noAdaptation, adaptive_update_params::Tuple, Theta::Array, r::Integer,a_log::Real)
+function adaptation(algorithm::FixedKernel, adaptive_update_params::Tuple, Theta::Array, r::Integer,a_log::Real)
 
   # do nothing
 

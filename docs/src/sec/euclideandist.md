@@ -1,4 +1,4 @@
-# Weigthed Euclidean distance function 
+# Weighted Euclidean distance function
 
 ```@docs
 ApproximateBayesianComputation.euclidean_dist

@@ -169,54 +169,49 @@
               
                 <p><a id='Simple-example-1'></a></p>
 <h1 id="simple-example">Simple example</h1>
-<p>Let us use the  ABC rejection sampling algorithm to learn the mean for a Normal distribution with known standard deviation, where the prior for unknown mean is a Normal distibution.</p>
-<p>Load packages, and set up the model.</p>
-<div class="codehilite"><pre><span></span><span class="k">using</span> <span class="n">ApproximateBayesianComputation</span>
-<span class="k">using</span> <span class="n">Distributions</span>
+<p>Let us use the  ABC rejection sampling algorithm to learn the mean for a Normal distribution with known standard deviation, where the prior for the unknown mean is a Normal distibution.</p>
+<p>Load packages.</p>
+<div class="codehilite"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="k">using</span> <span class="n">ApproximateBayesianComputation</span>
+<span class="n">julia</span><span class="o">&gt;</span> <span class="k">using</span> <span class="n">Distributions</span>
+</pre></div>
 
-<span class="n">μ</span> <span class="o">=</span> <span class="mi">0</span> <span class="c"># true value for the mean, the parameter that  we want to estimate</span>
-<span class="n">σ</span> <span class="o">=</span> <span class="mi">1</span> <span class="c"># known standard deviation</span>
-<span class="n">n</span> <span class="o">=</span> <span class="mi">100</span> <span class="c"># nbr of observations</span>
 
-<span class="n">y</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="n">Normal</span><span class="p">(</span><span class="n">μ</span><span class="p">,</span><span class="n">σ</span><span class="p">),</span><span class="mi">100</span><span class="p">)</span> <span class="c"># generate some data</span>
+<p>Set parameters for data model.</p>
+<div class="codehilite"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">μ</span> <span class="o">=</span> <span class="mi">0</span> <span class="c"># true value for the mean, the parameter that  we want to estimate</span>
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">σ</span> <span class="o">=</span> <span class="mi">1</span> <span class="c"># known standard deviation</span>
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">100</span> <span class="c"># nbr of observations</span>
+</pre></div>
 
-<span class="c"># the prior is a normal distribution with μ = 0.1, and σ = 1</span>
-<span class="n">prior</span> <span class="o">=</span> <span class="n">Normal</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<p>Generate some data</p>
+<div class="codehilite"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">y</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="n">Normal</span><span class="p">(</span><span class="n">μ</span><span class="p">,</span><span class="n">σ</span><span class="p">),</span><span class="mi">100</span><span class="p">)</span> <span class="c"># generate some data</span>
+</pre></div>
+
+
+<p>Set prior distibution. The prior is a normal distribution with μ = 0.1, and σ = 1</p>
+<div class="codehilite"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">prior</span> <span class="o">=</span> <span class="n">Normal</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 </pre></div>
 
 
 <p>Define the functions needed for the ABC-RS algorithm.</p>
-<div class="codehilite"><pre><span></span><span class="c"># function to sample from the prior</span>
-<span class="n">sample_from_prior</span><span class="p">()</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="n">prior</span><span class="p">)</span>
-
-<span class="c"># function to generate data</span>
-<span class="n">generate_data</span><span class="p">(</span><span class="n">μ</span><span class="p">)</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="n">Normal</span><span class="p">(</span><span class="n">μ</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">σ</span><span class="p">),</span><span class="n">n</span><span class="p">)</span>
-
-<span class="c"># the summary statistics are the mean and the standard</span>
-<span class="c"># deviation, i.e. the sufficient statistics for the data</span>
-<span class="n">calc_summary</span><span class="p">(</span><span class="n">y_star</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="o">=</span> <span class="p">[</span><span class="n">mean</span><span class="p">(</span><span class="n">y_star</span><span class="p">);</span> <span class="n">std</span><span class="p">(</span><span class="n">y_star</span><span class="p">)]</span>
-
-<span class="c"># distance function</span>
-<span class="n">ρ</span><span class="p">(</span><span class="n">s_star</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span> <span class="o">=</span> <span class="n">euclidean_dist</span><span class="p">(</span><span class="n">s_star</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">ones</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<div class="codehilite"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">sample_from_prior</span><span class="p">()</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="n">prior</span><span class="p">)</span> <span class="c"># function to sample from the prior</span>
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">generate_data</span><span class="p">(</span><span class="n">μ</span><span class="p">)</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="n">Normal</span><span class="p">(</span><span class="n">μ</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">σ</span><span class="p">),</span><span class="n">n</span><span class="p">)</span> <span class="c"># function to generate data</span>
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">calc_summary</span><span class="p">(</span><span class="n">y_star</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="o">=</span> <span class="p">[</span><span class="n">mean</span><span class="p">(</span><span class="n">y_star</span><span class="p">);</span> <span class="n">std</span><span class="p">(</span><span class="n">y_star</span><span class="p">)]</span>  <span class="c"># the summary statistics</span>
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">ρ</span><span class="p">(</span><span class="n">s_star</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span> <span class="o">=</span> <span class="n">euclidean_dist</span><span class="p">(</span><span class="n">s_star</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">ones</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span> <span class="c"># distance function</span>
 </pre></div>
 
 
 <p>Set up the ABC-RS problem.</p>
-<div class="codehilite"><pre><span></span><span class="n">problem</span> <span class="o">=</span> <span class="n">ABCRS</span><span class="p">(</span><span class="mi">10</span><span class="o">^</span><span class="mi">6</span><span class="p">,</span>
-                <span class="mf">0.01</span><span class="p">,</span>
-                <span class="n">Data</span><span class="p">(</span><span class="n">y</span><span class="p">),</span>
-                <span class="mi">1</span><span class="p">,</span>
-                <span class="n">cores</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
-                <span class="n">print_interval</span> <span class="o">=</span> <span class="mi">10</span><span class="o">^</span><span class="mi">5</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">problem</span> <span class="o">=</span> <span class="n">ABCRS</span><span class="p">(</span><span class="mi">10</span><span class="o">^</span><span class="mi">6</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="n">Data</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="n">cores</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">print_interval</span> <span class="o">=</span> <span class="mi">10</span><span class="o">^</span><span class="mi">5</span><span class="p">)</span>
 </pre></div>
 
 
 <p>Run ABC-RS.</p>
-<div class="codehilite"><pre><span></span><span class="n">approx_posterior_samples</span> <span class="o">=</span> <span class="n">sample</span><span class="p">(</span><span class="n">problem</span><span class="p">,</span>
-                                  <span class="n">sample_from_prior</span><span class="p">,</span>
-                                  <span class="n">generate_data</span><span class="p">,</span>
-                                  <span class="n">calc_summary</span><span class="p">,</span>
-                                  <span class="n">ρ</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">approx_posterior_samples</span> <span class="o">=</span> <span class="n">sample</span><span class="p">(</span><span class="n">problem</span><span class="p">,</span>
+                                         <span class="n">sample_from_prior</span><span class="p">,</span>
+                                         <span class="n">generate_data</span><span class="p">,</span>
+                                         <span class="n">calc_summary</span><span class="p">,</span>
+                                         <span class="n">ρ</span><span class="p">)</span>
 </pre></div>
 
 

@@ -35,7 +35,7 @@ ABCPMC(T::Integer, N::Integer,ϵ_seq::Vector, data::Data, dim_unknown::Integer; 
         ρ::Function)
 
 Sample from the approximate posterior distribtuion using PMC-ABC algorithm
-described in Adaptive approximate Bayesian computation< http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.313.3573&rep=rep1&type=pdf.
+described in *Adaptive approximate Bayesian computation* [http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.313.3573&rep=rep1&type=pdf](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.313.3573&rep=rep1&type=pdf).
 
 Input:
 - `problem::ABCPMC` problem

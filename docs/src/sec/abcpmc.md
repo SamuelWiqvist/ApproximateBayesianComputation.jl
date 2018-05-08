@@ -1,6 +1,6 @@
-# ABC Markov chain Monte Carlo
+# ABC population Monte Carlo 
 
-ABC-MCMC object.
+ABC-PMC object.
 
 ```@docs
 ApproximateBayesianComputation.ABCPMC

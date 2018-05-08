@@ -1,6 +1,6 @@
 site_name:           ApproximateBayesianComputation
 repo_url:            https://github.com/SamuelWiqvist/ApproximateBayesianComputation.jl
-site_description:    Description
+site_description:    Documentation for ApproximateBayesianComputation.jl 
 site_author:         Samuel Wiqvist
 theme:               readthedocs
 

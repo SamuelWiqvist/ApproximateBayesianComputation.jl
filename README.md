@@ -20,6 +20,7 @@ Distance function(s):
 
 Posterior inference checks are also provided see ```?quantile_interval``` and ```?loss```.
 
+* **Documentation:**  [https://samuelwiqvist.github.io/ApproximateBayesianComputation.jl/](https://samuelwiqvist.github.io/ApproximateBayesianComputation.jl/).
 
 ## Minimal working example
 

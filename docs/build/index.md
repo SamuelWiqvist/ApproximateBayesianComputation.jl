@@ -1,13 +1,10 @@
 
-#Documentation for ApproximateBayesianComputation.jl
+<a id='ApproximateBayesianComputation.jl-1'></a>
+
+# ApproximateBayesianComputation.jl
 
 
 This package contains some Approximate Bayesian computation algorithms.
-
-
-<a id='Features-1'></a>
-
-## Features
 
 
 Algorithms:

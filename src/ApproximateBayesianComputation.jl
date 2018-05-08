@@ -28,7 +28,7 @@ export
   log_unifpdf, # log pdfs
 
   AMUpdate, # adaptive updating algorithms for ABC-MCMC
-  noAdaptation
+  FixedKernel
 
 
 # load adaptive update parameters
