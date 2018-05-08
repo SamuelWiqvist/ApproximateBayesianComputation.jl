@@ -17,6 +17,7 @@ Kernels:
 
 Distance function(s):
 * (Weighted) Euclidean distance
+* Gaussian kernel distance
 
 Posterior inference checks are also provided see ```?quantile_interval``` and ```?loss```.
 
