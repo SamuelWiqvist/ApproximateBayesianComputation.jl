@@ -28,11 +28,11 @@ ABCPMC(T::Integer, N::Integer,ϵ_seq::Vector, data::Data, dim_unknown::Integer; 
 # method
 """
     sample(problem::ABCPMC,
-        sample_from_prior::Function,
-        evaluate_prior::Function,
-        generate_data::Function,
-        calc_summary::Function,
-        ρ::Function)
+           sample_from_prior::Function,
+           evaluate_prior::Function,
+           generate_data::Function,
+           calc_summary::Function,
+           ρ::Function)
 
 Sample from the approximate posterior distribtuion using PMC-ABC algorithm
 described in *Adaptive approximate Bayesian computation* [http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.313.3573&rep=rep1&type=pdf](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.313.3573&rep=rep1&type=pdf).

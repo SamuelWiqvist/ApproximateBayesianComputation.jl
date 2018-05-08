@@ -176,11 +176,10 @@
 <p><a id='StatsBase.sample' href='#StatsBase.sample'>#</a>
 <strong><code>StatsBase.sample</code></strong> &mdash; <em>Function</em>.</p>
 <div class="codehilite"><pre><span></span>sample(problem::ABCRS,
-  sample_from_prior::Function,
-  generate_data::Function,
-  calc_summary::Function,
-  ρ::Function,
-  kernel::Function)
+       sample_from_prior::Function,
+       generate_data::Function,
+       calc_summary::Function,
+       ρ::Function)
 </pre></div>
 
 
@@ -197,13 +196,13 @@
 <ul>
 <li><code>samples_approx_posterior::Matrix</code> samples from the approxiamte posterior</li>
 </ul>
-<p><a target='_blank' href='https://github.com/SamuelWiqvist/ApproximateBayesianComputation.jl/blob/e462f22d3194c7bcc5dec24708fc4385d8ca1ab8/src\abcrs.jl#L30-L49' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/SamuelWiqvist/ApproximateBayesianComputation.jl/blob/11e7ea46ecbc940f49a425967cc88196de3162a6/src\abcrs.jl#L30-L48' class='documenter-source'>source</a><br></p>
 <div class="codehilite"><pre><span></span>sample(problem::ABCPMC,
-    sample_from_prior::Function,
-    evaluate_prior::Function,
-    generate_data::Function,
-    calc_summary::Function,
-    ρ::Function)
+       sample_from_prior::Function,
+       evaluate_prior::Function,
+       generate_data::Function,
+       calc_summary::Function,
+       ρ::Function)
 </pre></div>
 
 
@@ -220,14 +219,14 @@
 <ul>
 <li><code>θ_pop::Matrix</code> last population</li>
 </ul>
-<p><a target='_blank' href='https://github.com/SamuelWiqvist/ApproximateBayesianComputation.jl/blob/e462f22d3194c7bcc5dec24708fc4385d8ca1ab8/src\abcpmc.jl#L29-L49' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/SamuelWiqvist/ApproximateBayesianComputation.jl/blob/11e7ea46ecbc940f49a425967cc88196de3162a6/src\abcpmc.jl#L29-L49' class='documenter-source'>source</a><br></p>
 <div class="codehilite"><pre><span></span><span class="nt">sample</span><span class="o">(</span><span class="nt">problem</span><span class="o">:</span><span class="nd">:ABCMCMC</span><span class="o">,</span>
-      <span class="nt">sample_from_prior</span><span class="o">:</span><span class="nd">:Function</span><span class="o">,</span>
-      <span class="nt">evaluate_prior</span><span class="o">:</span><span class="nd">:Function</span><span class="o">,</span>
-      <span class="nt">generate_data</span><span class="o">:</span><span class="nd">:Function</span><span class="o">,</span>
-      <span class="nt">calc_summary</span><span class="o">:</span><span class="nd">:Function</span><span class="o">,</span>
-      <span class="nt">ρ</span><span class="o">:</span><span class="nd">:Function</span><span class="o">;</span>
-      <span class="nt">kernel</span><span class="o">:</span><span class="nd">:Function</span> <span class="o">=</span> <span class="nt">uniform_kernel</span><span class="o">)</span>
+       <span class="nt">sample_from_prior</span><span class="o">:</span><span class="nd">:Function</span><span class="o">,</span>
+       <span class="nt">evaluate_prior</span><span class="o">:</span><span class="nd">:Function</span><span class="o">,</span>
+       <span class="nt">generate_data</span><span class="o">:</span><span class="nd">:Function</span><span class="o">,</span>
+       <span class="nt">calc_summary</span><span class="o">:</span><span class="nd">:Function</span><span class="o">,</span>
+       <span class="nt">ρ</span><span class="o">:</span><span class="nd">:Function</span><span class="o">;</span>
+       <span class="nt">kernel</span><span class="o">:</span><span class="nd">:Function</span> <span class="o">=</span> <span class="nt">uniform_kernel</span><span class="o">)</span>
 </pre></div>
 
 
@@ -246,7 +245,7 @@
 <ul>
 <li><code>chain::Matrix</code> the chain genrated by the ABC-MCMC algorithm</li>
 </ul>
-<p><a target='_blank' href='https://github.com/SamuelWiqvist/ApproximateBayesianComputation.jl/blob/e462f22d3194c7bcc5dec24708fc4385d8ca1ab8/src\abcmcmc.jl#L33-L55' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/SamuelWiqvist/ApproximateBayesianComputation.jl/blob/11e7ea46ecbc940f49a425967cc88196de3162a6/src\abcmcmc.jl#L33-L55' class='documenter-source'>source</a><br></p>
               
             </div>
           </div>

@@ -3,11 +3,11 @@ __precompile__(true)
 module ApproximateBayesianComputation
 
 # load packages
-using StatsBase, Distributions
+using StatsBase: var
+using Distributions
 
 # import sample
-import Distributions.sample
-import StatsBase.sample
+import StatsBase: sample
 
 # export functions and types
 export
@@ -32,7 +32,7 @@ export
 
 
 # load adaptive update parameters
-include("adaptive updating algorithms/adaptiveupdate.jl")
+include("adaptiveupdate.jl")
 
 
 # load soruce files for ABC algorithms and related methods

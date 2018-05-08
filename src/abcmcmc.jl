@@ -32,12 +32,12 @@ ABCMCMC(N::Integer, burn_in::Real, ϵ_seq::Vector, dim_unknown::Integer, θ_star
 # method
 """
     sample(problem::ABCMCMC,
-          sample_from_prior::Function,
-          evaluate_prior::Function,
-          generate_data::Function,
-          calc_summary::Function,
-          ρ::Function;
-          kernel::Function = uniform_kernel)
+           sample_from_prior::Function,
+           evaluate_prior::Function,
+           generate_data::Function,
+           calc_summary::Function,
+           ρ::Function;
+           kernel::Function = uniform_kernel)
 
 Sample from the approximate posterior distribtuion using ABC-MCMC.
 

@@ -29,11 +29,10 @@ ABCRS(N::Integer, ϵ::Real, data::Data, dim_unknown::Integer;
 # method
 """
     sample(problem::ABCRS,
-      sample_from_prior::Function,
-      generate_data::Function,
-      calc_summary::Function,
-      ρ::Function,
-      kernel::Function)
+           sample_from_prior::Function,
+           generate_data::Function,
+           calc_summary::Function,
+           ρ::Function)
 
 Sample from the approximate posterior distribtuion using ABC rejection sampling.
 
@@ -118,7 +117,7 @@ function sample(problem::ABCRS,
 
 end
 
-# help functions 
+# help functions
 
 function abcrsinterationats_at_core(dim_unknown::Integer,
                                   iter_at_core::Integer,

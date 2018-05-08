@@ -25,7 +25,7 @@ Type for defining a problem for the ABC-MCMC algorithm Parameters:
   * `print_interval::Integer` print interval for stats of algorithm (default value 1000)
 
 
-<a target='_blank' href='https://github.com/SamuelWiqvist/ApproximateBayesianComputation.jl/blob/e462f22d3194c7bcc5dec24708fc4385d8ca1ab8/src\abcmcmc.jl#L2-L15' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/SamuelWiqvist/ApproximateBayesianComputation.jl/blob/11e7ea46ecbc940f49a425967cc88196de3162a6/src\abcmcmc.jl#L2-L15' class='documenter-source'>source</a><br>
 
 
 <a id='Adaptive-tuning-of-the-proposal-distrbution-1'></a>
@@ -48,7 +48,7 @@ Parameters:
   * `Cov::Array{Real}` covaraince matrix
 
 
-<a target='_blank' href='https://github.com/SamuelWiqvist/ApproximateBayesianComputation.jl/blob/e462f22d3194c7bcc5dec24708fc4385d8ca1ab8/src\adaptive updating algorithms\adaptiveupdate.jl#L6-L14' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/SamuelWiqvist/ApproximateBayesianComputation.jl/blob/11e7ea46ecbc940f49a425967cc88196de3162a6/src\adaptiveupdate.jl#L6-L14' class='documenter-source'>source</a><br>
 
 <a id='ApproximateBayesianComputation.AMUpdate' href='#ApproximateBayesianComputation.AMUpdate'>#</a>
 **`ApproximateBayesianComputation.AMUpdate`** &mdash; *Type*.
@@ -70,5 +70,5 @@ Parameters:
   * `t_0::Integer`
 
 
-<a target='_blank' href='https://github.com/SamuelWiqvist/ApproximateBayesianComputation.jl/blob/e462f22d3194c7bcc5dec24708fc4385d8ca1ab8/src\adaptive updating algorithms\adaptiveupdate.jl#L19-L32' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/SamuelWiqvist/ApproximateBayesianComputation.jl/blob/11e7ea46ecbc940f49a425967cc88196de3162a6/src\adaptiveupdate.jl#L19-L32' class='documenter-source'>source</a><br>
 
