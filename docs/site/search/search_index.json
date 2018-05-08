@@ -67,42 +67,42 @@
         },
         {
             "location": "/sec/uniformkernel/",
-            "text": "Uniform kernel\n\n\n#\n\n\nApproximateBayesianComputation.uniform_kernel\n \u2014 \nFunction\n.\n\n\nuniform_kernel(s_star::Vector, s::Vector, \u03f5::Real, \u03c1::Function)\n\n\n\n\n\nThe Uniform kernel function.\n\n\nsource",
+            "text": "Uniform kernel\n\n\n#\n\n\nApproximateBayesianComputation.uniform_kernel\n \u2014 \nFunction\n.\n\n\nuniform_kernel(s_star::Vector, s::Vector, \u03f5::Real, \u03c1::Function)\n\n\n\n\n\nThe Uniform kernel function follows\n\n\nK^{\\text{Uniform}}_{\\epsilon}(\\rho(x,y)) = \\begin{cases}         1, \\text{if}, \\rho(x,y) \\le \\epsilon,         \\\n        0, \\text{otherwise}.         \\end{cases}\n\n\nsource",
             "title": "Uniform kernel"
         },
         {
             "location": "/sec/uniformkernel/#uniform-kernel",
-            "text": "#  ApproximateBayesianComputation.uniform_kernel  \u2014  Function .  uniform_kernel(s_star::Vector, s::Vector, \u03f5::Real, \u03c1::Function)  The Uniform kernel function.  source",
+            "text": "#  ApproximateBayesianComputation.uniform_kernel  \u2014  Function .  uniform_kernel(s_star::Vector, s::Vector, \u03f5::Real, \u03c1::Function)  The Uniform kernel function follows  K^{\\text{Uniform}}_{\\epsilon}(\\rho(x,y)) = \\begin{cases}         1, \\text{if}, \\rho(x,y) \\le \\epsilon,         \\\n        0, \\text{otherwise}.         \\end{cases}  source",
             "title": "Uniform kernel"
         },
         {
             "location": "/sec/gaussiankernel/",
-            "text": "Gaussian kernel\n\n\n#\n\n\nApproximateBayesianComputation.gaussian_kernel\n \u2014 \nFunction\n.\n\n\ngaussian_kernel(s_star::Vector, s::Vector, \u03f5::Real, \u03c1::Function)\n\n\n\n\n\nThe Gaussian kernel function.\n\n\nsource",
+            "text": "Gaussian kernel\n\n\n#\n\n\nApproximateBayesianComputation.gaussian_kernel\n \u2014 \nFunction\n.\n\n\ngaussian_kernel(s_star::Vector, s::Vector, \u03f5::Real, \u03c1::Function)\n\n\n\n\n\nThe Gaussian kernel function follows\n\n\n$K^{\\text{Gaussian}}\n{\\epsilon}(x,y) \\propto \\exp(-\\rho\n}(x,y)/2\\epsilon^2).$\n\n\nsource",
             "title": "Gaussian kernel"
         },
         {
             "location": "/sec/gaussiankernel/#gaussian-kernel",
-            "text": "#  ApproximateBayesianComputation.gaussian_kernel  \u2014  Function .  gaussian_kernel(s_star::Vector, s::Vector, \u03f5::Real, \u03c1::Function)  The Gaussian kernel function.  source",
+            "text": "#  ApproximateBayesianComputation.gaussian_kernel  \u2014  Function .  gaussian_kernel(s_star::Vector, s::Vector, \u03f5::Real, \u03c1::Function)  The Gaussian kernel function follows  $K^{\\text{Gaussian}} {\\epsilon}(x,y) \\propto \\exp(-\\rho }(x,y)/2\\epsilon^2).$  source",
             "title": "Gaussian kernel"
         },
         {
             "location": "/sec/euclideandist/",
-            "text": "Weighted Euclidean distance function\n\n\n#\n\n\nApproximateBayesianComputation.euclidean_dist\n \u2014 \nFunction\n.\n\n\neuclidean_dist(s_star::Vector, s::Vector, w::Vector)\n\n\n\n\n\nThe (weigthed) Euclidean distance function.\n\n\nsource",
+            "text": "Weighted Euclidean distance function\n\n\nThe (weighted) Euclidean distance function, computed as\n\n\n\n\n\n\\rho_{\\text{Euclidean}}(x, y ; w) = (x-y)^{\\transpose}\\text{diag}(1/w^2)(x-y).\n\n\n\n\n\nWhere $w$ is the weighting matrix.\n\n\n#\n\n\nApproximateBayesianComputation.euclidean_dist\n \u2014 \nFunction\n.\n\n\neuclidean_dist(s_star::Vector, s::Vector, w::Vector)\n\n\n\n\n\nThe (weigthed) Euclidean distance function, computed as\n\n\n$ \u03c1_{\\text{Euclidean}}(x, y ; w) = (x-y)^{\\transpose}\\text{diag}(1/w^2)(x-y).$\n\n\nWhere $w$ is the weighting matrix.\n\n\nsource",
             "title": "Weigthed Euclidena distance"
         },
         {
             "location": "/sec/euclideandist/#weighted-euclidean-distance-function",
-            "text": "#  ApproximateBayesianComputation.euclidean_dist  \u2014  Function .  euclidean_dist(s_star::Vector, s::Vector, w::Vector)  The (weigthed) Euclidean distance function.  source",
+            "text": "The (weighted) Euclidean distance function, computed as   \n\\rho_{\\text{Euclidean}}(x, y ; w) = (x-y)^{\\transpose}\\text{diag}(1/w^2)(x-y).   Where $w$ is the weighting matrix.  #  ApproximateBayesianComputation.euclidean_dist  \u2014  Function .  euclidean_dist(s_star::Vector, s::Vector, w::Vector)  The (weigthed) Euclidean distance function, computed as  $ \u03c1_{\\text{Euclidean}}(x, y ; w) = (x-y)^{\\transpose}\\text{diag}(1/w^2)(x-y).$  Where $w$ is the weighting matrix.  source",
             "title": "Weighted Euclidean distance function"
         },
         {
             "location": "/sec/gaussiankerneldist/",
-            "text": "Gaussian kernel distance function\n\n\n#\n\n\nApproximateBayesianComputation.gaussian_kernel_dist\n \u2014 \nFunction\n.\n\n\ngaussian_kernel_dist(s_star::Vector, s::Vector, w::Vector)\n\n\n\n\n\nThe Gaussian kernel distance function.\n\n\nsource",
+            "text": "Gaussian kernel distance function\n\n\n#\n\n\nApproximateBayesianComputation.gaussian_kernel_dist\n \u2014 \nFunction\n.\n\n\ngaussian_kernel_dist(s_star::Vector, s::Vector, w::Vector)\n\n\n\n\n\nThe Gaussian kernel distance function.\n\n\n$\u03c1_{\\text{Gaussian}}(x, y ; \u03a3) = (x-y)^{\\transpose}\\Sigma^{-1}(x-y).$\n\n\nWhere $\u03a3$ is the covariance matrix.\n\n\nsource",
             "title": "Gaussian kernel distance"
         },
         {
             "location": "/sec/gaussiankerneldist/#gaussian-kernel-distance-function",
-            "text": "#  ApproximateBayesianComputation.gaussian_kernel_dist  \u2014  Function .  gaussian_kernel_dist(s_star::Vector, s::Vector, w::Vector)  The Gaussian kernel distance function.  source",
+            "text": "#  ApproximateBayesianComputation.gaussian_kernel_dist  \u2014  Function .  gaussian_kernel_dist(s_star::Vector, s::Vector, w::Vector)  The Gaussian kernel distance function.  $\u03c1_{\\text{Gaussian}}(x, y ; \u03a3) = (x-y)^{\\transpose}\\Sigma^{-1}(x-y).$  Where $\u03a3$ is the covariance matrix.  source",
             "title": "Gaussian kernel distance function"
         },
         {

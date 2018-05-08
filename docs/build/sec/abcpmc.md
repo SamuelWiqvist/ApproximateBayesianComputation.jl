@@ -24,5 +24,5 @@ Parameters:
   * `print_interval::Integer` print state of algorithm at every `print_interval`th iteration (default value 1000)
 
 
-<a target='_blank' href='https://github.com/SamuelWiqvist/ApproximateBayesianComputation.jl/blob/11e7ea46ecbc940f49a425967cc88196de3162a6/src\abcpmc.jl#L2-L14' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/SamuelWiqvist/ApproximateBayesianComputation.jl/blob/f39fb4d489dbf9adefa5fe467339f80e3aa7837c/src\abcpmc.jl#L2-L14' class='documenter-source'>source</a><br>
 

@@ -14,6 +14,10 @@ gaussian_kernel_dist(s_star::Vector, s::Vector, w::Vector)
 
 The Gaussian kernel distance function.
 
+$ρ_{\text{Gaussian}}(x, y ; Σ) = (x-y)^{\transpose}\Sigma^{-1}(x-y).$
 
-<a target='_blank' href='https://github.com/SamuelWiqvist/ApproximateBayesianComputation.jl/blob/11e7ea46ecbc940f49a425967cc88196de3162a6/src\distancefunctions.jl#L16' class='documenter-source'>source</a><br>
+Where $Σ$ is the covariance matrix.
+
+
+<a target='_blank' href='https://github.com/SamuelWiqvist/ApproximateBayesianComputation.jl/blob/f39fb4d489dbf9adefa5fe467339f80e3aa7837c/src\distancefunctions.jl#L20' class='documenter-source'>source</a><br>
 

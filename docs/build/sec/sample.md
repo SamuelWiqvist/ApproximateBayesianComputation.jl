@@ -31,7 +31,7 @@ Output:
   * `samples_approx_posterior::Matrix` samples from the approxiamte posterior
 
 
-<a target='_blank' href='https://github.com/SamuelWiqvist/ApproximateBayesianComputation.jl/blob/11e7ea46ecbc940f49a425967cc88196de3162a6/src\abcrs.jl#L30-L48' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/SamuelWiqvist/ApproximateBayesianComputation.jl/blob/f39fb4d489dbf9adefa5fe467339f80e3aa7837c/src\abcrs.jl#L30-L48' class='documenter-source'>source</a><br>
 
 
 ```
@@ -58,7 +58,7 @@ Output:
   * `θ_pop::Matrix` last population
 
 
-<a target='_blank' href='https://github.com/SamuelWiqvist/ApproximateBayesianComputation.jl/blob/11e7ea46ecbc940f49a425967cc88196de3162a6/src\abcpmc.jl#L29-L49' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/SamuelWiqvist/ApproximateBayesianComputation.jl/blob/f39fb4d489dbf9adefa5fe467339f80e3aa7837c/src\abcpmc.jl#L29-L49' class='documenter-source'>source</a><br>
 
 
 ```
@@ -88,5 +88,5 @@ Output:
   * `chain::Matrix` the chain genrated by the ABC-MCMC algorithm
 
 
-<a target='_blank' href='https://github.com/SamuelWiqvist/ApproximateBayesianComputation.jl/blob/11e7ea46ecbc940f49a425967cc88196de3162a6/src\abcmcmc.jl#L33-L55' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/SamuelWiqvist/ApproximateBayesianComputation.jl/blob/f39fb4d489dbf9adefa5fe467339f80e3aa7837c/src\abcmcmc.jl#L33-L55' class='documenter-source'>source</a><br>
 

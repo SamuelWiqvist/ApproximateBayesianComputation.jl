@@ -1,7 +1,16 @@
 doc"""
     uniform_kernel(s_star::Vector, s::Vector, ϵ::Real, ρ::Function)
 
-The Uniform kernel function.
+The Uniform kernel function follows
+
+``
+K^{\text{Uniform}}_{\epsilon}(\rho(x,y)) = \begin{cases}
+        1, \text{if}, \rho(x,y) \le \epsilon,
+        \\
+        0, \text{otherwise}.
+        \end{cases}
+``
+
 """
 function uniform_kernel(s_star::Vector, s::Vector, ϵ::Real, ρ::Function)
 
@@ -16,7 +25,10 @@ end
 doc"""
     gaussian_kernel(s_star::Vector, s::Vector, ϵ::Real, ρ::Function)
 
-The Gaussian kernel function.
+The Gaussian kernel function follows
+
+``K^{\text{Gaussian}}_{\epsilon}(x,y) \propto \exp(-\rho_{\text{Gaussian}}(x,y)/2\epsilon^2).``
+
 """
 function gaussian_kernel(s_star::Vector, s::Vector, ϵ::Real, ρ::Function)
 
