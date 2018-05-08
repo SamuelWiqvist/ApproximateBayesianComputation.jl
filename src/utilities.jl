@@ -1,4 +1,3 @@
-
 # log pdf for commonly used distributions
 
 doc"""

@@ -3,11 +3,11 @@ __precompile__(true)
 module ApproximateBayesianComputation
 
 # load packages
-using StatsBase, Distributions
+using StatsBase: var
+using Distributions
 
 # import sample
-import Distributions.sample
-import StatsBase.sample
+import StatsBase: sample
 
 # export functions and types
 export
@@ -23,16 +23,16 @@ export
   gaussian_kernel_dist,
   uniform_kernel, # kernels
   gaussian_kernel,
-  calcquantileint, # posterior inference
+  quantile_interval, # posterior inference
   loss,
   log_unifpdf, # log pdfs
 
   AMUpdate, # adaptive updating algorithms for ABC-MCMC
-  noAdaptation
+  FixedKernel
 
 
 # load adaptive update parameters
-include("adaptive updating algorithms/adaptiveupdate.jl")
+include("adaptiveupdate.jl")
 
 
 # load soruce files for ABC algorithms and related methods
@@ -62,7 +62,7 @@ Kernels:
 Distance functions:
 * (Weighted) euclidean_dist distance
 
-Posterior inference checks are also provided see ```?calcquantileint``` and ```?loss```.
+Posterior inference checks are also provided see ```?quantile_interval``` and ```?loss```.
 
 
 ## Minimal working example
@@ -129,7 +129,7 @@ approx_posterior_samples = sample(problem,
 Check posterior quantile interval.
 
 ```julia
-posterior_quantile_interval = calcquantileint(approx_posterior_samples)
+posterior_quantile_interval = quantile_interval(approx_posterior_samples)
 ```
 
 

@@ -28,14 +28,14 @@ ABCPMC(T::Integer, N::Integer,ϵ_seq::Vector, data::Data, dim_unknown::Integer; 
 # method
 """
     sample(problem::ABCPMC,
-        sample_from_prior::Function,
-        evaluate_prior::Function,
-        generate_data::Function,
-        calc_summary::Function,
-        ρ::Function)
+           sample_from_prior::Function,
+           evaluate_prior::Function,
+           generate_data::Function,
+           calc_summary::Function,
+           ρ::Function)
 
 Sample from the approximate posterior distribtuion using PMC-ABC algorithm
-described in Adaptive approximate Bayesian computation< http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.313.3573&rep=rep1&type=pdf.
+described in *Adaptive approximate Bayesian computation* [http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.313.3573&rep=rep1&type=pdf](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.313.3573&rep=rep1&type=pdf).
 
 Input:
 - `problem::ABCPMC` problem
@@ -96,16 +96,16 @@ function sample(problem::ABCPMC,
 
   # set start population (in parallel)
   @parallel for i = 1:N_cores
-    θ_pop_parallel[:,:,i], accaptance_rate[i] = ABCPMCstartvalatcores(sample_from_prior,
-                                                                      generate_data,
-                                                                      calc_summary,
-                                                                      ρ,
-                                                                      dim_unknown,
-                                                                      N,
-                                                                      N_cores,
-                                                                      ϵ_seq[1],
-                                                                      y,
-                                                                      s)
+    θ_pop_parallel[:,:,i], accaptance_rate[i] = abcpmc_startval_at_cores(sample_from_prior,
+                                                                         generate_data,
+                                                                         calc_summary,
+                                                                         ρ,
+                                                                         dim_unknown,
+                                                                         N,
+                                                                         N_cores,
+                                                                         ϵ_seq[1],
+                                                                         y,
+                                                                         s)
   end
 
   end
@@ -138,18 +138,18 @@ function sample(problem::ABCPMC,
 
     # update population (in parallel)
     @parallel for i = 1:N_cores
-      θ_pop_parallel[:,:,i], accaptance_rate[i] = ABCPMCpropatcores(w_old,
-                                                                    θ_pop_old,
-                                                                    τ_2,
-                                                                    dim_unknown,
-                                                                    s,
-                                                                    ϵ_seq[t],
-                                                                    N,
-                                                                    N_cores,
-                                                                    generate_data,
-                                                                    calc_summary,
-                                                                    ρ,
-                                                                    y)
+      θ_pop_parallel[:,:,i], accaptance_rate[i] = abcpmc_prop_at_cores(w_old,
+                                                                       θ_pop_old,
+                                                                       τ_2,
+                                                                       dim_unknown,
+                                                                       s,
+                                                                       ϵ_seq[t],
+                                                                       N,
+                                                                       N_cores,
+                                                                       generate_data,
+                                                                       calc_summary,
+                                                                       ρ,
+                                                                       y)
     end
 
     end
@@ -185,17 +185,9 @@ end
 
 # help functions
 
-"""
-    ABCPMCstartvalatcores(sample_from_prior::Function,
-                          generate_data::Function,
-                          calc_summary::Funciton,
-                          N::Integer,
-                          N_cores::Integer)
-
-Runs the first iteration of the PMC-SMC algorithm for N/N_cores particels,
-in parallel at N_cores cores.
-"""
-function ABCPMCstartvalatcores(sample_from_prior::Function,
+# Runs the first iteration of the PMC-SMC algorithm for N/N_cores particels,
+# in parallel at N_cores cores.
+function abcpmc_startval_at_cores(sample_from_prior::Function,
                                generate_data::Function,
                                calc_summary::Function,
                                ρ::Function,
@@ -227,22 +219,8 @@ function ABCPMCstartvalatcores(sample_from_prior::Function,
 
 end
 
-"""
-    ABCPMCpropatcores(w_old::Vector,
-                      θ_pop_old::Matrix,
-                      τ_2::Vector,
-                      dim_unknown::Integer,
-                      s::Vector,
-                      ϵ_val::Real,
-                      N::Integer,
-                      N_cores::Integer,
-                      sample_from_prior::Function,
-                      generate_data::Function,
-                      calc_summary::Function)
-
-Updates the population for N/N_cores particels in parallel at N_cores cores.
-"""
-function ABCPMCpropatcores(w_old::Vector,
+# Updates the population for N/N_cores particels in parallel at N_cores cores.
+function abcpmc_prop_at_cores(w_old::Vector,
                            θ_pop_old::Base.ReshapedArray,
                            τ_2::Vector,
                            dim_unknown::Integer,

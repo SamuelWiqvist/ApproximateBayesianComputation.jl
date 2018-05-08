@@ -1,6 +1,6 @@
 # [![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/SamuelWiqvist/ApproximateBayesianComputation.jl/master) Approximate Bayesian Computation in Julia
 
-![![Build Status](https://travis-ci.org/SamuelWiqvist/ApproximateBayesianComputation.jl.svg?branch=master)](https://travis-ci.org/SamuelWiqvist/ApproximateBayesianComputation.jl) [![Build status](https://ci.appveyor.com/api/projects/status/6iukm6um8355uldi?svg=true)](https://ci.appveyor.com/project/SamuelWiqvist/approximatebayesiancomputation-jl)[![Coverage Status](https://coveralls.io/repos/github/SamuelWiqvist/ApproximateBayesianComputation.jl/badge.svg)](https://coveralls.io/github/SamuelWiqvist/ApproximateBayesianComputation.jl)[![codecov](https://codecov.io/gh/SamuelWiqvist/ApproximateBayesianComputation.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/SamuelWiqvist/ApproximateBayesianComputation.jl)
+[![Build Status](https://travis-ci.org/SamuelWiqvist/ApproximateBayesianComputation.jl.svg?branch=master)](https://travis-ci.org/SamuelWiqvist/ApproximateBayesianComputation.jl) [![Build status](https://ci.appveyor.com/api/projects/status/6iukm6um8355uldi?svg=true)](https://ci.appveyor.com/project/SamuelWiqvist/approximatebayesiancomputation-jl)[![Coverage Status](https://coveralls.io/repos/github/SamuelWiqvist/ApproximateBayesianComputation.jl/badge.svg)](https://coveralls.io/github/SamuelWiqvist/ApproximateBayesianComputation.jl)[![codecov](https://codecov.io/gh/SamuelWiqvist/ApproximateBayesianComputation.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/SamuelWiqvist/ApproximateBayesianComputation.jl)
 
 This repository contains some Approximate Bayesian computation algorithms.
 
@@ -18,8 +18,9 @@ Kernels:
 Distance function(s):
 * (Weighted) Euclidean distance
 
-Posterior inference checks are also provided see ```?calcquantileint``` and ```?loss```.
+Posterior inference checks are also provided see ```?quantile_interval``` and ```?loss```.
 
+* **Documentation:**  [https://samuelwiqvist.github.io/ApproximateBayesianComputation.jl/](https://samuelwiqvist.github.io/ApproximateBayesianComputation.jl/).
 
 ## Minimal working example
 
@@ -85,7 +86,7 @@ approx_posterior_samples = sample(problem,
 Check posterior quantile interval.
 
 ```julia
-posterior_quantile_interval = calcquantileint(approx_posterior_samples)
+posterior_quantile_interval = quantile_interval(approx_posterior_samples)
 ```
 
 Posterior and prior distribution.

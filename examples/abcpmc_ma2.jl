@@ -115,7 +115,7 @@ approx_posterior_samples = @time sample(problem,
                                         ρ)
 
 # calc posterior quantile interval
-posterior_quantile_interval = calcquantileint(approx_posterior_samples)
+posterior_quantile_interval = quantile_interval(approx_posterior_samples)
 
 # Plot posterior
 PyPlot.figure()

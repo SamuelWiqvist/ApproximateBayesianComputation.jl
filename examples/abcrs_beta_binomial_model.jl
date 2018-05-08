@@ -52,7 +52,7 @@ approx_posterior_samples = @time sample(problem,
                                         ρ)
 
 # calc posterior quantile interval
-posterior_quantile_interval = calcquantileint(approx_posterior_samples, print_on = true)
+posterior_quantile_interval = quantile_interval(approx_posterior_samples, print_on = true)
 
 # calc kernel density est. for approxiamte posterior
 kde_approx_posterior = kde(approx_posterior_samples[:])

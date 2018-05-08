@@ -29,11 +29,10 @@ ABCRS(N::Integer, ϵ::Real, data::Data, dim_unknown::Integer;
 # method
 """
     sample(problem::ABCRS,
-      sample_from_prior::Function,
-      generate_data::Function,
-      calc_summary::Function,
-      ρ::Function,
-      kernel::Function)
+           sample_from_prior::Function,
+           generate_data::Function,
+           calc_summary::Function,
+           ρ::Function)
 
 Sample from the approximate posterior distribtuion using ABC rejection sampling.
 
@@ -86,16 +85,16 @@ function sample(problem::ABCRS,
   @sync begin
 
   @parallel for n_cores = 1:N_cores
-    samples_approx_posterior[:,:,n_cores] = abcrsinterationatsatcore(dim_unknown,
-                                                                     div(N,N_cores),
-                                                                     print_interval,
-                                                                     y,
-                                                                     s,
-                                                                     ϵ,
-                                                                     sample_from_prior,
-                                                                     generate_data,
-                                                                     calc_summary,
-                                                                     ρ)
+    samples_approx_posterior[:,:,n_cores] = abcrsinterationats_at_core(dim_unknown,
+                                                                       div(N,N_cores),
+                                                                       print_interval,
+                                                                       y,
+                                                                       s,
+                                                                       ϵ,
+                                                                       sample_from_prior,
+                                                                       generate_data,
+                                                                       calc_summary,
+                                                                       ρ)
   end
 
   end
@@ -118,8 +117,9 @@ function sample(problem::ABCRS,
 
 end
 
+# help functions
 
-function abcrsinterationatsatcore(dim_unknown::Integer,
+function abcrsinterationats_at_core(dim_unknown::Integer,
                                   iter_at_core::Integer,
                                   print_interval::Integer,
                                   y::Array,
@@ -143,7 +143,7 @@ function abcrsinterationatsatcore(dim_unknown::Integer,
     y_star = generate_data(θ_star)
     s_star = calc_summary(y_star,y)
 
-    accept =  uniform_kernel(s_star, s, ϵ, ρ) == 1. 
+    accept =  uniform_kernel(s_star, s, ϵ, ρ) == 1.
 
     if accept
       samples_approx_posterior[:,n] = θ_star
