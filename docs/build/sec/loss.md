@@ -15,15 +15,9 @@ loss(theta_true::Vector, theta_est::Vector)
 Computes the loss for the parameter estimations.
 
 
-<a target='_blank' href='https://github.com/SamuelWiqvist/ApproximateBayesianComputation.jl/blob/f39fb4d489dbf9adefa5fe467339f80e3aa7837c/src\posteriorinference.jl#L58' class='documenter-source'>source</a><br>
-
-
 ```
 loss(theta_true::Real, theta_est::Real)
 ```
 
-Computes the loss for the parameter estimations.
-
-
-<a target='_blank' href='https://github.com/SamuelWiqvist/ApproximateBayesianComputation.jl/blob/f39fb4d489dbf9adefa5fe467339f80e3aa7837c/src\posteriorinference.jl#L72' class='documenter-source'>source</a><br>
+Computes the loss for the parameter estimation.
 

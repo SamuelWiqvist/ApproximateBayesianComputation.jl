@@ -1,7 +1,9 @@
 # type
 """
-Type for defining a problem for the ABC-MCMC algorithm
+Type for defining a problem for the ABC-MCMC algorithm.
+
 Parameters:
+
 - `N::Integer` nbr of iterations
 - `burn_in::Integer` length for burn-in
 - `ϵ_seq::Vector` sequence of threshold values

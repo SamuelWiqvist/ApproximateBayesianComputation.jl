@@ -180,8 +180,13 @@
 
 
 <p>The Gaussian kernel function follows</p>
-<p>$K^{\text{Gaussian}}<em _text_Gaussian="\text{Gaussian">{\epsilon}(x,y) \propto \exp(-\rho</em>}(x,y)/2\epsilon^2).$</p>
-<p><a target='_blank' href='https://github.com/SamuelWiqvist/ApproximateBayesianComputation.jl/blob/f39fb4d489dbf9adefa5fe467339f80e3aa7837c/src\kernels.jl#L25' class='documenter-source'>source</a><br></p>
+<p>
+<script type="math/tex; mode=display">
+K^{\text{Gaussian}}_{\epsilon}(x,y) \propto \exp(-\rho(x,y)/2\epsilon^2).
+</script>
+</p>
+<p>Where ϵ is the threshold and ρ the distance function.</p>
+<p>The distance function ρ can be set to <code>gaussian_kernel_dist</code> where the summary statistics are weigthed according to a covariance matrix. But other distance functions can also be used.</p>
               
             </div>
           </div>

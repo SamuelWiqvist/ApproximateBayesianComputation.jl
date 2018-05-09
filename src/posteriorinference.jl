@@ -72,7 +72,7 @@ end
 doc"""
     loss(theta_true::Real, theta_est::Real)
 
-Computes the loss for the parameter estimations.
+Computes the loss for the parameter estimation.
 """
 function loss(theta_true::Real, theta_est::Real)
   return abs(theta_true-theta_est)

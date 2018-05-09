@@ -3,14 +3,15 @@ doc"""
 
 The Uniform kernel function follows
 
-``
+```math
 K^{\text{Uniform}}_{\epsilon}(\rho(x,y)) = \begin{cases}
         1, \text{if}, \rho(x,y) \le \epsilon,
         \\
         0, \text{otherwise}.
         \end{cases}
-``
+```
 
+Where ϵ is the threshold and ρ the distance function.
 """
 function uniform_kernel(s_star::Vector, s::Vector, ϵ::Real, ρ::Function)
 
@@ -27,8 +28,14 @@ doc"""
 
 The Gaussian kernel function follows
 
-``K^{\text{Gaussian}}_{\epsilon}(x,y) \propto \exp(-\rho_{\text{Gaussian}}(x,y)/2\epsilon^2).``
+```math
+K^{\text{Gaussian}}_{\epsilon}(x,y) \propto \exp(-\rho(x,y)/2\epsilon^2).
+```
+Where ϵ is the threshold and ρ the distance function.
 
+The distance function ρ can be set to `gaussian_kernel_dist` where the summary
+statistics are weigthed according to a covariance matrix. But other distance
+functions can also be used.
 """
 function gaussian_kernel(s_star::Vector, s::Vector, ϵ::Real, ρ::Function)
 

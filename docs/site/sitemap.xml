@@ -4,7 +4,7 @@
     
     <url>
      <loc>/</loc>
-     <lastmod>2018-05-08</lastmod>
+     <lastmod>2018-05-09</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -12,7 +12,7 @@
     
     <url>
      <loc>/examples/ex1/</loc>
-     <lastmod>2018-05-08</lastmod>
+     <lastmod>2018-05-09</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -21,25 +21,25 @@
         
     <url>
      <loc>/sec/abcrs/</loc>
-     <lastmod>2018-05-08</lastmod>
+     <lastmod>2018-05-09</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/sec/abcmcmc/</loc>
-     <lastmod>2018-05-08</lastmod>
+     <lastmod>2018-05-09</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/sec/abcpmc/</loc>
-     <lastmod>2018-05-08</lastmod>
+     <lastmod>2018-05-09</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/sec/sample/</loc>
-     <lastmod>2018-05-08</lastmod>
+     <lastmod>2018-05-09</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -49,13 +49,13 @@
         
     <url>
      <loc>/sec/uniformkernel/</loc>
-     <lastmod>2018-05-08</lastmod>
+     <lastmod>2018-05-09</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/sec/gaussiankernel/</loc>
-     <lastmod>2018-05-08</lastmod>
+     <lastmod>2018-05-09</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -65,13 +65,13 @@
         
     <url>
      <loc>/sec/euclideandist/</loc>
-     <lastmod>2018-05-08</lastmod>
+     <lastmod>2018-05-09</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/sec/gaussiankerneldist/</loc>
-     <lastmod>2018-05-08</lastmod>
+     <lastmod>2018-05-09</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -81,13 +81,13 @@
         
     <url>
      <loc>/sec/quantint/</loc>
-     <lastmod>2018-05-08</lastmod>
+     <lastmod>2018-05-09</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/sec/loss/</loc>
-     <lastmod>2018-05-08</lastmod>
+     <lastmod>2018-05-09</lastmod>
      <changefreq>daily</changefreq>
     </url>
         

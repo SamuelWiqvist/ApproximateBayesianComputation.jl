@@ -57,5 +57,5 @@ julia> approx_posterior_samples = sample(problem,
 Check posterior quantile interval.
 
 ```julia
-posterior_quantile_interval = quantile_interval(approx_posterior_samples)
+julia> posterior_quantile_interval = quantile_interval(approx_posterior_samples)
 ```
