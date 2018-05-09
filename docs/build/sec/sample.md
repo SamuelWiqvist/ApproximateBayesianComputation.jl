@@ -3,8 +3,14 @@
 
 # Sample
 
-<a id='StatsBase.sample' href='#StatsBase.sample'>#</a>
-**`StatsBase.sample`** &mdash; *Function*.
+
+`sample` is a multimethod function with one implementation for each algorithm.
+
+
+Sample method for `ABCRS`.
+
+<a id='StatsBase.sample-Tuple{ApproximateBayesianComputation.ABCRS,Function,Function,Function,Function}' href='#StatsBase.sample-Tuple{ApproximateBayesianComputation.ABCRS,Function,Function,Function,Function}'>#</a>
+**`StatsBase.sample`** &mdash; *Method*.
 
 
 
@@ -31,34 +37,11 @@ Output:
   * `samples_approx_posterior::Matrix` samples from the approxiamte posterior
 
 
-<a target='_blank' href='https://github.com/SamuelWiqvist/ApproximateBayesianComputation.jl/blob/11e7ea46ecbc940f49a425967cc88196de3162a6/src\abcrs.jl#L30-L48' class='documenter-source'>source</a><br>
+Sample method for `ABCMCMC`.
 
+<a id='StatsBase.sample-Tuple{ApproximateBayesianComputation.ABCMCMC,Function,Function,Function,Function,Function}' href='#StatsBase.sample-Tuple{ApproximateBayesianComputation.ABCMCMC,Function,Function,Function,Function,Function}'>#</a>
+**`StatsBase.sample`** &mdash; *Method*.
 
-```
-sample(problem::ABCPMC,
-       sample_from_prior::Function,
-       evaluate_prior::Function,
-       generate_data::Function,
-       calc_summary::Function,
-       ρ::Function)
-```
-
-Sample from the approximate posterior distribtuion using PMC-ABC algorithm described in *Adaptive approximate Bayesian computation* [http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.313.3573&rep=rep1&type=pdf](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.313.3573&rep=rep1&type=pdf).
-
-Input:
-
-  * `problem::ABCPMC` problem
-  * `sample_from_prior::Function` function to sample from the prior
-  * `generate_data::Function` function to generate data from the model
-  * `calc_summary::Function` function to calculate summary statistics
-  * `ρ::Function` the distance function
-
-Output:
-
-  * `θ_pop::Matrix` last population
-
-
-<a target='_blank' href='https://github.com/SamuelWiqvist/ApproximateBayesianComputation.jl/blob/11e7ea46ecbc940f49a425967cc88196de3162a6/src\abcpmc.jl#L29-L49' class='documenter-source'>source</a><br>
 
 
 ```
@@ -88,5 +71,33 @@ Output:
   * `chain::Matrix` the chain genrated by the ABC-MCMC algorithm
 
 
-<a target='_blank' href='https://github.com/SamuelWiqvist/ApproximateBayesianComputation.jl/blob/11e7ea46ecbc940f49a425967cc88196de3162a6/src\abcmcmc.jl#L33-L55' class='documenter-source'>source</a><br>
+Sample method for `ABCPMC`.
+
+<a id='StatsBase.sample-Tuple{ApproximateBayesianComputation.ABCPMC,Function,Function,Function,Function,Function}' href='#StatsBase.sample-Tuple{ApproximateBayesianComputation.ABCPMC,Function,Function,Function,Function,Function}'>#</a>
+**`StatsBase.sample`** &mdash; *Method*.
+
+
+
+```
+sample(problem::ABCPMC,
+       sample_from_prior::Function,
+       evaluate_prior::Function,
+       generate_data::Function,
+       calc_summary::Function,
+       ρ::Function)
+```
+
+Sample from the approximate posterior distribtuion using PMC-ABC algorithm described in *Adaptive approximate Bayesian computation* [http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.313.3573&rep=rep1&type=pdf](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.313.3573&rep=rep1&type=pdf).
+
+Input:
+
+  * `problem::ABCPMC` problem
+  * `sample_from_prior::Function` function to sample from the prior
+  * `generate_data::Function` function to generate data from the model
+  * `calc_summary::Function` function to calculate summary statistics
+  * `ρ::Function` the distance function
+
+Output:
+
+  * `θ_pop::Matrix` last population
 

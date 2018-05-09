@@ -12,8 +12,15 @@
 uniform_kernel(s_star::Vector, s::Vector, ϵ::Real, ρ::Function)
 ```
 
-The Uniform kernel function.
+The Uniform kernel function follows
 
+$$
+K^{\text{Uniform}}_{\epsilon}(\rho(x,y)) = \begin{cases}
+        1, \text{if}, \rho(x,y) \le \epsilon,
+        \\
+        0, \text{otherwise}.
+        \end{cases}
+$$
 
-<a target='_blank' href='https://github.com/SamuelWiqvist/ApproximateBayesianComputation.jl/blob/11e7ea46ecbc940f49a425967cc88196de3162a6/src\kernels.jl#L1' class='documenter-source'>source</a><br>
+Where ϵ is the threshold and ρ the distance function.
 

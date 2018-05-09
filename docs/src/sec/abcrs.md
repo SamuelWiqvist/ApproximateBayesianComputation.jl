@@ -1,4 +1,4 @@
-# ABC rejections sampling
+# ABC rejection sampling
 
 ABC-RS object.
 

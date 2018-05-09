@@ -179,8 +179,14 @@
 </pre></div>
 
 
-<p>The Gaussian kernel function.</p>
-<p><a target='_blank' href='https://github.com/SamuelWiqvist/ApproximateBayesianComputation.jl/blob/11e7ea46ecbc940f49a425967cc88196de3162a6/src\kernels.jl#L16' class='documenter-source'>source</a><br></p>
+<p>The Gaussian kernel function follows</p>
+<p>
+<script type="math/tex; mode=display">
+K^{\text{Gaussian}}_{\epsilon}(x,y) \propto \exp(-\rho(x,y)/2\epsilon^2).
+</script>
+</p>
+<p>Where ϵ is the threshold and ρ the distance function.</p>
+<p>The distance function ρ can be set to <code>gaussian_kernel_dist</code> where the summary statistics are weigthed according to a covariance matrix. But other distance functions can also be used.</p>
               
             </div>
           </div>

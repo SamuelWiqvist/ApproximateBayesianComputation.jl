@@ -12,8 +12,11 @@
 euclidean_dist(s_star::Vector, s::Vector, w::Vector)
 ```
 
-The (weigthed) Euclidean distance function.
+The (weigthed) Euclidean distance function, computed as
 
+$$
+ρ_{\text{Euclidean}}(x, y ; w) = (x-y)^{T}\text{diag}(1/w^2)(x-y).
+$$
 
-<a target='_blank' href='https://github.com/SamuelWiqvist/ApproximateBayesianComputation.jl/blob/11e7ea46ecbc940f49a425967cc88196de3162a6/src\distancefunctions.jl#L2' class='documenter-source'>source</a><br>
+Where w is the weighting matrix.
 

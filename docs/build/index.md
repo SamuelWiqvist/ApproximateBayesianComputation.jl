@@ -26,4 +26,5 @@ Distance function(s):
 
 
   * (Weighted) Euclidean distance
+  * Gaussian kernel distance
 

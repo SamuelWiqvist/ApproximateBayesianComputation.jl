@@ -2,49 +2,48 @@ __precompile__(true)
 
 module ApproximateBayesianComputation
 
-# load packages
-using StatsBase: var
-using Distributions
+  # load packages
+  using StatsBase
+  using Distributions
 
-# import sample
-import StatsBase: sample
+  # import sample
+  import StatsBase: sample
 
-# export functions and types
-export
-  # types
-  ABCRS,
-  ABCMCMC,
-  ABCPMC,
-  Data,
+  # export functions and types
+  export
+    # types
+    ABCRS,
+    ABCMCMC,
+    ABCPMC,
+    Data,
 
-  # methods
-  sample, # algorithms
-  euclidean_dist, # distance functions
-  gaussian_kernel_dist,
-  uniform_kernel, # kernels
-  gaussian_kernel,
-  quantile_interval, # posterior inference
-  loss,
-  log_unifpdf, # log pdfs
+    # methods
+    sample, # algorithms
+    euclidean_dist, # distance functions
+    gaussian_kernel_dist,
+    uniform_kernel, # kernels
+    gaussian_kernel,
+    quantile_interval, # posterior inference
+    loss,
+    log_unifpdf, # log pdfs
 
-  AMUpdate, # adaptive updating algorithms for ABC-MCMC
-  FixedKernel
-
-
-# load adaptive update parameters
-include("adaptiveupdate.jl")
+    AMUpdate, # adaptive updating algorithms for ABC-MCMC
+    FixedKernel
 
 
-# load soruce files for ABC algorithms and related methods
-include("types.jl")  # types
-include("abcrs.jl") # algorithms
-include("abcpmc.jl")
-include("abcmcmc.jl")
-include("distancefunctions.jl") # distance functions
-include("kernels.jl") # kernels
-include("posteriorinference.jl") # posterior inference functions
-include("utilities.jl") # log pdfs and other useful functions
+  # load adaptive update parameters
+  include("adaptiveupdate.jl")
 
+
+  # load soruce files for ABC algorithms and related methods
+  include("types.jl")  # types
+  include("abcrs.jl") # algorithms
+  include("abcpmc.jl")
+  include("abcmcmc.jl")
+  include("distancefunctions.jl") # distance functions
+  include("kernels.jl") # kernels
+  include("posteriorinference.jl") # posterior inference functions
+  include("utilities.jl") # log pdfs and other useful functions
 
 
 """
@@ -61,6 +60,7 @@ Kernels:
 
 Distance functions:
 * (Weighted) euclidean_dist distance
+* Gaussian kernel distance
 
 Posterior inference checks are also provided see ```?quantile_interval``` and ```?loss```.
 

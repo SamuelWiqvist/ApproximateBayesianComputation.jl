@@ -11,7 +11,9 @@ ABC-MCMC object.
 
 
 
-Type for defining a problem for the ABC-MCMC algorithm Parameters:
+Type for defining a problem for the ABC-MCMC algorithm
+
+Parameters:
 
   * `N::Integer` nbr of iterations
   * `burn_in::Integer` length for burn-in
@@ -23,9 +25,6 @@ Type for defining a problem for the ABC-MCMC algorithm Parameters:
   * `adaptive_update::AdaptationAlgorithm` adaptive updating algorithm for the proposal distribtuion
   * `algorithm_type::String` type of ABC algorithm (original or general, default value original)
   * `print_interval::Integer` print interval for stats of algorithm (default value 1000)
-
-
-<a target='_blank' href='https://github.com/SamuelWiqvist/ApproximateBayesianComputation.jl/blob/11e7ea46ecbc940f49a425967cc88196de3162a6/src\abcmcmc.jl#L2-L15' class='documenter-source'>source</a><br>
 
 
 <a id='Adaptive-tuning-of-the-proposal-distrbution-1'></a>
@@ -47,9 +46,6 @@ Parameters:
 
   * `Cov::Array{Real}` covaraince matrix
 
-
-<a target='_blank' href='https://github.com/SamuelWiqvist/ApproximateBayesianComputation.jl/blob/11e7ea46ecbc940f49a425967cc88196de3162a6/src\adaptiveupdate.jl#L6-L14' class='documenter-source'>source</a><br>
-
 <a id='ApproximateBayesianComputation.AMUpdate' href='#ApproximateBayesianComputation.AMUpdate'>#</a>
 **`ApproximateBayesianComputation.AMUpdate`** &mdash; *Type*.
 
@@ -68,7 +64,4 @@ Parameters:
   * `gamma_0::Real`
   * `k::Real`
   * `t_0::Integer`
-
-
-<a target='_blank' href='https://github.com/SamuelWiqvist/ApproximateBayesianComputation.jl/blob/11e7ea46ecbc940f49a425967cc88196de3162a6/src\adaptiveupdate.jl#L19-L32' class='documenter-source'>source</a><br>
 

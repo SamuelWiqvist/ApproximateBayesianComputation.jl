@@ -1,6 +1,6 @@
 # type
 """
-Type for defining a problem for the ABC rejection sampling algorithm
+Type for defining a problem for the ABC-PMC algorithm
 
 Parameters:
 

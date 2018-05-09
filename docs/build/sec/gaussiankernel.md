@@ -12,8 +12,13 @@
 gaussian_kernel(s_star::Vector, s::Vector, ϵ::Real, ρ::Function)
 ```
 
-The Gaussian kernel function.
+The Gaussian kernel function follows
 
+$$
+K^{\text{Gaussian}}_{\epsilon}(x,y) \propto \exp(-\rho(x,y)/2\epsilon^2).
+$$
 
-<a target='_blank' href='https://github.com/SamuelWiqvist/ApproximateBayesianComputation.jl/blob/11e7ea46ecbc940f49a425967cc88196de3162a6/src\kernels.jl#L16' class='documenter-source'>source</a><br>
+Where ϵ is the threshold and ρ the distance function.
+
+The distance function ρ can be set to `gaussian_kernel_dist` where the summary statistics are weigthed according to a covariance matrix. But other distance functions can also be used.
 
