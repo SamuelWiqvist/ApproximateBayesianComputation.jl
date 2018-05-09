@@ -179,8 +179,17 @@
 </pre></div>
 
 
-<p>The Uniform kernel function.</p>
-<p><a target='_blank' href='https://github.com/SamuelWiqvist/ApproximateBayesianComputation.jl/blob/11e7ea46ecbc940f49a425967cc88196de3162a6/src\kernels.jl#L1' class='documenter-source'>source</a><br></p>
+<p>The Uniform kernel function follows</p>
+<p>
+<script type="math/tex; mode=display">
+K^{\text{Uniform}}_{\epsilon}(\rho(x,y)) = \begin{cases}
+        1, \text{if}, \rho(x,y) \le \epsilon,
+        \\
+        0, \text{otherwise}.
+        \end{cases}
+</script>
+</p>
+<p>Where ϵ is the threshold and ρ the distance function.</p>
               
             </div>
           </div>
